@@ -17,7 +17,7 @@ const Homepage = () => {
     }
   );
   return (
-    <div className="flex flex-col justify-center items-center h-screen gap-20 ">
+    <div className="flex flex-col justify-center items-center h-screen gap-20">
       <h1 className="font-bold text-5xl">
         what <ToDoHeading />
       </h1>
