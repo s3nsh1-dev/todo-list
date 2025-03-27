@@ -12,3 +12,8 @@ export const colorPalette: paletteType[] = [
   { id: "third", color: "text-red-500" },
   { id: "fourth", color: "text-green-600" },
 ];
+
+// Current Date and Day
+const date = new Date().toDateString().slice(4, 15).split(" ").join(".");
+const day = new Date().toDateString().slice(0, 3);
+export const todayDate = `${day}, ${date}`;
