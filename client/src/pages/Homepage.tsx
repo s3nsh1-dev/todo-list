@@ -1,7 +1,7 @@
-import React from "react";
 import NotesLink from "../components/Homepage/NotesLink";
 import TasksLinks from "../components/Homepage/TasksLinks";
 import { RouteButtonProperties } from "../constants/HomepageConstants";
+import ToDoHeading from "../components/others/ToDoHeading";
 
 const Homepage = () => {
   const renderRouteButtons: React.ReactNode[] = RouteButtonProperties.map(
@@ -17,8 +17,10 @@ const Homepage = () => {
     }
   );
   return (
-    <div className="flex flex-col justify-center items-center h-screen gap-20">
-      <h1 className="font-bold text-5xl">what ToDo....?</h1>
+    <div className="flex flex-col justify-center items-center h-screen gap-20 ">
+      <h1 className="font-bold text-5xl">
+        what <ToDoHeading />
+      </h1>
       <div className="flex gap-3 text-center">
         <div className="flex flex-col justify-center items-center gap-3">
           {renderRouteButtons}

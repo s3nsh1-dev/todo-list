@@ -9,15 +9,17 @@ import YearlyGoals from "./pages/YearlyGoals";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="*" element={<PageNotFound />} />
-      <Route path="/daily-tasks" element={<DailyTasks />} />
-      <Route path="/weekly-goals" element={<WeeklyGoals />} />
-      <Route path="/monthly-goals" element={<MonthlyGoals />} />
-      <Route path="/yearly-goals" element={<YearlyGoals />} />
-      <Route path="/notes" element={<Notes />} />
-    </Routes>
+    <main className="text-white">
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="/daily-tasks" element={<DailyTasks />} />
+        <Route path="/weekly-goals" element={<WeeklyGoals />} />
+        <Route path="/monthly-goals" element={<MonthlyGoals />} />
+        <Route path="/yearly-goals" element={<YearlyGoals />} />
+        <Route path="/notes" element={<Notes />} />
+      </Routes>
+    </main>
   );
 };
 
