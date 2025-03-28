@@ -56,6 +56,7 @@ const dailyTasksSlice = createSlice({
   reducers: {
     addTasks: (state, action: PayloadAction<taskDetailsType>) => {
       state["taskDetails"].push(action.payload);
+      console.log("the newly added task", action.payload);
     },
 
     // state is update internally because RTK uses immer.js

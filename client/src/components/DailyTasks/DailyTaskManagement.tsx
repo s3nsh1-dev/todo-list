@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { IconButton } from "@mui/material";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
@@ -16,24 +16,16 @@ const DailyTaskManagement = () => {
   const dailyTasksList = useSelector(
     (state: RootState) => state.dailyTasks.taskDetails
   );
-  const [taskName, setTaskName] = useState<stateType>({
-    completedTasks: [],
-    ongoingTasks: [],
-  });
-
-  useEffect(() => {
-    setTaskName({
-      completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
-      ongoingTasks: dailyTasksList.filter(
-        (tasks) => tasks.status === "ONGOING"
-      ),
-    });
-  }, [dailyTasksList]);
+  console.log("the daily tasks list", dailyTasksList);
+  const taskName: stateType = {
+    completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
+    ongoingTasks: dailyTasksList.filter((tasks) => tasks.status === "ONGOING"),
+  };
 
   const renderOngoingTasks = taskName.ongoingTasks.map((tasks, index) => {
     return (
-      <>
-        <div key={tasks.taskId} className="flex items-center justify-between">
+      <Fragment key={tasks.taskId}>
+        <div className="flex items-center justify-between">
           <p className="flex item-center flex-row">{tasks.taskName}</p>
           <div>
             <IconButton>
@@ -45,14 +37,14 @@ const DailyTaskManagement = () => {
           </div>
         </div>
         {index < taskName.ongoingTasks.length - 1 && <DividerGray />}
-      </>
+      </Fragment>
     );
   });
 
   const renderCompletedTasks = taskName.completedTasks.map((tasks, index) => {
     return (
-      <>
-        <div key={tasks.taskId} className="flex items-center justify-between">
+      <Fragment key={tasks.taskId}>
+        <div className="flex items-center justify-between">
           <p className="flex item-center flex-row">{tasks.taskName}</p>
           <div>
             <IconButton>
@@ -61,7 +53,7 @@ const DailyTaskManagement = () => {
           </div>
         </div>
         {index !== taskName.completedTasks.length - 1 && <DividerGray />}
-      </>
+      </Fragment>
     );
   });
 
