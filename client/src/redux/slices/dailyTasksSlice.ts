@@ -12,11 +12,11 @@ const taskDetails: taskDetailsType[] = [
   { taskId: "3", taskName: "Task D", status: "ONGOING" },
 ];
 const previousTasksLogs: historyLogType[] = [
-  { histId: "0", histResult: "SUCCESS" },
-  { histId: "1", histResult: "SUCCESS" },
-  { histId: "2", histResult: "FAILED" },
-  { histId: "3", histResult: "SUCCESS" },
-  { histId: "4", histResult: "FAILED" },
+  { histId: "0", histDate: "Mon, Mar.24.2025", histResult: "SUCCESS" },
+  { histId: "1", histDate: "Tue, Mar.25.2025", histResult: "SUCCESS" },
+  { histId: "2", histDate: "Wed, Mar.26.2025", histResult: "FAILED" },
+  { histId: "3", histDate: "Thu, Mar.27.2025", histResult: "SUCCESS" },
+  { histId: "4", histDate: "Fri, Mar.28.2025", histResult: "FAILED" },
 ];
 const initialState: dailyTasksType = {
   taskDetails,
