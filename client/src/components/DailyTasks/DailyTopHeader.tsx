@@ -6,7 +6,13 @@ import { IconButton } from "@mui/material";
 import { todayDate } from "../../constants/GenericConstants";
 import AddTaskModal from "./AddTaskModal";
 import { useState } from "react";
+import Modal from "@mui/material/Modal";
 
+export interface SimpleDialogProps {
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
+}
 interface stateType {
   history: boolean;
   addTask: boolean;
@@ -43,7 +49,15 @@ const DailyTopHeader = () => {
           </IconButton>
         </div>
       </section>
-      {open.addTask && <AddTaskModal />}
+      {open && (
+        <Modal
+          open={open.addTask}
+          onClose={handleModalVisibility}
+          disableEnforceFocus={false}
+        >
+          <AddTaskModal closingModal={handleModalVisibility} />
+        </Modal>
+      )}
     </>
   );
 };
