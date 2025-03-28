@@ -1,6 +1,6 @@
 import { FC } from "react";
 import IconButton from "@mui/material/IconButton";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
 
@@ -17,7 +17,7 @@ const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
         <p className="flex item-center flex-row">{tasks.taskName}</p>
         <div>
           <IconButton>
-            <TaskAltIcon className="text-gray-500 hover:text-red-700" />
+            <HighlightOffIcon className="text-gray-500 hover:text-red-700" />
           </IconButton>
         </div>
       </div>
