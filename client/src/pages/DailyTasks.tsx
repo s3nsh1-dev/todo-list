@@ -8,7 +8,7 @@ const DailyTasks = () => {
     <div style={{ margin: "0px 5%" }}>
       <DailyTopHeader />
       <Divider />
-      <section>
+      <section className="flex flex-col gap-5" style={{ marginTop: "10px" }}>
         <DailyIntro />
         <Divider />
         <DailyTaskManagement />
