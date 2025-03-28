@@ -4,7 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { todayDate } from "../../constants/GenericConstants";
-import AddTaskModal from "./AddTaskModal";
+import AddTaskModal from "./add-tasks/AddTaskModal";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 

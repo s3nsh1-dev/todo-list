@@ -1,11 +1,8 @@
-import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import { IconButton } from "@mui/material";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import type { RootState } from "../../redux/store";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
+import ShowOngoingTasks from "./ShowOngoingTasks";
+import ShowCompletedTasks from "./ShowCompletedTasks";
 
 interface stateType {
   completedTasks: taskDetailsType[];
@@ -24,36 +21,23 @@ const DailyTaskManagement = () => {
 
   const renderOngoingTasks = taskName.ongoingTasks.map((tasks, index) => {
     return (
-      <Fragment key={tasks.taskId}>
-        <div className="flex items-center justify-between">
-          <p className="flex item-center flex-row">{tasks.taskName}</p>
-          <div>
-            <IconButton>
-              <ModeEditIcon className="text-gray-500 hover:text-white" />
-            </IconButton>
-            <IconButton>
-              <TaskAltIcon className="text-gray-500 hover:text-green-600" />
-            </IconButton>
-          </div>
-        </div>
-        {index < taskName.ongoingTasks.length - 1 && <DividerGray />}
-      </Fragment>
+      <ShowOngoingTasks
+        key={tasks.taskId}
+        tasks={tasks}
+        index={index}
+        arrLength={taskName.ongoingTasks.length}
+      />
     );
   });
 
   const renderCompletedTasks = taskName.completedTasks.map((tasks, index) => {
     return (
-      <Fragment key={tasks.taskId}>
-        <div className="flex items-center justify-between">
-          <p className="flex item-center flex-row">{tasks.taskName}</p>
-          <div>
-            <IconButton>
-              <TaskAltIcon className="text-gray-500 hover:text-red-700" />
-            </IconButton>
-          </div>
-        </div>
-        {index !== taskName.completedTasks.length - 1 && <DividerGray />}
-      </Fragment>
+      <ShowCompletedTasks
+        key={tasks.taskId}
+        tasks={tasks}
+        index={index}
+        arrLength={taskName.completedTasks.length}
+      />
     );
   });
 
