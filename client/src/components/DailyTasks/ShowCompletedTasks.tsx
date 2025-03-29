@@ -3,6 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
+import { useDispatch } from "react-redux";
+import { updateTask } from "../../redux/slices/dailyTasksSlice";
 
 interface propTypes {
   tasks: taskDetailsType;
@@ -11,12 +13,16 @@ interface propTypes {
 }
 
 const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
+  const dispatch = useDispatch();
+  const handleResetTaskStatus = () => {
+    dispatch(updateTask({ ...tasks, status: "ONGOING" }));
+  };
   return (
     <>
       <div className="flex items-center justify-between">
         <p className="flex item-center flex-row">{tasks.taskName}</p>
         <div>
-          <IconButton>
+          <IconButton onClick={handleResetTaskStatus}>
             <HighlightOffIcon className="text-gray-500 hover:text-red-700" />
           </IconButton>
         </div>
