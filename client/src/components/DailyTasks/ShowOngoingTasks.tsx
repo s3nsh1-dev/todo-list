@@ -4,6 +4,9 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
+import { useDispatch } from "react-redux";
+import { updateTask } from "../../redux/slices/dailyTasksSlice";
+
 interface propTypes {
   index: number;
   tasks: taskDetailsType;
@@ -11,6 +14,10 @@ interface propTypes {
 }
 
 const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
+  const dispatch = useDispatch();
+  const handleUpdateTaskStatus = () => {
+    dispatch(updateTask({ ...tasks, status: "DONE" }));
+  };
   return (
     <>
       <div className="flex items-center justify-between">
@@ -19,7 +26,7 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
           <IconButton>
             <ModeEditIcon className="text-gray-500 hover:text-white" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleUpdateTaskStatus}>
             <TaskAltIcon className="text-gray-500 hover:text-green-600" />
           </IconButton>
         </div>
