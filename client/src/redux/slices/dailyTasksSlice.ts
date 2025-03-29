@@ -86,15 +86,7 @@ const dailyTasksSlice = createSlice({
       };
     },
 
-    updateTaskName: (state, action: PayloadAction<taskDetailsType>) => {
-      return {
-        ...state,
-        taskDetails: state["taskDetails"].map((tasks) =>
-          tasks.taskId === action.payload.taskId ? action.payload : tasks
-        ),
-      };
-    },
-    updateTaskStatus: (state, action: PayloadAction<taskDetailsType>) => {
+    updateTask: (state, action: PayloadAction<taskDetailsType>) => {
       return {
         ...state,
         taskDetails: state["taskDetails"].map((tasks) =>
@@ -105,7 +97,6 @@ const dailyTasksSlice = createSlice({
   },
 });
 
-export const { addTasks, removeTasks, updateTaskName } =
-  dailyTasksSlice.actions;
+export const { addTasks, removeTasks, updateTask } = dailyTasksSlice.actions;
 export default dailyTasksSlice;
 export const dailyTasksReducer = dailyTasksSlice.reducer;
