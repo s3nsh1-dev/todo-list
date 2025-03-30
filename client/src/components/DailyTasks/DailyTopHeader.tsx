@@ -48,6 +48,7 @@ const DailyTopHeader = () => {
               <HomeIcon color="primary" />
             </IconButton>
           </Link>
+
           <IconButton
             aria-label="daily-tasks-history"
             onClick={showHistoryModal}

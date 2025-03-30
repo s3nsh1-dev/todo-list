@@ -5,8 +5,8 @@ import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../../redux/slices/dailyTasksSlice";
-import { addPanelStyle } from "../../constants/customCssProperties";
-import { Button, IconButton, Modal } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import ShowEditModal from "./edit-tasks/ShowEditModal";
 
 interface propTypes {
   index: number;
@@ -48,44 +48,14 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
       </div>
       {index < arrLength - 1 && <DividerGray />}
       {open && (
-        <Modal open={open} onClose={onClose}>
-          <section className="bg-gray-800" style={addPanelStyle}>
-            <article id="add-dailyTaskName" className="text-gray-300">
-              <h1 className="text-center text-2xl font-bold ">Add New Task</h1>
-              <DividerGray />
-              <div style={{ marginTop: "20px" }}>
-                <p className="font-bold">Task Name</p>
-                <input
-                  className="border border-gray-300 rounded-md p-2 w-full"
-                  style={{ padding: "10px", margin: "5px 0px" }}
-                  value={userValue}
-                  type="text"
-                  id="add-dailyTaskName"
-                  placeholder={tasks.taskName}
-                  onChange={(e) => setUserValue(e.target.value)}
-                />
-              </div>
-            </article>
-            <article>
-              <div
-                id="add-dailyTask-actionButtons"
-                className="flex justify-center item-center gap-3"
-              >
-                <Button color="error" variant="contained" onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button
-                  onClick={submitEditedTask}
-                  variant="contained"
-                  color="success"
-                  disabled={isDisabled}
-                >
-                  SAVE
-                </Button>
-              </div>
-            </article>
-          </section>
-        </Modal>
+        <ShowEditModal
+          isDisabled={isDisabled}
+          submitEditedTask={submitEditedTask}
+          userValue={userValue}
+          setUserValue={setUserValue}
+          open={open}
+          onClose={onClose}
+        />
       )}
     </>
   );

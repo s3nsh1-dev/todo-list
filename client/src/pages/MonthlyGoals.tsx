@@ -1,5 +1,17 @@
+import {
+  getDayOfTheWeek,
+  getMonthAsString,
+} from "../constants/commonFunctions";
+import WMheader from "../components/week-month/common-wm/WMheader";
+
 const MonthlyGoals = () => {
-  return <div>Monthly Goals</div>;
+  const dateInfo = `${getDayOfTheWeek()}, ${getMonthAsString()} ${new Date().getFullYear()}`;
+  const toggleModal = () => {};
+  return (
+    <>
+      <WMheader dateInfo={dateInfo} toggleModal={toggleModal} />
+    </>
+  );
 };
 
 export default MonthlyGoals;

@@ -4,12 +4,16 @@ type propsTypes = {
   isDisabled: boolean;
   handleSubmit: () => void;
   handleClose: () => void;
+  backLabel: string;
+  enterLabel: string;
 };
 
-const AddTaskActions: FC<propsTypes> = ({
+const TaskCardActionButtons: FC<propsTypes> = ({
   isDisabled,
   handleSubmit,
   handleClose,
+  backLabel,
+  enterLabel,
 }) => {
   return (
     <div
@@ -17,7 +21,7 @@ const AddTaskActions: FC<propsTypes> = ({
       className="flex justify-center item-center gap-3"
     >
       <Button color="error" variant="contained" onClick={handleClose}>
-        Cancel
+        {backLabel}
       </Button>
       <Button
         onClick={handleSubmit}
@@ -25,10 +29,10 @@ const AddTaskActions: FC<propsTypes> = ({
         color="success"
         disabled={isDisabled}
       >
-        Submit
+        {enterLabel}
       </Button>
     </div>
   );
 };
 
-export default AddTaskActions;
+export default TaskCardActionButtons;

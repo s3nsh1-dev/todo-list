@@ -3,8 +3,8 @@ import type { taskDetailsType } from "../../../constants/commonInterfaces";
 import { addTasks } from "../../../redux/slices/dailyTasksSlice";
 import { useDispatch } from "react-redux";
 import { addPanelStyle } from "../../../constants/customCssProperties";
-import AddTaskContent from "./AddTaskContent";
-import AddTaskActions from "./AddTaskActions";
+import TaskCardLabelContent from "./TaskCardLabelContent";
+import TaskCardActionButtons from "./TaskCardActionButtons";
 
 interface propsTypes {
   closingModal: () => void;
@@ -34,11 +34,18 @@ const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
 
   return (
     <div className="bg-gray-800" style={addPanelStyle}>
-      <AddTaskContent userValue={userValue} setUserValue={setUserValue} />
-      <AddTaskActions
+      <TaskCardLabelContent
+        userValue={userValue}
+        setUserValue={setUserValue}
+        heading="Add Task"
+        label="Task Name"
+      />
+      <TaskCardActionButtons
         isDisabled={isDisabled}
         handleSubmit={handleSubmit}
         handleClose={handleClose}
+        backLabel="Cancel"
+        enterLabel="Submit"
       />
     </div>
   );

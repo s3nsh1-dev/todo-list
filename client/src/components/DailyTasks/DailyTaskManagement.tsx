@@ -42,16 +42,14 @@ const DailyTaskManagement = () => {
   });
 
   return (
-    <article id="daily-tasks-list" className="flex flex-col gap-5">
-      <div id="completed-daily-task">
+    <article className="flex flex-col gap-5">
+      <div>
         <h1 className="text-xl font-bold text-gray-400">Completed</h1>
-        <div id="show-completed-tasks" className="text-gray-500">
-          {renderCompletedTasks}
-        </div>
+        <div className="text-gray-500">{renderCompletedTasks}</div>
       </div>
-      <div id="ongoing-daily-task">
+      <div>
         <h1 className="text-xl font-bold">Ongoing</h1>
-        <div id="show-ongoing-tasks">{renderOngoingTasks}</div>
+        <div>{renderOngoingTasks}</div>
       </div>
     </article>
   );
