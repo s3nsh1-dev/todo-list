@@ -25,11 +25,11 @@ export interface weeklyGoalObjectType {
 export interface weeklyLogsType {
   id: string;
   weekNum: string;
-  wResult: string;
+  wResult: "SUCCESS" | "FAILED";
 }
 
 export interface weeklyGoalsListType {
   id: string;
   wGoalsName: string;
-  wGoalsStatus: string;
+  wGoalsStatus: "ONGOING" | "DONE";
 }
