@@ -5,10 +5,8 @@ import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../../redux/slices/dailyTasksSlice";
-import { addPanelStyle } from "../../constants/customCssProperties";
-import { IconButton, Modal } from "@mui/material";
-import TaskCardActionButtons from "./add-tasks/TaskCardActionButtons";
-import TaskCardLabelContent from "./add-tasks/TaskCardLabelContent";
+import IconButton from "@mui/material/IconButton";
+import ShowEditModal from "./edit-tasks/ShowEditModal";
 
 interface propTypes {
   index: number;
@@ -50,25 +48,14 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
       </div>
       {index < arrLength - 1 && <DividerGray />}
       {open && (
-        <Modal open={open} onClose={onClose}>
-          <section className="bg-gray-800" style={addPanelStyle}>
-            <TaskCardLabelContent
-              userValue={userValue}
-              setUserValue={setUserValue}
-              heading="Edit Task"
-              label="Task Name"
-            />
-            <article>
-              <TaskCardActionButtons
-                isDisabled={isDisabled}
-                handleSubmit={submitEditedTask}
-                handleClose={onClose}
-                backLabel="Cancel"
-                enterLabel="Save"
-              />
-            </article>
-          </section>
-        </Modal>
+        <ShowEditModal
+          isDisabled={isDisabled}
+          submitEditedTask={submitEditedTask}
+          userValue={userValue}
+          setUserValue={setUserValue}
+          open={open}
+          onClose={onClose}
+        />
       )}
     </>
   );
