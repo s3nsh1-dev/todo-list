@@ -2,12 +2,8 @@ import { getDayOfTheWeek, getWeekNumber } from "../constants/commonFunctions";
 import WMheader from "../components/week-month/common-wm/WMheader";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import { historyPanelStyle } from "../constants/customCssProperties";
-import { Button } from "@mui/material";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import AddWeeklyModal from "../components/weekly-goals/add-wGoals/AddWeeklyModal";
+import ShowWeekHistoryModal from "../components/weekly-goals/header-modals/ShowWeekHistoryModal";
+import AddWeeklyModal from "../components/weekly-goals/header-modals/AddWeeklyModal";
 
 interface openType {
   openHistory: boolean;
@@ -15,9 +11,6 @@ interface openType {
 }
 
 const WeeklyGoals = () => {
-  const { weeklyGoalsList } = useSelector(
-    (state: RootState) => state.weeklyGoals
-  );
   const [open, setOpen] = useState<openType>({
     openHistory: false,
     openAddWeeklyGoals: false,
@@ -32,8 +25,6 @@ const WeeklyGoals = () => {
       openAddWeeklyGoals: !prev.openAddWeeklyGoals,
     }));
   };
-
-  console.log("weekly Tasks", weeklyGoalsList);
   return (
     <>
       <WMheader
@@ -47,19 +38,7 @@ const WeeklyGoals = () => {
           onClose={toggleHistoryModal}
           disableEnforceFocus={false}
         >
-          <div className="bg-gray-800" style={historyPanelStyle}>
-            <div>HI am weekly history content</div>
-            <div>
-              <Button
-                color="error"
-                onClick={() => {
-                  setOpen((prev) => ({ ...prev, openHistory: false }));
-                }}
-              >
-                Close
-              </Button>
-            </div>
-          </div>
+          <ShowWeekHistoryModal onClosingModal={toggleHistoryModal} />
         </Modal>
       )}
       {open.openAddWeeklyGoals && (
