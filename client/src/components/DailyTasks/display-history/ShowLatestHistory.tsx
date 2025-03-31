@@ -1,14 +1,15 @@
 import { DividerGray } from "../../others/CommonComponents";
 import { FC } from "react";
-import type { historyLogType } from "../../../constants/commonInterfaces";
 interface propTypes {
-  tasks: historyLogType;
+  primary: string;
+  secondary: string;
   index: number;
   arrLength: number;
   color: string;
 }
 const ShowLatestHistory: FC<propTypes> = ({
-  tasks,
+  primary,
+  secondary,
   index,
   arrLength,
   color,
@@ -16,9 +17,9 @@ const ShowLatestHistory: FC<propTypes> = ({
   return (
     <div className="" style={{ margin: "10px 0px" }}>
       <div className="flex justify-between" style={{ margin: "5px 0px" }}>
-        <p className="font-bold">{tasks.histDate}</p>
+        <p className="font-bold">{primary}</p>
         <div className={`${color} w-20 flex justify-center rounded`}>
-          {tasks.histResult}
+          {secondary}
         </div>
       </div>
       {index !== arrLength - 1 && <DividerGray />}
