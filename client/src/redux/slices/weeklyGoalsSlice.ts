@@ -30,6 +30,7 @@ const weeklySlice = createSlice({
       action: PayloadAction<{ id: string; name: string }>
     ) => {
       const { id, name } = action.payload;
+      // Using mutation style (allowed by Immer)
       const goal = state.weeklyGoalsList.find((goal) => goal.id === id);
       if (goal) {
         goal.wGoalsName = name;

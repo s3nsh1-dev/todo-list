@@ -5,21 +5,44 @@ import Modal from "@mui/material/Modal";
 import { historyPanelStyle } from "../constants/customCssProperties";
 import { Button } from "@mui/material";
 
+interface openType {
+  openHistory: boolean;
+  openAddWeeklyGoals: boolean;
+}
+
 const WeeklyGoals = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<openType>({
+    openHistory: false,
+    openAddWeeklyGoals: false,
+  });
   const dateInfo = `${getDayOfTheWeek()}, ${getWeekNumber()}`;
-  const toggleModal = () => {
-    setOpen(!open);
+  const toggleHistoryModal = () => {
+    setOpen((prev) => ({ ...prev, openHistory: !prev.openHistory }));
+  };
+  const toggleWeeklyModal = () => {
+    setOpen((prev) => ({
+      ...prev,
+      openAddWeeklyGoals: !prev.openAddWeeklyGoals,
+    }));
   };
   return (
     <>
-      <WMheader dateInfo={dateInfo} toggleModal={toggleModal} />
+      <WMheader
+        dateInfo={dateInfo}
+        toggleHistory={toggleHistoryModal}
+        toggleGoals={toggleWeeklyModal}
+      />
       {open && (
-        <Modal open={open} onClose={toggleModal}>
+        <Modal open={open.openHistory} onClose={toggleHistoryModal}>
           <div className="bg-gray-800" style={historyPanelStyle}>
-            <div>HI am history content</div>
+            <div>HI am weekly history content</div>
             <div>
-              <Button color="error" onClick={toggleModal}>
+              <Button
+                color="error"
+                onClick={() => {
+                  setOpen((prev) => ({ ...prev, openHistory: false }));
+                }}
+              >
                 Close
               </Button>
             </div>
