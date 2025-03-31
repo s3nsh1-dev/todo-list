@@ -61,7 +61,7 @@ export default WeeklyGoals;
  * when i declared userValue inside this component it did not reset but the value input i had previously was showing
  * so, the question i why did the userValue reset, i always though this was the normal behavior but why
  * it should reset and what i current component was not making it. coz there was nothing wrong it should not reset
- * based on the coded behavior
+ * based on the coded behavior(i forgot this behavior)
  *
  * ANSWER:
  * state (the placement of state had the whole game)

@@ -14,7 +14,7 @@ const ShowLatestHistory: FC<propTypes> = ({
   color,
 }) => {
   return (
-    <div key={tasks.histId} className="" style={{ margin: "10px 0px" }}>
+    <div className="" style={{ margin: "10px 0px" }}>
       <div className="flex justify-between" style={{ margin: "5px 0px" }}>
         <p className="font-bold">{tasks.histDate}</p>
         <div className={`${color} w-20 flex justify-center rounded`}>
