@@ -1,4 +1,4 @@
-import { DividerGray } from "../../others/CommonComponents";
+import { DividerGray } from "../others/CommonComponents";
 import { FC } from "react";
 
 interface propsTypes {

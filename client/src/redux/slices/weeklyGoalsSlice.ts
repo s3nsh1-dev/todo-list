@@ -5,7 +5,7 @@ import { weeklyGoalsList, weeklyLogs } from "../../constants/sliceDataset";
 const initialState: weeklyGoalObjectType = { weeklyGoalsList, weeklyLogs };
 
 const weeklySlice = createSlice({
-  name: "",
+  name: "weeklyGoals",
   initialState,
   reducers: {
     addWeeklyGoals: (state, action: PayloadAction<string>) => {
@@ -30,6 +30,7 @@ const weeklySlice = createSlice({
       action: PayloadAction<{ id: string; name: string }>
     ) => {
       const { id, name } = action.payload;
+      // Using mutation style (allowed by Immer)
       const goal = state.weeklyGoalsList.find((goal) => goal.id === id);
       if (goal) {
         goal.wGoalsName = name;
@@ -38,6 +39,7 @@ const weeklySlice = createSlice({
   },
 });
 
-export const { addWeeklyGoals, removeWeeklyGoals } = weeklySlice.actions;
+export const { addWeeklyGoals, removeWeeklyGoals, updateWeeklyGoal } =
+  weeklySlice.actions;
 export default weeklySlice;
 export const weeklyGoalReducer = weeklySlice.reducer;

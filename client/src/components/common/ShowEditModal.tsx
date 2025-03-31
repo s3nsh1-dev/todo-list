@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import TaskCardActionButtons from "../add-tasks/TaskCardActionButtons";
-import TaskCardLabelContent from "../add-tasks/TaskCardLabelContent";
-import { addPanelStyle } from "../../../constants/customCssProperties";
+import TaskCardActionButtons from "./TaskCardActionButtons";
+import TaskCardLabelContent from "./TaskCardLabelContent";
+import { addPanelStyle } from "../../constants/customCssProperties";
 
 interface ShowEditModalProps {
   isDisabled: boolean;

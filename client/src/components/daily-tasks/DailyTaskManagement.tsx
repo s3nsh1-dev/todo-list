@@ -13,7 +13,6 @@ const DailyTaskManagement = () => {
   const dailyTasksList = useSelector(
     (state: RootState) => state.dailyTasks.taskDetails
   );
-  console.log("the daily tasks list", dailyTasksList);
   const taskName: stateType = {
     completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
     ongoingTasks: dailyTasksList.filter((tasks) => tasks.status === "ONGOING"),

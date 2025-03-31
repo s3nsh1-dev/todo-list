@@ -4,10 +4,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { todayDate } from "../../constants/GenericConstants";
-import AddTaskModal from "./add-tasks/AddTaskModal";
+import AddTaskModal from "./AddTaskModal";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import DailyTaskHistoryModal from "./display-history/DailyTaskHistoryModal";
+import DailyTaskHistoryModal from "./DailyTaskHistoryModal";
 
 export interface SimpleDialogProps {
   open: boolean;

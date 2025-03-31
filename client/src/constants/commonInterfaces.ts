@@ -1,35 +1,35 @@
-export interface taskDetailsType {
+export type taskDetailsType = {
   taskId: string;
   taskName: string;
   status: "DONE" | "ONGOING";
-}
-export interface historyLogType {
+};
+export type historyLogType = {
   histId: string;
   histDate: string;
   histResult: string;
-}
-export interface dailyTasksType {
+};
+export type dailyTasksType = {
   taskDetails: taskDetailsType[];
   previousTasksLogs: historyLogType[];
-}
-export interface paletteType {
+};
+export type paletteType = {
   id: string;
   color: string;
-}
+};
 
-export interface weeklyGoalObjectType {
+export type weeklyGoalObjectType = {
   weeklyGoalsList: weeklyGoalsListType[];
   weeklyLogs: weeklyLogsType[];
-}
+};
 
-export interface weeklyLogsType {
+export type weeklyLogsType = {
   id: string;
   weekNum: string;
   wResult: "SUCCESS" | "FAILED";
-}
+};
 
-export interface weeklyGoalsListType {
+export type weeklyGoalsListType = {
   id: string;
   wGoalsName: string;
   wGoalsStatus: "ONGOING" | "DONE";
-}
+};

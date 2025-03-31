@@ -1,7 +1,7 @@
-import DailyIntro from "../components/DailyTasks/DailyIntro";
+import DailyIntro from "../components/daily-tasks/DailyIntro";
 import { Divider } from "@mui/material";
-import DailyTopHeader from "../components/DailyTasks/DailyTopHeader";
-import DailyTaskManagement from "../components/DailyTasks/DailyTaskManagement";
+import DailyTopHeader from "../components/daily-tasks/DailyTopHeader";
+import DailyTaskManagement from "../components/daily-tasks/DailyTaskManagement";
 
 const DailyTasks = () => {
   return (
