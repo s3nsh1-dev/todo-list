@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { dailyTasksReducer } from "./slices/dailyTasksSlice";
+import { weeklyGoalReducer } from "./slices/weeklyGoalsSlice";
 
 const store = configureStore({
   reducer: {
     dailyTasks: dailyTasksReducer,
+    weeklyGoals: weeklyGoalReducer,
   },
 });
 

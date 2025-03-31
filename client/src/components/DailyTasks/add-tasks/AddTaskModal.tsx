@@ -26,9 +26,6 @@ const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
   const handleSubmit = () => {
     newTask.taskName = userValue;
     dispatch(addTasks(newTask));
-    handleClose();
-  };
-  const handleClose = () => {
     closingModal();
   };
 
@@ -43,7 +40,7 @@ const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
       <TaskCardActionButtons
         isDisabled={isDisabled}
         handleSubmit={handleSubmit}
-        handleClose={handleClose}
+        handleClose={closingModal}
         backLabel="Cancel"
         enterLabel="Submit"
       />

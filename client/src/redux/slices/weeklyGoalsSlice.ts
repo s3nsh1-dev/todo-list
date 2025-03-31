@@ -5,7 +5,7 @@ import { weeklyGoalsList, weeklyLogs } from "../../constants/sliceDataset";
 const initialState: weeklyGoalObjectType = { weeklyGoalsList, weeklyLogs };
 
 const weeklySlice = createSlice({
-  name: "",
+  name: "weeklyGoals",
   initialState,
   reducers: {
     addWeeklyGoals: (state, action: PayloadAction<string>) => {
@@ -39,6 +39,7 @@ const weeklySlice = createSlice({
   },
 });
 
-export const { addWeeklyGoals, removeWeeklyGoals } = weeklySlice.actions;
+export const { addWeeklyGoals, removeWeeklyGoals, updateWeeklyGoal } =
+  weeklySlice.actions;
 export default weeklySlice;
 export const weeklyGoalReducer = weeklySlice.reducer;
