@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import type { weeklyLogsType } from "../../../constants/commonInterfaces";
-import ShowLatestHistory from "../../DailyTasks/display-history/ShowLatestHistory";
-import HistoryCard from "../../week-month/common-wm/HistoryCard";
+import { RootState } from "../../redux/store";
+import type { weeklyLogsType } from "../../constants/commonInterfaces";
+import ShowLatestHistory from "../common/ShowLatestHistory";
+import HistoryCard from "../common/HistoryCard";
 
 interface propsTypes {
   onClosingModal: () => void;

@@ -2,7 +2,7 @@ import {
   getDayOfTheWeek,
   getMonthAsString,
 } from "../constants/commonFunctions";
-import WMheader from "../components/week-month/common-wm/WMheader";
+import WMheader from "../components/common/WMheader";
 import { useState } from "react";
 import { Modal, Button } from "@mui/material";
 import { historyPanelStyle } from "../constants/customCssProperties";

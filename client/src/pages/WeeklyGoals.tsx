@@ -1,9 +1,9 @@
 import { getDayOfTheWeek, getWeekNumber } from "../constants/commonFunctions";
-import WMheader from "../components/week-month/common-wm/WMheader";
+import WMheader from "../components/common/WMheader";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import ShowWeekHistoryModal from "../components/weekly-goals/header-modals/ShowWeekHistoryModal";
-import AddWeeklyModal from "../components/weekly-goals/header-modals/AddWeeklyModal";
+import ShowWeekHistoryModal from "../components/weekly-goals/ShowWeekHistoryModal";
+import AddWeeklyModal from "../components/weekly-goals/AddWeeklyModal";
 
 interface openType {
   openHistory: boolean;

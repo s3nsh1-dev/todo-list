@@ -6,7 +6,7 @@ import type { taskDetailsType } from "../../constants/commonInterfaces";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../../redux/slices/dailyTasksSlice";
 import IconButton from "@mui/material/IconButton";
-import ShowEditModal from "./edit-tasks/ShowEditModal";
+import ShowEditModal from "../common/ShowEditModal";
 
 interface propTypes {
   index: number;

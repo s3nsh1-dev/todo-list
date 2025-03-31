@@ -1,9 +1,9 @@
 import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/store";
-import type { historyLogType } from "../../../constants/commonInterfaces";
-import ShowLatestHistory from "./ShowLatestHistory";
-import HistoryCard from "../../week-month/common-wm/HistoryCard";
+import type { RootState } from "../../redux/store";
+import type { historyLogType } from "../../constants/commonInterfaces";
+import ShowLatestHistory from "../common/ShowLatestHistory";
+import HistoryCard from "../common/HistoryCard";
 
 interface propTypes {
   closingModal: () => void;

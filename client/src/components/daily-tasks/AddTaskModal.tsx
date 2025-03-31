@@ -1,10 +1,10 @@
 import { useState, FC } from "react";
-import type { taskDetailsType } from "../../../constants/commonInterfaces";
-import { addTasks } from "../../../redux/slices/dailyTasksSlice";
+import type { taskDetailsType } from "../../constants/commonInterfaces";
+import { addTasks } from "../../redux/slices/dailyTasksSlice";
 import { useDispatch } from "react-redux";
-import { addPanelStyle } from "../../../constants/customCssProperties";
-import TaskCardLabelContent from "./TaskCardLabelContent";
-import TaskCardActionButtons from "./TaskCardActionButtons";
+import { addPanelStyle } from "../../constants/customCssProperties";
+import TaskCardLabelContent from "../common/TaskCardLabelContent";
+import TaskCardActionButtons from "../common/TaskCardActionButtons";
 
 interface propsTypes {
   closingModal: () => void;

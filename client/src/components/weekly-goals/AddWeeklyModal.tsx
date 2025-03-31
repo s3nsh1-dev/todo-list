@@ -1,9 +1,9 @@
 import React from "react";
-import TaskCardActionButtons from "../../DailyTasks/add-tasks/TaskCardActionButtons";
-import TaskCardLabelContent from "../../DailyTasks/add-tasks/TaskCardLabelContent";
-import { addPanelStyle } from "../../../constants/customCssProperties";
+import TaskCardActionButtons from "../common/TaskCardActionButtons";
+import TaskCardLabelContent from "../common/TaskCardLabelContent";
+import { addPanelStyle } from "../../constants/customCssProperties";
 import { useDispatch } from "react-redux";
-import { addWeeklyGoals } from "../../../redux/slices/weeklyGoalsSlice";
+import { addWeeklyGoals } from "../../redux/slices/weeklyGoalsSlice";
 
 interface propsTypes {
   onClosingModal: () => void;
@@ -19,7 +19,7 @@ const AddWeeklyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
   };
 
   return (
-    <div style={addPanelStyle}>
+    <div className="bg-gray-800" style={addPanelStyle}>
       <TaskCardLabelContent
         heading="Add Weekly Goal"
         label="Goal Name"

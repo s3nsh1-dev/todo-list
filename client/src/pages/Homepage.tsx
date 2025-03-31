@@ -1,5 +1,5 @@
-import NotesLink from "../components/Homepage/NotesLink";
-import TasksLinks from "../components/Homepage/TasksLinks";
+import NotesLink from "../components/homepage/NotesLink";
+import TasksLinks from "../components/homepage/TasksLinks";
 import { RouteButtonProperties } from "../constants/HomepageConstants";
 import ToDoHeading from "../components/others/ToDoHeading";
 

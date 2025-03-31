@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { historyPanelStyle } from "../../../constants/customCssProperties";
+import { historyPanelStyle } from "../../constants/customCssProperties";
 
 interface propTypes {
   children: React.ReactNode;
