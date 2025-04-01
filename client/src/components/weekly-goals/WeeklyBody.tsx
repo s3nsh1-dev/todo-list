@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import IntroToManagement from "../common/IntroToManagement";
@@ -20,8 +21,14 @@ const WeeklyBody = () => {
     (state: RootState) => state.weeklyGoals.weeklyGoalsList
   );
 
-  const ongoingWGoals = GG.filter((goal) => goal.wGoalsStatus === "ONGOING");
-  const completedWGoals = GG.filter((goal) => goal.wGoalsStatus === "DONE");
+  //this will reduce the possibility or re-render when there is not change in global status but in local states
+  const ongoingWGoals = useMemo(() => {
+    return [...GG].filter((goal) => goal.wGoalsStatus === "ONGOING");
+  }, [GG]);
+
+  const completedWGoals = useMemo(() => {
+    return [...GG].filter((goal) => goal.wGoalsStatus === "DONE");
+  }, [GG]);
 
   const dispatch = useDispatch();
 
