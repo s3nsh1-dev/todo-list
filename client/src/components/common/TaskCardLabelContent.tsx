@@ -26,6 +26,7 @@ const TaskCardLabelContent: FC<propsTypes> = ({
           type="text"
           placeholder="e.g., Need to go shopping"
           onChange={(e) => setUserValue(e.target.value)}
+          autoFocus
         />
       </div>
     </div>
