@@ -2,17 +2,14 @@ import { DividerGray } from "../others/CommonComponents";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-import { useDispatch } from "react-redux";
-import {
-  updateWeeklyGoalStatus,
-  updateWeeklyGoalName,
-} from "../../redux/slices/weeklyGoalsSlice";
 
 interface propTypes {
   id: string;
   name: string;
   index: number;
   arrLength: number;
+  handleStatus: (value: string) => void;
+  handleEditGoal: ({ id, name }: { id: string; name: string }) => void;
 }
 
 const OngoingDivision: React.FC<propTypes> = ({
@@ -20,16 +17,9 @@ const OngoingDivision: React.FC<propTypes> = ({
   name,
   index,
   arrLength,
+  handleEditGoal,
+  handleStatus,
 }) => {
-  const dispatch = useDispatch();
-
-  const handleEditWGoal = (value: { id: string; name: string }) => {
-    dispatch(updateWeeklyGoalName(value));
-  };
-  const handelWStatus = (value: string) => {
-    dispatch(updateWeeklyGoalStatus(value));
-  };
-
   return (
     <>
       <div className="flex justify-between">
@@ -37,7 +27,7 @@ const OngoingDivision: React.FC<propTypes> = ({
         <div>
           <IconButton
             onClick={() => {
-              handleEditWGoal({ id: id, name: name });
+              handleEditGoal({ id, name });
             }}
           >
             <EditIcon className="hover:text-blue-500 text-gray-500" />
@@ -45,7 +35,7 @@ const OngoingDivision: React.FC<propTypes> = ({
           <IconButton
             onClick={() => {
               console.log("triggered");
-              handelWStatus(id);
+              handleStatus(id);
             }}
           >
             <AddTaskIcon className="hover:text-green-700 text-gray-500" />

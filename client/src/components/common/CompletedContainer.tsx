@@ -1,31 +1,18 @@
-import CompletedDivision from "./CompletedDivision";
-import type { weeklyGoalsListType } from "../../constants/commonInterfaces";
-
 interface propTypes {
-  completedWGoals: weeklyGoalsListType[];
+  heading: string;
+  children: React.ReactNode;
 }
 
-const CompletedContainer: React.FC<propTypes> = ({ completedWGoals }) => {
-  const renderCompletedWTasks = completedWGoals.map((goal, index) => {
-    return (
-      <CompletedDivision
-        id={goal.id}
-        key={goal.id}
-        index={index}
-        arrLength={completedWGoals.length}
-        name={goal.wGoalsName}
-      />
-    );
-  });
+const CompletedContainer: React.FC<propTypes> = ({ heading, children }) => {
   return (
     <div style={{ margin: "10px 0px" }}>
       <h1
         className="text-2xl font-bold text-gray-400"
         style={{ padding: "5px 0px" }}
       >
-        Completed Goals
+        {heading}
       </h1>
-      <div>{renderCompletedWTasks}</div>
+      <div>{children}</div>
     </div>
   );
 };

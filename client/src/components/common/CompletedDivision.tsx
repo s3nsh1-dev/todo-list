@@ -2,17 +2,14 @@ import IconButton from "@mui/material/IconButton";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DividerGray } from "../others/CommonComponents";
-import { useDispatch } from "react-redux";
-import {
-  removeWeeklyGoals,
-  updateWeeklyGoalStatus,
-} from "../../redux/slices/weeklyGoalsSlice";
 
 interface propTypes {
   id: string;
   name: string;
   index: number;
   arrLength: number;
+  handleDelete: (value: string) => void;
+  handleStatusUpdate: (value: string) => void;
 }
 
 const CompletedDivision: React.FC<propTypes> = ({
@@ -20,17 +17,9 @@ const CompletedDivision: React.FC<propTypes> = ({
   name,
   index,
   arrLength,
+  handleDelete,
+  handleStatusUpdate,
 }) => {
-  const dispatch = useDispatch();
-
-  const handleStatusUpdate = (value: string) => {
-    dispatch(updateWeeklyGoalStatus(value));
-  };
-
-  const handleDeleteGoal = (value: string) => {
-    dispatch(removeWeeklyGoals(value));
-  };
-
   return (
     <>
       <div className="flex justify-between">
@@ -38,7 +27,7 @@ const CompletedDivision: React.FC<propTypes> = ({
         <div>
           <IconButton
             onClick={() => {
-              handleDeleteGoal(id);
+              handleDelete(id);
             }}
           >
             <DeleteOutlineIcon className="hover:text-red-500 text-gray-500" />
