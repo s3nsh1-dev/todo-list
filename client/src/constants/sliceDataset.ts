@@ -16,17 +16,17 @@ export const weeklyLogs: weeklyLogsType[] = [
 ];
 
 export const weeklyGoalsList: weeklyGoalsListType[] = [
-  { id: "1", wGoalsName: "Exercise 5 times a week", wGoalsStatus: "COMPLETED" },
-  { id: "2", wGoalsName: "Read 2 books", wGoalsStatus: "IN_PROGRESS" },
-  { id: "3", wGoalsName: "Improve coding skills", wGoalsStatus: "COMPLETED" },
-  { id: "4", wGoalsName: "Meditate daily", wGoalsStatus: "FAILED" },
-  { id: "5", wGoalsName: "Eat healthy meals", wGoalsStatus: "COMPLETED" },
+  { id: "1", wGoalsName: "Exercise 5 times a week", wGoalsStatus: "DONE" },
+  { id: "2", wGoalsName: "Read 2 books", wGoalsStatus: "ONGOING" },
+  { id: "3", wGoalsName: "Improve coding skills", wGoalsStatus: "DONE" },
+  { id: "4", wGoalsName: "Meditate daily", wGoalsStatus: "ONGOING" },
+  { id: "5", wGoalsName: "Eat healthy meals", wGoalsStatus: "DONE" },
   {
     id: "6",
     wGoalsName: "Complete a side project",
-    wGoalsStatus: "IN_PROGRESS",
+    wGoalsStatus: "ONGOING",
   },
-  { id: "7", wGoalsName: "Limit social media usage", wGoalsStatus: "FAILED" },
+  { id: "7", wGoalsName: "Limit social media usage", wGoalsStatus: "ONGOING" },
 ];
 
 export const taskDetails: taskDetailsType[] = [

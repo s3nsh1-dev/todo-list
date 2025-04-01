@@ -16,7 +16,7 @@ const WMheader: React.FC<propTypes> = ({
 }) => {
   return (
     <div className="flex justify-between">
-      <p>{dateInfo}</p>
+      <p className="flex items-center">{dateInfo}</p>
       <div>
         <RedirectToHome />
         <IconButton onClick={toggleHistory}>
