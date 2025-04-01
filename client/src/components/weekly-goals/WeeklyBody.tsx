@@ -21,7 +21,7 @@ const WeeklyBody = () => {
     (state: RootState) => state.weeklyGoals.weeklyGoalsList
   );
 
-  //this will reduce the possibility or re-render when there is not change in global status but in local states
+  //these will reduce the possibility or re-render when there is not change in global status but in local states
   const ongoingWGoals = useMemo(() => {
     return [...GG].filter((goal) => goal.wGoalsStatus === "ONGOING");
   }, [GG]);
