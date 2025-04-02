@@ -11,6 +11,7 @@ interface ShowEditModalProps {
   setUserValue: (value: string) => void;
   open: boolean;
   onClose: () => void;
+  placeholder: string;
 }
 
 const ShowEditModal: React.FC<ShowEditModalProps> = ({
@@ -20,6 +21,7 @@ const ShowEditModal: React.FC<ShowEditModalProps> = ({
   setUserValue,
   open,
   onClose,
+  placeholder,
 }) => {
   return (
     <Modal open={open} onClose={onClose}>
@@ -29,6 +31,7 @@ const ShowEditModal: React.FC<ShowEditModalProps> = ({
           setUserValue={setUserValue}
           heading="Edit Task"
           label="Update Task Name"
+          placeholder={placeholder}
         />
         <article>
           <TaskCardActionButtons
