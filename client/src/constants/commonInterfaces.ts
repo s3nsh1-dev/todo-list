@@ -33,3 +33,15 @@ export type weeklyGoalsListType = {
   wGoalsName: string;
   wGoalsStatus: "ONGOING" | "DONE";
 };
+
+export interface monthlyGoalsListType {
+  id: string;
+  GoalName: string;
+  status: "ONGOING" | "DONE";
+}
+
+export interface monthlyHistoryType {
+  id: string;
+  MonthlyName: string;
+  status: "SUCCESS" | "FAILED";
+}

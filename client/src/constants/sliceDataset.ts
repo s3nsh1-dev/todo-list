@@ -3,6 +3,8 @@ import {
   weeklyGoalsListType,
   historyLogType,
   taskDetailsType,
+  monthlyGoalsListType,
+  monthlyHistoryType,
 } from "./commonInterfaces";
 
 export const weeklyLogs: weeklyLogsType[] = [
@@ -84,4 +86,24 @@ export const previousTasksLogs: historyLogType[] = [
   { histId: "18", histDate: "Fri, Apr.11.2025", histResult: "FAILED" },
   { histId: "19", histDate: "Sat, Apr.12.2025", histResult: "SUCCESS" },
   { histId: "20", histDate: "Sun, Apr.13.2025", histResult: "FAILED" },
+];
+
+export const monthlyHistory: monthlyHistoryType[] = [
+  { id: "", MonthlyName: "", status: "SUCCESS" },
+  { id: "", MonthlyName: "", status: "FAILED" },
+  { id: "", MonthlyName: "", status: "SUCCESS" },
+  { id: "", MonthlyName: "", status: "FAILED" },
+  { id: "", MonthlyName: "", status: "SUCCESS" },
+];
+
+export const monthlyGoalsList: monthlyGoalsListType[] = [
+  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "", GoalName: "", status: "DONE" },
+  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "", GoalName: "", status: "DONE" },
+  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "", GoalName: "", status: "DONE" },
+  { id: "", GoalName: "", status: "ONGOING" },
 ];
