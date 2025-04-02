@@ -25,7 +25,7 @@ const weeklySlice = createSlice({
         }),
       };
     },
-    updateWeeklyGoal: (
+    updateWeeklyGoalName: (
       state,
       action: PayloadAction<{ id: string; name: string }>
     ) => {
@@ -36,10 +36,22 @@ const weeklySlice = createSlice({
         goal.wGoalsName = name;
       }
     },
+    updateWeeklyGoalStatus: (state, action: PayloadAction<string>) => {
+      const goal = state.weeklyGoalsList.find(
+        (goal) => goal.id === action.payload
+      );
+      if (goal) {
+        goal.wGoalsStatus = goal.wGoalsStatus === "DONE" ? "ONGOING" : "DONE";
+      }
+    },
   },
 });
 
-export const { addWeeklyGoals, removeWeeklyGoals, updateWeeklyGoal } =
-  weeklySlice.actions;
+export const {
+  addWeeklyGoals,
+  removeWeeklyGoals,
+  updateWeeklyGoalName,
+  updateWeeklyGoalStatus,
+} = weeklySlice.actions;
 export default weeklySlice;
 export const weeklyGoalReducer = weeklySlice.reducer;
