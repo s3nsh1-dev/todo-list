@@ -36,6 +36,7 @@ const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
         setUserValue={setUserValue}
         heading="Add Task"
         label="Task Name"
+        placeholder="e.g., Need to go shopping"
       />
       <TaskCardActionButtons
         isDisabled={isDisabled}

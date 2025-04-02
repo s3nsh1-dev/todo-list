@@ -55,6 +55,7 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
           setUserValue={setUserValue}
           open={open}
           onClose={onClose}
+          placeholder={tasks.taskName}
         />
       )}
     </>

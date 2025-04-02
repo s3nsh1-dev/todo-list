@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { RootState } from "../../redux/store";
 import IntroToManagement from "../common/IntroToManagement";
 import CompletedContainer from "../common/CompletedContainer";
@@ -11,7 +11,7 @@ import {
   updateWeeklyGoalStatus,
   updateWeeklyGoalName,
 } from "../../redux/slices/weeklyGoalsSlice";
-import { Modal, Button } from "@mui/material";
+import ShowEditModal from "../common/ShowEditModal";
 
 const content =
   "The `weeklySlice` manages weekly goals, allowing users to add, remove, and update tasks efficiently. It leverages Immer for immutability, enabling direct state modifications. Goals can be added with a unique ID, removed by filtering, or updated by modifying their name—all while keeping Redux state management seamless and optimized.";
@@ -19,7 +19,7 @@ const content =
 const WeeklyBody = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [userValue, setUserValue] = useState<string>("");
-  const [editData, setEditData] = useState<{ id: string; oldName: string }>({
+  const editData = useRef<{ id: string; oldName: string }>({
     id: "",
     oldName: "",
   });
@@ -43,16 +43,20 @@ const WeeklyBody = () => {
     dispatch(updateWeeklyGoalStatus(value));
   };
 
-  const handleOnChangeInput = (value: string) => {
-    setUserValue(value);
-  };
+  // const handleOnChangeInput = (value: string) => {
+  //   setUserValue(value);
+  // };
+  console.log("Weekly body rendering:", editData);
 
   const handleDeleteGoal = (value: string) => {
     dispatch(removeWeeklyGoals(value));
   };
 
   const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
-    setEditData({ id, oldName: name });
+    editData.current.id = id;
+    editData.current.oldName = name;
+    console.log("editData: ", editData);
+    toggleModal();
   };
 
   const toggleModal = () => {
@@ -60,7 +64,10 @@ const WeeklyBody = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(updateWeeklyGoalName({ id: editData.id, name: userValue }));
+    console.log("id:", editData.current.id, ",userInput:", userValue);
+    dispatch(
+      updateWeeklyGoalName({ id: editData.current.id, name: userValue })
+    );
     toggleModal();
   };
 
@@ -91,6 +98,8 @@ const WeeklyBody = () => {
     );
   });
 
+  const isDisabled = userValue.length > 1 ? false : true;
+
   return (
     <>
       <IntroToManagement heading="Introduction" content={content} />
@@ -101,27 +110,15 @@ const WeeklyBody = () => {
         {renderOngoingWGoals}
       </OngoingContainer>
       {open && (
-        <Modal open={open} onClose={toggleModal}>
-          <div className="bg-gray-800">
-            <div>
-              <p>Goal Name</p>
-              <input
-                type="text"
-                value={userValue}
-                placeholder={editData.oldName}
-                onChange={(event) => {
-                  handleOnChangeInput(event.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <Button color="error" onClick={toggleModal}>
-                Close
-              </Button>
-              <Button color="success" onClick={handleSubmit}></Button>
-            </div>
-          </div>
-        </Modal>
+        <ShowEditModal
+          isDisabled={isDisabled}
+          submitEditedTask={handleSubmit}
+          userValue={userValue}
+          setUserValue={setUserValue}
+          open={open}
+          onClose={toggleModal}
+          placeholder={editData.current.oldName}
+        />
       )}
     </>
   );

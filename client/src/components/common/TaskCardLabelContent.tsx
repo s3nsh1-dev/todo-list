@@ -6,12 +6,14 @@ interface propsTypes {
   setUserValue: (value: string) => void;
   heading: string;
   label: string;
+  placeholder: string;
 }
 const TaskCardLabelContent: FC<propsTypes> = ({
   userValue,
   setUserValue,
   heading,
   label,
+  placeholder,
 }) => {
   return (
     <div className="text-gray-300">
@@ -24,7 +26,7 @@ const TaskCardLabelContent: FC<propsTypes> = ({
           style={{ padding: "10px", margin: "5px 0px" }}
           value={userValue}
           type="text"
-          placeholder="e.g., Need to go shopping"
+          placeholder={placeholder}
           onChange={(e) => setUserValue(e.target.value)}
           autoFocus
         />

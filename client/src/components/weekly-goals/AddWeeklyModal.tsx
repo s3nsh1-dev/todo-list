@@ -25,6 +25,7 @@ const AddWeeklyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
         label="Goal Name"
         userValue={userValue}
         setUserValue={setUserValue}
+        placeholder="e.g., Need to go shopping"
       />
       <TaskCardActionButtons
         isDisabled={isDisabled}
