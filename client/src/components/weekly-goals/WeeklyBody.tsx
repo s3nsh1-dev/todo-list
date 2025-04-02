@@ -50,7 +50,6 @@ const WeeklyBody = () => {
   const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
     editData.current.id = id;
     editData.current.oldName = name;
-    console.log("editData: ", editData);
     toggleModal();
   };
 
@@ -59,7 +58,6 @@ const WeeklyBody = () => {
   };
 
   const handleSubmit = () => {
-    console.log("id:", editData.current.id, ",userInput:", userValue);
     dispatch(
       updateWeeklyGoalName({ id: editData.current.id, name: userValue })
     );

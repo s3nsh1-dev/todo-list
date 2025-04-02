@@ -34,7 +34,6 @@ const OngoingDivision: React.FC<propTypes> = ({
           </IconButton>
           <IconButton
             onClick={() => {
-              console.log("triggered");
               handleStatus(id);
             }}
           >
