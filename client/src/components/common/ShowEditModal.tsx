@@ -23,7 +23,6 @@ const ShowEditModal: React.FC<ShowEditModalProps> = ({
   onClose,
   placeholder,
 }) => {
-  console.log("showEditModal rendering");
   return (
     <Modal open={open} onClose={onClose}>
       <section className="bg-gray-800" style={addPanelStyle}>

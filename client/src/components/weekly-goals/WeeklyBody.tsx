@@ -43,11 +43,6 @@ const WeeklyBody = () => {
     dispatch(updateWeeklyGoalStatus(value));
   };
 
-  // const handleOnChangeInput = (value: string) => {
-  //   setUserValue(value);
-  // };
-  console.log("Weekly body rendering:", editData);
-
   const handleDeleteGoal = (value: string) => {
     dispatch(removeWeeklyGoals(value));
   };
