@@ -125,3 +125,13 @@ const WeeklyBody = () => {
 };
 
 export default WeeklyBody;
+
+/*
+
+ *Learning of the Component
+ when react re-render it does not change the value for state and ref (in Correct words: useRef and useState values
+ persist when a re-render is triggered, state value is noted at the first render)
+ when u want UI to render after a variable change use state and if only maintain a value with persistence
+ across the re-render cycle use Ref
+
+*/
