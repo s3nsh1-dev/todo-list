@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const monthlySlice = createSlice({
-  name: "",
+  name: "monthlyGoals",
   initialState,
   reducers: {
     addMonthlyGoals: (state, action: PayloadAction<string>) => {
