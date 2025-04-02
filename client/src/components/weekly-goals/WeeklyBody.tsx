@@ -1,12 +1,11 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import IntroToManagement from "../common/IntroToManagement";
 import CompletedContainer from "../common/CompletedContainer";
 import OngoingContainer from "../common/OngoingContainer";
 import CompletedDivision from "../common/CompletedDivision";
 import OngoingDivision from "../common/OngoingDivision";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   removeWeeklyGoals,
   updateWeeklyGoalStatus,
