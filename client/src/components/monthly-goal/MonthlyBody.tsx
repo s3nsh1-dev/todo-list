@@ -12,9 +12,7 @@ import {
   editMonthlyGoal,
 } from "../../redux/slices/monthlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
-
-const content =
-  "The `weeklySlice` manages weekly goals, allowing users to add, remove, and update tasks efficiently. It leverages Immer for immutability, enabling direct state modifications. Goals can be added with a unique ID, removed by filtering, or updated by modifying their name—all while keeping Redux state management seamless and optimized.";
+import { monthlyContent as content } from "../../constants/GenericConstants";
 
 const MonthlyBody = () => {
   const [open, setOpen] = useState<boolean>(false);

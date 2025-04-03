@@ -12,9 +12,7 @@ import {
   updateYearlyGoalName,
 } from "../../redux/slices/yearlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
-
-const content =
-  "The `weeklySlice` manages weekly goals, allowing users to add, remove, and update tasks efficiently. It leverages Immer for immutability, enabling direct state modifications. Goals can be added with a unique ID, removed by filtering, or updated by modifying their name—all while keeping Redux state management seamless and optimized.";
+import { yearlyContent as content } from "../../constants/GenericConstants";
 
 const YearlyBody = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -95,10 +93,7 @@ const YearlyBody = () => {
 
   return (
     <>
-      <IntroToManagement
-        heading="Tell use your Yearly Resolution"
-        content={content}
-      />
+      <IntroToManagement heading="Introduction" content={content} />
       <CompletedContainer heading="Completed">
         {renderCompletedWTasks}
       </CompletedContainer>
