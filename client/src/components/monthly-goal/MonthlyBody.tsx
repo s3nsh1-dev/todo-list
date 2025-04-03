@@ -69,7 +69,7 @@ const MonthlyBody = () => {
         id={goal.id}
         index={index}
         arrLength={completedWGoals.length}
-        name={goal.status}
+        name={goal.GoalName}
         handleDelete={handleDeleteGoal}
         handleStatusUpdate={handleStatusUpdate}
       />
@@ -80,7 +80,7 @@ const MonthlyBody = () => {
       <OngoingDivision
         key={goal.id}
         id={goal.id}
-        name={goal.status}
+        name={goal.GoalName}
         index={index}
         arrLength={ongoingWGoals.length}
         handleStatus={handleStatusUpdate}

@@ -35,7 +35,7 @@ const monthlySlice = createSlice({
       return {
         ...state,
         monthlyGoalsList: state.monthlyGoalsList.filter(
-          (goal) => goal.id === action.payload
+          (goal) => goal.id !== action.payload
         ),
       };
     },

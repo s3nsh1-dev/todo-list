@@ -89,21 +89,29 @@ export const previousTasksLogs: historyLogType[] = [
 ];
 
 export const monthlyHistory: monthlyHistoryType[] = [
-  { id: "", MonthlyName: "", status: "SUCCESS" },
-  { id: "", MonthlyName: "", status: "FAILED" },
-  { id: "", MonthlyName: "", status: "SUCCESS" },
-  { id: "", MonthlyName: "", status: "FAILED" },
-  { id: "", MonthlyName: "", status: "SUCCESS" },
+  { id: "1", MonthlyName: "January 2025", status: "SUCCESS" },
+  { id: "2", MonthlyName: "February 2025", status: "FAILED" },
+  { id: "3", MonthlyName: "March 2025", status: "SUCCESS" },
+  { id: "4", MonthlyName: "April 2025", status: "FAILED" },
+  { id: "5", MonthlyName: "May 2025", status: "SUCCESS" },
 ];
 
 export const monthlyGoalsList: monthlyGoalsListType[] = [
-  { id: "", GoalName: "", status: "ONGOING" },
-  { id: "", GoalName: "", status: "DONE" },
-  { id: "", GoalName: "", status: "ONGOING" },
-  { id: "", GoalName: "", status: "ONGOING" },
-  { id: "", GoalName: "", status: "DONE" },
-  { id: "", GoalName: "", status: "ONGOING" },
-  { id: "", GoalName: "", status: "ONGOING" },
-  { id: "", GoalName: "", status: "DONE" },
-  { id: "", GoalName: "", status: "ONGOING" },
+  { id: "1", GoalName: "Increase monthly sales by 10%", status: "ONGOING" },
+  { id: "2", GoalName: "Launch new marketing campaign", status: "DONE" },
+  {
+    id: "3",
+    GoalName: "Improve customer support response time",
+    status: "ONGOING",
+  },
+  { id: "4", GoalName: "Reduce operational costs", status: "ONGOING" },
+  { id: "5", GoalName: "Expand into two new regions", status: "DONE" },
+  { id: "6", GoalName: "Implement a new CRM system", status: "ONGOING" },
+  { id: "7", GoalName: "Upgrade website performance", status: "ONGOING" },
+  { id: "8", GoalName: "Enhance social media engagement", status: "DONE" },
+  {
+    id: "9",
+    GoalName: "Train team on new sales strategies",
+    status: "ONGOING",
+  },
 ];
