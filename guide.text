@@ -5,12 +5,10 @@ mongoDB (optional)
 
 ========NEXT WORK========
 
-need to completely delegate daily tasks as add and edit task are the same
-delegate to that level that month weak and year can be created easily
-year will have adding option but no update and edit as commitment need to be there
 how can the daily goals can be reset as the day passes (after mongoDB)
 work on notes
-delegate DEMO data from all the slices
+feature for user to decide what button feature to active and disable
+notes have all crud applications and saved in local storage
 
 ===============Key Learning===============
 
