@@ -7,14 +7,14 @@ import CompletedDivision from "../common/CompletedDivision";
 import OngoingDivision from "../common/OngoingDivision";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  removeWeeklyGoals,
-  updateWeeklyGoalStatus,
-  updateWeeklyGoalName,
-} from "../../redux/slices/weeklyGoalsSlice";
+  removeYearlyGoal,
+  updateYearlyGoalStatus,
+  updateYearlyGoalName,
+} from "../../redux/slices/yearlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
-import { weeklyContent as content } from "../../constants/GenericConstants";
+import { yearlyContent as content } from "../../constants/GenericConstants";
 
-const WeeklyBody = () => {
+const YearlyBody = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [userValue, setUserValue] = useState<string>("");
   const editData = useRef<{ id: string; oldName: string }>({
@@ -23,26 +23,26 @@ const WeeklyBody = () => {
   });
 
   const GG = useSelector(
-    (state: RootState) => state.weeklyGoals.weeklyGoalsList
+    (state: RootState) => state.yearlyResolution.yearlyGoalList
   );
 
   //these will reduce the possibility or re-render when there is not change in global status but in local states
   const ongoingWGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.wGoalsStatus === "ONGOING");
+    return [...GG].filter((goal) => goal.status === "ONGOING");
   }, [GG]);
 
   const completedWGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.wGoalsStatus === "DONE");
+    return [...GG].filter((goal) => goal.status === "DONE");
   }, [GG]);
 
   const dispatch = useDispatch();
 
   const handleStatusUpdate = (value: string) => {
-    dispatch(updateWeeklyGoalStatus(value));
+    dispatch(updateYearlyGoalStatus(value));
   };
 
   const handleDeleteGoal = (value: string) => {
-    dispatch(removeWeeklyGoals(value));
+    dispatch(removeYearlyGoal(value));
   };
 
   const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
@@ -57,7 +57,7 @@ const WeeklyBody = () => {
 
   const handleSubmit = () => {
     dispatch(
-      updateWeeklyGoalName({ id: editData.current.id, name: userValue })
+      updateYearlyGoalName({ id: editData.current.id, name: userValue })
     );
     toggleModal();
   };
@@ -69,7 +69,7 @@ const WeeklyBody = () => {
         id={goal.id}
         index={index}
         arrLength={completedWGoals.length}
-        name={goal.wGoalsName}
+        name={goal.yearlyGoalName}
         handleDelete={handleDeleteGoal}
         handleStatusUpdate={handleStatusUpdate}
       />
@@ -80,7 +80,7 @@ const WeeklyBody = () => {
       <OngoingDivision
         key={goal.id}
         id={goal.id}
-        name={goal.wGoalsName}
+        name={goal.yearlyGoalName}
         index={index}
         arrLength={ongoingWGoals.length}
         handleStatus={handleStatusUpdate}
@@ -94,10 +94,10 @@ const WeeklyBody = () => {
   return (
     <>
       <IntroToManagement heading="Introduction" content={content} />
-      <CompletedContainer heading="Completed Goals">
+      <CompletedContainer heading="Completed">
         {renderCompletedWTasks}
       </CompletedContainer>
-      <OngoingContainer heading="Ongoing Goals">
+      <OngoingContainer heading="Ongoing">
         {renderOngoingWGoals}
       </OngoingContainer>
       {open && (
@@ -115,7 +115,7 @@ const WeeklyBody = () => {
   );
 };
 
-export default WeeklyBody;
+export default YearlyBody;
 
 /*
 

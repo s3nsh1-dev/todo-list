@@ -23,7 +23,7 @@ const OngoingDivision: React.FC<propTypes> = ({
   return (
     <>
       <div className="flex justify-between">
-        <p className="text-gray-500 flex items-center">{name}</p>
+        <p className="flex items-center">{name}</p>
         <div>
           <IconButton
             onClick={() => {

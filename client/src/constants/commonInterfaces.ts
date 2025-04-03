@@ -33,3 +33,27 @@ export type weeklyGoalsListType = {
   wGoalsName: string;
   wGoalsStatus: "ONGOING" | "DONE";
 };
+
+export interface monthlyGoalsListType {
+  id: string;
+  GoalName: string;
+  status: "ONGOING" | "DONE";
+}
+
+export interface monthlyHistoryType {
+  id: string;
+  MonthlyName: string;
+  status: "SUCCESS" | "FAILED";
+}
+
+export type YearlyGoalType = {
+  id: string;
+  yearlyGoalName: string;
+  status: "ONGOING" | "DONE";
+};
+
+export type YearlyHistoryLogType = {
+  id: string;
+  yearNum: string;
+  status: "SUCCESS" | "FAILED";
+};

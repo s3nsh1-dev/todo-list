@@ -5,15 +5,15 @@ import {
 import WMheader from "../../components/common/WMheader";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import ShowMonthHistoryModal from "./ShowMonthHistoryModal";
-import AddMonthlyModal from "./AddMonthlyModal";
+import ShowYearlyHistoryModal from "../yearly-goal/ShowYearlyHistoryModal";
+import AddYearlyModal from "../yearly-goal/AddYearlyModal";
 
 interface openType {
   openHistory: boolean;
   openAddWeeklyGoals: boolean;
 }
 
-const MonthlyHeader = () => {
+const YearlyHeader = () => {
   const [open, setOpen] = useState<openType>({
     openHistory: false,
     openAddWeeklyGoals: false,
@@ -41,7 +41,7 @@ const MonthlyHeader = () => {
           onClose={toggleHistoryModal}
           disableEnforceFocus={false}
         >
-          <ShowMonthHistoryModal onClosingModal={toggleHistoryModal} />
+          <ShowYearlyHistoryModal onClosingModal={toggleHistoryModal} />
         </Modal>
       )}
       {open.openAddWeeklyGoals && (
@@ -50,14 +50,14 @@ const MonthlyHeader = () => {
           onClose={toggleWeeklyGoalsModal}
           disableEnforceFocus={false}
         >
-          <AddMonthlyModal onClosingModal={toggleWeeklyGoalsModal} />
+          <AddYearlyModal onClosingModal={toggleWeeklyGoalsModal} />
         </Modal>
       )}
     </>
   );
 };
 
-export default MonthlyHeader;
+export default YearlyHeader;
 
 /**
  * ISSUE:
