@@ -45,3 +45,15 @@ export interface monthlyHistoryType {
   MonthlyName: string;
   status: "SUCCESS" | "FAILED";
 }
+
+export type YearlyGoalType = {
+  id: string;
+  yearlyGoalName: string;
+  status: "ONGOING" | "DONE";
+};
+
+export type YearlyHistoryLogType = {
+  id: string;
+  yearNum: string;
+  status: "SUCCESS" | "FAILED";
+};

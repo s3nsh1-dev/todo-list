@@ -5,6 +5,8 @@ import {
   taskDetailsType,
   monthlyGoalsListType,
   monthlyHistoryType,
+  YearlyGoalType,
+  YearlyHistoryLogType,
 } from "./commonInterfaces";
 
 export const weeklyLogs: weeklyLogsType[] = [
@@ -114,4 +116,75 @@ export const monthlyGoalsList: monthlyGoalsListType[] = [
     GoalName: "Train team on new sales strategies",
     status: "ONGOING",
   },
+];
+
+// Sample Yearly Goals Data
+export const yearlyGoalList: YearlyGoalType[] = [
+  {
+    id: "1",
+    yearlyGoalName: "Increase company revenue by 20%",
+    status: "ONGOING",
+  },
+  {
+    id: "2",
+    yearlyGoalName: "Expand to international markets",
+    status: "DONE",
+  },
+  { id: "3", yearlyGoalName: "Hire 50 new employees", status: "ONGOING" },
+  {
+    id: "4",
+    yearlyGoalName: "Develop a new flagship product",
+    status: "ONGOING",
+  },
+  {
+    id: "5",
+    yearlyGoalName: "Improve customer retention rate",
+    status: "ONGOING",
+  },
+  {
+    id: "6",
+    yearlyGoalName: "Achieve 1M social media followers",
+    status: "DONE",
+  },
+  {
+    id: "7",
+    yearlyGoalName: "Enhance employee training programs",
+    status: "ONGOING",
+  },
+  {
+    id: "8",
+    yearlyGoalName: "Increase brand partnerships",
+    status: "DONE",
+  },
+  {
+    id: "9",
+    yearlyGoalName: "Reduce company expenses by 15%",
+    status: "ONGOING",
+  },
+  {
+    id: "10",
+    yearlyGoalName: "Improve ESG (Environmental, Social, Governance) practices",
+    status: "DONE",
+  },
+  {
+    id: "11",
+    yearlyGoalName: "Launch new AI-driven analytics tool",
+    status: "ONGOING",
+  },
+];
+
+// Sample Yearly History Logs
+export const yearlyHistoryLogs: YearlyHistoryLogType[] = [
+  { id: "1", yearNum: "2015", status: "SUCCESS" },
+  { id: "2", yearNum: "2016", status: "SUCCESS" },
+  { id: "3", yearNum: "2017", status: "FAILED" },
+  { id: "4", yearNum: "2018", status: "SUCCESS" },
+  { id: "5", yearNum: "2019", status: "SUCCESS" },
+  { id: "6", yearNum: "2020", status: "FAILED" },
+  { id: "7", yearNum: "2021", status: "SUCCESS" },
+  { id: "8", yearNum: "2022", status: "SUCCESS" },
+  { id: "9", yearNum: "2023", status: "FAILED" },
+  { id: "10", yearNum: "2024", status: "SUCCESS" },
+  { id: "11", yearNum: "2025", status: "FAILED" },
+  { id: "12", yearNum: "2026", status: "SUCCESS" },
 ];
