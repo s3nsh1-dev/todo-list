@@ -7,6 +7,7 @@ import {
   monthlyHistoryType,
   YearlyGoalType,
   YearlyHistoryLogType,
+  notesTypes,
 } from "./commonInterfaces";
 
 export const weeklyLogs: weeklyLogsType[] = [
@@ -187,4 +188,43 @@ export const yearlyHistoryLogs: YearlyHistoryLogType[] = [
   { id: "10", yearNum: "2024", status: "SUCCESS" },
   { id: "11", yearNum: "2025", status: "FAILED" },
   { id: "12", yearNum: "2026", status: "SUCCESS" },
+];
+
+export const notes: notesTypes[] = [
+  {
+    id: "0",
+    title: "Meeting Notes for today",
+    content:
+      "Discussed project timeline, assigned tasks, and set next meeting on Friday. Key takeaways: finalize UI designs by next week, ensure backend API integration is smooth, and review client feedback before proceeding further.",
+  },
+  {
+    id: "1",
+    title: "Shopping List for urgency",
+    content:
+      "Milk, eggs, bread, and fruits for the week. Remember to check for discounts on cereals and snacks. Also, look for organic vegetables and some healthy snacks like nuts or protein bars for quick bites during work.",
+  },
+  {
+    id: "2",
+    title: "Project Ideas",
+    content:
+      "Brainstormed ideas for the new mobile app: user-friendly design, offline support, and gamification elements. The main focus is on productivity tracking with a clean UI and personalized reminders. Consider integrating AI-driven recommendations for better engagement.",
+  },
+  {
+    id: "3",
+    title: "Daily Journal really want to meet",
+    content:
+      "Today was productive: finished reading a book, took a long walk, and cooked a healthy meal. Also, started learning a new programming concept, which seemed tough at first but got better with practice. Need to focus on consistency and time management.",
+  },
+  {
+    id: "4",
+    title: "Workout Plan",
+    content:
+      "Monday: Cardio and abs. Wednesday: Strength training. Friday: Yoga and stretching. Planning to add HIIT workouts on alternate days to improve endurance. Will track progress weekly and adjust exercises accordingly.",
+  },
+  {
+    id: "5",
+    title: "Travel Itinerary",
+    content:
+      "Plan to visit Paris next month: book flights, reserve hotel, and list must-see attractions. Planning to explore local cuisine, visit the Louvre, and take a day trip to Versailles. Need to sort out travel insurance and prepare a packing list for essentials.",
+  },
 ];
