@@ -9,8 +9,8 @@ interface propTypes {
 const NotesCards: React.FC<propTypes> = ({ title, content }) => {
   return (
     <div
-      className="flex justify-between gap-5 flex-col border-2 border-gray-400 rounded-2xl"
-      style={{ margin: "10px 0px", padding: "10px" }}
+      className="flex justify-between gap-5 flex-col border-2 border-gray-400 rounded max-w-xl"
+      style={{ padding: "10px" }}
     >
       <div className="flex flex-col gap-2">
         <h1

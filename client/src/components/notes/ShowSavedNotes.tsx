@@ -9,7 +9,9 @@ const ShowSavedNotes = () => {
       <NotesCards key={note.id} title={note.title} content={note.content} />
     );
   });
-  return <div>{renderNotesCard}</div>;
+  return (
+    <div className="flex flex-wrap justify-center gap-5">{renderNotesCard}</div>
+  );
 };
 
 export default ShowSavedNotes;

@@ -9,7 +9,7 @@ const Notes = () => {
     setOpen((open) => !open);
   };
   return (
-    <div style={{ margin: "5px 7%" }}>
+    <div>
       <NotesHeader open={open} toggleNotes={toggleNotes} />
       <NotesContent open={open} />
     </div>

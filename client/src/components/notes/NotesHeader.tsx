@@ -8,7 +8,7 @@ interface propTypes {
 
 const NotesHeader: React.FC<propTypes> = ({ open, toggleNotes }) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between" style={{ marginBottom: "10px" }}>
       <h1 className="font-bold flex items-center text-2xl">Notes</h1>
       <div className="flex gap-2">
         <RedirectToHome />

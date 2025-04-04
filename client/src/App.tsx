@@ -9,7 +9,7 @@ import YearlyGoals from "./pages/YearlyGoals";
 
 const App = () => {
   return (
-    <main className="">
+    <>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<PageNotFound />} />
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/yearly-goals" element={<YearlyGoals />} />
         <Route path="/notes" element={<Notes />} />
       </Routes>
-    </main>
+    </>
   );
 };
 
