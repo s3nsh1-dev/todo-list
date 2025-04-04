@@ -15,3 +15,4 @@ mobile version is bad for goals/task as the icon the not aligned properly if the
 
 unMounting will cause the state to reset. its good for component needed for quick task/window
 < cloc . > will count the lines of code we have
+Mui does not let me user margin and padding classes in tailwind

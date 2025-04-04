@@ -27,7 +27,7 @@ const NotesCards: React.FC<propTypes> = ({ title, content }) => {
         </div>
       </div>
       <div className="flex gap-2">
-        <Button variant="outlined" color="info">
+        <Button variant="outlined" color="success">
           <span className="font-bold">Open</span>
         </Button>
         <Button variant="outlined" color="warning">
@@ -36,9 +36,14 @@ const NotesCards: React.FC<propTypes> = ({ title, content }) => {
         <Button variant="outlined" color="error">
           <span className="font-bold">Delete</span>
         </Button>
+        <Button variant="outlined" color="info">
+          <span className="font-bold">Copy</span>
+        </Button>
       </div>
     </div>
   );
 };
 
 export default NotesCards;
+
+// add date to the card

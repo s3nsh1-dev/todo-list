@@ -62,4 +62,5 @@ export interface notesTypes {
   id: string;
   title: string;
   content: string;
+  date: string;
 }

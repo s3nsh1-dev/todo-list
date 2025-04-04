@@ -22,6 +22,7 @@ const noteSlice = createSlice({
         id: crypto.randomUUID(),
         title: action.payload.title,
         content: action.payload.content,
+        date: new Date().toLocaleString(),
       });
     },
     removeNotes: (state, action: PayloadAction<string>) => {
