@@ -1,15 +1,11 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import NotesCards from "./NotesCards";
+import ShowSavedNotes from "./ShowSavedNotes";
+import CreateNotes from "./CreateNotes";
 
-const NotesContent = () => {
-  const data = useSelector((state: RootState) => state.notesArray.notes);
-  const renderNotesCard = data.map((note) => {
-    return (
-      <NotesCards key={note.id} title={note.title} content={note.content} />
-    );
-  });
-  return <div>{renderNotesCard}</div>;
+interface propTypes {
+  open: boolean;
+}
+
+const NotesContent: React.FC<propTypes> = ({ open }) => {
+  return <div>{open ? <CreateNotes /> : <ShowSavedNotes />}</div>;
 };
-
 export default NotesContent;
