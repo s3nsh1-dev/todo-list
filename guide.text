@@ -13,3 +13,4 @@ notes have all crud applications and saved in local storage
 ===============Key Learning===============
 
 unMounting will cause the state to reset. its good for component needed for quick task/window
+< cloc . > will count the lines of code we have

@@ -3,6 +3,7 @@ import { dailyTasksReducer } from "./slices/dailyTasksSlice";
 import { weeklyGoalReducer } from "./slices/weeklyGoalsSlice";
 import { monthlyReducer } from "./slices/monthlyGoalsSlice";
 import { yearlyGoalReducers } from "./slices/yearlyGoalsSlice";
+import { globalButtonReducer } from "./slices/globalButtonFlags";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     weeklyGoals: weeklyGoalReducer,
     monthlyGoals: monthlyReducer,
     yearlyResolution: yearlyGoalReducers,
+    buttonFlags: globalButtonReducer,
   },
 });
 
