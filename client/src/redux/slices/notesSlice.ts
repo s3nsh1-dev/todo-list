@@ -26,26 +26,30 @@ const noteSlice = createSlice({
       });
     },
     removeNotes: (state, action: PayloadAction<string>) => {
-      state.notes.filter((note) => note.id !== action.payload);
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
     updateNotes: (
       state,
       action: PayloadAction<{ id: string; title: string; content: string }>
     ) => {
-      //   const note = state.notes.find((note) => note.id === action.payload.id);
-      //   if (note) {
-      //     note.title = action.payload.title;
-      //     note.content = action.payload.content;
-      //   }
-      state.notes.map((note) => {
-        return note.id === action.payload.id
-          ? {
-              id: note.id,
-              title: action.payload.title,
-              content: action.payload.content,
-            }
-          : note;
-      });
+      // const note = state.notes.find((note) => note.id === action.payload.id);
+      // if (note) {
+      //   note.title = action.payload.title;
+      //   note.content = action.payload.content;
+      // }
+      return {
+        ...state,
+        notes: [...state.notes].map((note) => {
+          return note.id === action.payload.id
+            ? {
+                ...note,
+                title: action.payload.title,
+                content: action.payload.content,
+                date: new Date().toLocaleString(),
+              }
+            : note;
+        }),
+      };
     },
   },
 });

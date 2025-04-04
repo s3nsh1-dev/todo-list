@@ -1,6 +1,33 @@
 import { TextareaAutosize, Box, Button } from "@mui/material";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { createNotes } from "../../redux/slices/notesSlice";
 
 const CreateNotes = () => {
+  const dispatch = useDispatch();
+  const [titleValue, setTitleValue] = React.useState<string>("");
+  const [contentValue, setContentValue] = React.useState<string>("");
+  const handleNothing = () => {
+    setTitleValue("");
+    setContentValue("");
+  };
+  const handleSave = () => {
+    const title =
+      titleValue === " " || titleValue === "" ? "Untitled" : titleValue;
+    dispatch(createNotes({ title, content: contentValue }));
+    setTitleValue("");
+    setContentValue("");
+    alert("Note Saved");
+  };
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(contentValue);
+      // Optionally, provide user feedback
+      alert("Note copied to clipboard!");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
   return (
     <Box
       sx={{
@@ -18,6 +45,10 @@ const CreateNotes = () => {
     >
       <TextareaAutosize
         placeholder="Enter Title"
+        value={titleValue}
+        onChange={(e) => {
+          setTitleValue(e.target.value);
+        }}
         style={{
           padding: "8px",
           border: "1px solid #ccc",
@@ -29,6 +60,10 @@ const CreateNotes = () => {
         aria-label="Note Content"
         minRows={14}
         placeholder="Write your note here..."
+        value={contentValue}
+        onChange={(e) => {
+          setContentValue(e.target.value);
+        }}
         style={{
           width: "100%",
           padding: "8px",
@@ -38,13 +73,28 @@ const CreateNotes = () => {
         }}
       />
       <div className="flex gap-3">
-        <Button variant="outlined" color="warning" sx={{ fontWeight: "bold" }}>
+        <Button
+          variant="outlined"
+          color="warning"
+          sx={{ fontWeight: "bold" }}
+          onClick={handleNothing}
+        >
           Cancel
         </Button>
-        <Button variant="outlined" color="success" sx={{ fontWeight: "bold" }}>
+        <Button
+          variant="outlined"
+          color="success"
+          sx={{ fontWeight: "bold" }}
+          onClick={handleSave}
+        >
           Save
         </Button>
-        <Button variant="outlined" color="primary" sx={{ fontWeight: "bold" }}>
+        <Button
+          variant="outlined"
+          color="primary"
+          sx={{ fontWeight: "bold" }}
+          onClick={handleCopy}
+        >
           Copy
         </Button>
       </div>
