@@ -57,3 +57,10 @@ export type YearlyHistoryLogType = {
   yearNum: string;
   status: "SUCCESS" | "FAILED";
 };
+
+export interface notesTypes {
+  id: string;
+  title: string;
+  content: string;
+  date: string;
+}

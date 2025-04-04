@@ -9,7 +9,10 @@ how can the daily goals can be reset as the day passes (after mongoDB)
 work on notes
 feature for user to decide what button feature to active and disable
 notes have all crud applications and saved in local storage
+mobile version is bad for goals/task as the icon the not aligned properly if the task/goal name goes not 2 line
 
 ===============Key Learning===============
 
 unMounting will cause the state to reset. its good for component needed for quick task/window
+< cloc . > will count the lines of code we have
+Mui does not let me user margin and padding classes in tailwind
