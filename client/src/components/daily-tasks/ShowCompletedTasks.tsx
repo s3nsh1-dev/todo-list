@@ -20,7 +20,7 @@ const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <p className="flex item-center flex-row">{tasks.taskName}</p>
+        <p className="flex item-center flex-row w-64">{tasks.taskName}</p>
         <div>
           <IconButton onClick={handleResetTaskStatus}>
             <HighlightOffIcon className="text-gray-500 hover:text-red-700" />

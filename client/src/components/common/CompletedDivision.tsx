@@ -23,7 +23,7 @@ const CompletedDivision: React.FC<propTypes> = ({
   return (
     <>
       <div className="flex justify-between">
-        <p className="text-gray-500 flex items-center">{name}</p>
+        <p className="text-gray-500 flex items-center w-64">{name}</p>
         <div>
           <IconButton
             onClick={() => {
