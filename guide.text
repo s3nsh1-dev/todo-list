@@ -6,13 +6,19 @@ mongoDB (optional)
 ========NEXT WORK========
 
 how can the daily goals can be reset as the day passes (after mongoDB)
-work on notes
 feature for user to decide what button feature to active and disable
-notes have all crud applications and saved in local storage
-mobile version is bad for goals/task as the icon the not aligned properly if the task/goal name goes not 2 line
+Welcome screen
+drag and drop
 
 ===============Key Learning===============
 
 unMounting will cause the state to reset. its good for component needed for quick task/window
 < cloc . > will count the lines of code we have
 Mui does not let me user margin and padding classes in tailwind
+/*
+
+    when the UI is not increasing for large and have same width as small screen. use max + min + vw
+  width: "95vw", // Responsive width
+  maxWidth: "800px", // Caps width on large screens
+  minWidth: "300px", // Minimum width on smallest screens
+*/
