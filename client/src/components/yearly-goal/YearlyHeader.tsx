@@ -1,7 +1,3 @@
-import {
-  getDayOfTheWeek,
-  getWeekNumber,
-} from "../../constants/commonFunctions";
 import WMheader from "../../components/common/WMheader";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
@@ -18,7 +14,7 @@ const YearlyHeader = () => {
     openHistory: false,
     openAddWeeklyGoals: false,
   });
-  const dateInfo = `${getDayOfTheWeek()}, ${getWeekNumber()}`;
+  const dateInfo = `${new Date().getFullYear()}`;
   const toggleHistoryModal = () => {
     setOpen((prev) => ({ ...prev, openHistory: !prev.openHistory }));
   };
