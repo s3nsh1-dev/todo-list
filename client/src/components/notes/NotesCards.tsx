@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { removeNotes } from "../../redux/slices/notesSlice";
+import { removeNotesFromLocalStorage } from "../../redux/slices/localStorageSlice";
 import NotesModal from "./NotesModal";
 interface propTypes {
   title: string;
@@ -28,7 +28,7 @@ const NotesCards: React.FC<propTypes> = ({ id, title, content }) => {
   const dispatch = useDispatch();
 
   const handelRemoveNotes = () => {
-    dispatch(removeNotes(id));
+    dispatch(removeNotesFromLocalStorage(id));
   };
 
   const handleCopy = async () => {

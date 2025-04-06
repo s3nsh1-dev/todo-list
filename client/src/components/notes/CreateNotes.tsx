@@ -1,7 +1,7 @@
 import { TextareaAutosize, Box, Button } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { createNotes } from "../../redux/slices/notesSlice";
+import { addNotesToLocalStorage } from "../../redux/slices/localStorageSlice";
 
 const CreateNotes = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const CreateNotes = () => {
   const handleSave = () => {
     const title =
       titleValue === " " || titleValue === "" ? "Untitled" : titleValue;
-    dispatch(createNotes({ title, content: contentValue }));
+    dispatch(addNotesToLocalStorage({ title, content: contentValue }));
     setTitleValue("");
     setContentValue("");
     alert("Note Saved");

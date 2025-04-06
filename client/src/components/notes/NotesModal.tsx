@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import { notesPanelStyle } from "../../constants/customCssProperties";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { updateNotes } from "../../redux/slices/notesSlice";
+import { updateNotesInLocalStorage } from "../../redux/slices/localStorageSlice";
 
 interface propTypes {
   id: string;
@@ -34,7 +34,7 @@ const NotesModal: React.FC<propTypes> = ({
 
   const handleUpdateNote = () => {
     dispatch(
-      updateNotes({
+      updateNotesInLocalStorage({
         id,
         title: data.newTitle,
         content: data.newContent,

@@ -3,7 +3,7 @@ import { RootState } from "../../redux/store";
 import NotesCards from "./NotesCards";
 
 const ShowSavedNotes = () => {
-  const data = useSelector((state: RootState) => state.notesArray.notes);
+  const data = useSelector((state: RootState) => state.notesArray);
   console.log("Notes Data:", data);
   const renderNotesCard = data.map((note) => {
     return (
