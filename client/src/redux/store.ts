@@ -5,6 +5,7 @@ import { monthlyReducer } from "./slices/monthlyGoalsSlice";
 import { yearlyGoalReducers } from "./slices/yearlyGoalsSlice";
 import { globalButtonReducer } from "./slices/globalButtonFlags";
 import { localStorageReducer } from "./slices/localStorageSlice";
+import { welcomeReducer } from "./slices/welcomeFlag";
 // import { notesSliceReducer } from "./slices/notesSlice";
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
     yearlyResolution: yearlyGoalReducers,
     buttonFlags: globalButtonReducer,
     notesArray: localStorageReducer,
+    welcomeFlag: welcomeReducer,
     // notesArray: notesSliceReducer,
   },
 });
