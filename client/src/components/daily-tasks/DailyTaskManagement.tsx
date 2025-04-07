@@ -3,13 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
 import ShowOngoingTasks from "./ShowOngoingTasks";
 import ShowCompletedTasks from "./ShowCompletedTasks";
-import { closestCorners, DndContext } from "@dnd-kit/core";
+import {
+  closestCorners,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { replaceTasksWithNewValue } from "../../redux/slices/dailyTasksSlice";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 const DailyTaskManagement = () => {
   const dispatch = useDispatch();
@@ -49,6 +58,13 @@ const DailyTaskManagement = () => {
     );
   });
 
+  const sensor = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
   return (
     <article className="flex flex-col gap-5">
       <div>
@@ -58,6 +74,8 @@ const DailyTaskManagement = () => {
       <div>
         <h1 className="text-xl font-bold">Ongoing</h1>
         <DndContext
+          sensors={sensor}
+          modifiers={[restrictToParentElement]}
           collisionDetection={closestCorners}
           onDragEnd={(e) => {
             const { active, over } = e;
