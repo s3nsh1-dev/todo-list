@@ -1,22 +1,31 @@
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
-import type { taskDetailsType } from "../../constants/commonInterfaces";
 import ShowOngoingTasks from "./ShowOngoingTasks";
 import ShowCompletedTasks from "./ShowCompletedTasks";
-
-interface stateType {
-  completedTasks: taskDetailsType[];
-  ongoingTasks: taskDetailsType[];
-}
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { replaceTasksWithNewValue } from "../../redux/slices/dailyTasksSlice";
 
 const DailyTaskManagement = () => {
+  const dispatch = useDispatch();
   const dailyTasksList = useSelector(
     (state: RootState) => state.dailyTasks.taskDetails
   );
-  const taskName: stateType = {
-    completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
-    ongoingTasks: dailyTasksList.filter((tasks) => tasks.status === "ONGOING"),
-  };
+
+  const taskName = React.useMemo(
+    () => ({
+      completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
+      ongoingTasks: dailyTasksList.filter(
+        (tasks) => tasks.status === "ONGOING"
+      ),
+    }),
+    [dailyTasksList]
+  );
 
   const renderOngoingTasks = taskName.ongoingTasks.map((tasks, index) => {
     return (
@@ -48,7 +57,40 @@ const DailyTaskManagement = () => {
       </div>
       <div>
         <h1 className="text-xl font-bold">Ongoing</h1>
-        <div>{renderOngoingTasks}</div>
+        <DndContext
+          collisionDetection={closestCorners}
+          onDragEnd={(e) => {
+            const { active, over } = e;
+            if (!over) return;
+            if (active.id === over.id) {
+              return;
+            }
+            const originalIndex = taskName.ongoingTasks.findIndex(
+              (task) => task.taskId === active.id
+            );
+            const newIndex = taskName.ongoingTasks.findIndex(
+              (task) => task.taskId === over.id
+            );
+            const updatedTasks = arrayMove(
+              taskName.ongoingTasks,
+              originalIndex,
+              newIndex
+            );
+            dispatch(
+              replaceTasksWithNewValue([
+                ...updatedTasks,
+                ...taskName.completedTasks,
+              ])
+            );
+          }}
+        >
+          <SortableContext
+            items={taskName["ongoingTasks"].map((task) => task.taskId)}
+            strategy={verticalListSortingStrategy}
+          >
+            {renderOngoingTasks}
+          </SortableContext>
+        </DndContext>
       </div>
     </article>
   );

@@ -36,9 +36,16 @@ const dailyTasksSlice = createSlice({
         ),
       };
     },
+    replaceTasksWithNewValue: (
+      state,
+      action: PayloadAction<taskDetailsType[]>
+    ) => {
+      return { ...state, taskDetails: action.payload };
+    },
   },
 });
 
-export const { addTasks, removeTasks, updateTask } = dailyTasksSlice.actions;
+export const { addTasks, removeTasks, updateTask, replaceTasksWithNewValue } =
+  dailyTasksSlice.actions;
 export default dailyTasksSlice;
 export const dailyTasksReducer = dailyTasksSlice.reducer;
