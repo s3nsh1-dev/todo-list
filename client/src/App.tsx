@@ -6,8 +6,11 @@ import DailyTasks from "./pages/DailyTasks";
 import MonthlyGoals from "./pages/MonthlyGoals";
 import WeeklyGoals from "./pages/WeeklyGoals";
 import YearlyGoals from "./pages/YearlyGoals";
+import { useGlobalContext } from "./hook/useGlobalContext";
 
 const App = () => {
+  const intoFlag = useGlobalContext();
+  console.log("intoFlag", intoFlag);
   return (
     <>
       <Routes>
