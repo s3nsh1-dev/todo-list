@@ -6,6 +6,7 @@ import DailyTasks from "./pages/DailyTasks";
 import MonthlyGoals from "./pages/MonthlyGoals";
 import WeeklyGoals from "./pages/WeeklyGoals";
 import YearlyGoals from "./pages/YearlyGoals";
+import Test from "./Test/Test";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/monthly-goals" element={<MonthlyGoals />} />
         <Route path="/yearly-goals" element={<YearlyGoals />} />
         <Route path="/notes" element={<Notes />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </>
   );
