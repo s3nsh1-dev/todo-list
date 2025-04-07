@@ -13,7 +13,7 @@ const GlobalContext = createContext<GlobalContextType | null>(null);
 export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [intoFlag, setIntoFlag] = useState<boolean>(false);
+  const [intoFlag, setIntoFlag] = useState<boolean>(true);
 
   const contextValue: GlobalContextType = {
     intoFlag,
