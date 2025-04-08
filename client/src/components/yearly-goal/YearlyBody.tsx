@@ -13,6 +13,7 @@ import {
 } from "../../redux/slices/yearlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
 import { yearlyContent as content } from "../../constants/GenericConstants";
+import DndKitDefault from "../others/DndKitDefault";
 
 const YearlyBody = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -27,11 +28,11 @@ const YearlyBody = () => {
   );
 
   //these will reduce the possibility or re-render when there is not change in global status but in local states
-  const ongoingWGoals = useMemo(() => {
+  const ongoingYGoals = useMemo(() => {
     return [...GG].filter((goal) => goal.status === "ONGOING");
   }, [GG]);
 
-  const completedWGoals = useMemo(() => {
+  const completedYGoals = useMemo(() => {
     return [...GG].filter((goal) => goal.status === "DONE");
   }, [GG]);
 
@@ -62,27 +63,27 @@ const YearlyBody = () => {
     toggleModal();
   };
 
-  const renderCompletedWTasks = completedWGoals.map((goal, index) => {
+  const renderCompletedWTasks = completedYGoals.map((goal, index) => {
     return (
       <CompletedDivision
         key={goal.id}
         id={goal.id}
         index={index}
-        arrLength={completedWGoals.length}
+        arrLength={completedYGoals.length}
         name={goal.yearlyGoalName}
         handleDelete={handleDeleteGoal}
         handleStatusUpdate={handleStatusUpdate}
       />
     );
   });
-  const renderOngoingWGoals = ongoingWGoals.map((goal, index) => {
+  const renderOngoingWGoals = ongoingYGoals.map((goal, index) => {
     return (
       <OngoingDivision
         key={goal.id}
         id={goal.id}
         name={goal.yearlyGoalName}
         index={index}
-        arrLength={ongoingWGoals.length}
+        arrLength={ongoingYGoals.length}
         handleStatus={handleStatusUpdate}
         handleEditGoal={handleEditWGoal}
       />
@@ -97,9 +98,14 @@ const YearlyBody = () => {
       <CompletedContainer heading="Completed">
         {renderCompletedWTasks}
       </CompletedContainer>
-      <OngoingContainer heading="Ongoing">
-        {renderOngoingWGoals}
-      </OngoingContainer>
+      <DndKitDefault
+        memoizedGoals={ongoingYGoals}
+        completedGoals={completedYGoals}
+      >
+        <OngoingContainer heading="Ongoing">
+          {renderOngoingWGoals}
+        </OngoingContainer>
+      </DndKitDefault>
       {open && (
         <ShowEditModal
           isDisabled={isDisabled}

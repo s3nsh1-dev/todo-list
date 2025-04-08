@@ -2,6 +2,9 @@ import { DividerGray } from "../others/CommonComponents";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface propTypes {
   id: string;
@@ -20,10 +23,23 @@ const OngoingDivision: React.FC<propTypes> = ({
   handleEditGoal,
   handleStatus,
 }) => {
+  const { listeners, transform, transition, attributes, setNodeRef } =
+    useSortable({ id });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+    touchAction: "none",
+  };
   return (
     <>
-      <div className="flex justify-between">
-        <p className="flex items-center min-w-64 w-[50vw]">{name}</p>
+      <div className="flex justify-between" ref={setNodeRef} style={style}>
+        <div className="flex items-center min-w-60 w-[50vw]">
+          <IconButton {...listeners} {...attributes}>
+            <DragIndicatorIcon sx={{ color: "white" }} />
+          </IconButton>
+          <p className="flex items-center ">{name}</p>
+        </div>
         <div>
           <IconButton
             onClick={() => {

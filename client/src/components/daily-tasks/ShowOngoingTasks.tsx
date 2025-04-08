@@ -54,13 +54,11 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
         style={style}
         ref={setNodeRef}
       >
-        <div className="flex items-center">
+        <div className="flex items-center min-w-60 w-[50vw]">
           <IconButton {...listeners} {...attributes}>
             <DragIndicatorIcon sx={{ color: "gray" }} />
           </IconButton>
-          <p className="flex item-center flex-row min-w-40 w-[50vw]">
-            {tasks.taskName}
-          </p>
+          <p className="flex item-center flex-row ">{tasks.taskName}</p>
         </div>
         <div>
           <IconButton onClick={onOpen}>
