@@ -58,6 +58,15 @@ const yearlySlice = createSlice({
         goal.status = goal.status === "DONE" ? "ONGOING" : "DONE";
       }
     },
+    reInitializeYearlyGoals: (
+      state,
+      action: PayloadAction<YearlyGoalType[]>
+    ) => {
+      return {
+        ...state,
+        yearlyGoalList: action.payload,
+      };
+    },
   },
 });
 
@@ -67,6 +76,7 @@ export const {
   removeYearlyGoal,
   updateYearlyGoalName,
   updateYearlyGoalStatus,
+  reInitializeYearlyGoals,
 } = yearlySlice.actions;
 
 export const yearlyGoalReducers = yearlySlice.reducer;
