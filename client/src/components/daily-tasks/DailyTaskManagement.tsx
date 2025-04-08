@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux/store";
 import ShowOngoingTasks from "./ShowOngoingTasks";
 import ShowCompletedTasks from "./ShowCompletedTasks";
+import { replaceTasksWithNewValue } from "../../redux/slices/dailyTasksSlice";
 import {
   closestCorners,
   DndContext,
@@ -17,7 +18,6 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { replaceTasksWithNewValue } from "../../redux/slices/dailyTasksSlice";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 const DailyTaskManagement = () => {

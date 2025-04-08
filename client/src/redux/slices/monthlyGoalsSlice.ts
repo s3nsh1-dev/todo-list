@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { monthlyHistory, monthlyGoalsList } from "../../constants/sliceDataset";
-import { monthlyGoalsListType } from "../../constants/commonInterfaces";
+import {
+  monthlyGoalsListType,
+  monthlyHistoryType,
+} from "../../constants/commonInterfaces";
 
-const initialState = {
+interface monthlyGoalsState {
+  monthlyHistory: monthlyHistoryType[];
+  monthlyGoalsList: monthlyGoalsListType[];
+}
+
+const initialState: monthlyGoalsState = {
   monthlyHistory,
   monthlyGoalsList,
 };
@@ -50,6 +58,15 @@ const monthlySlice = createSlice({
         goal.GoalName = action.payload.name;
       }
     },
+    reInitializeMonthlyGoals: (
+      state,
+      action: PayloadAction<monthlyGoalsListType[]>
+    ) => {
+      return {
+        ...state,
+        monthlyGoalsList: action.payload,
+      };
+    },
   },
 });
 
@@ -60,6 +77,7 @@ export const {
   removeMonthlyGoal,
   editMonthlyGoal,
   updateMonthlyGoalStatus,
+  reInitializeMonthlyGoals,
 } = monthlySlice.actions;
 
 export const monthlyReducer = monthlySlice.reducer;

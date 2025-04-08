@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { weeklyGoalObjectType } from "../../constants/commonInterfaces";
+import type {
+  weeklyGoalObjectType,
+  weeklyGoalsListType,
+} from "../../constants/commonInterfaces";
 import { weeklyGoalsList, weeklyLogs } from "../../constants/sliceDataset";
 
 const initialState: weeklyGoalObjectType = { weeklyGoalsList, weeklyLogs };
@@ -44,6 +47,15 @@ const weeklySlice = createSlice({
         goal.wGoalsStatus = goal.wGoalsStatus === "DONE" ? "ONGOING" : "DONE";
       }
     },
+    reInitializeWeeklyGoals: (
+      state,
+      action: PayloadAction<weeklyGoalsListType[]>
+    ) => {
+      return {
+        ...state,
+        weeklyGoalsList: action.payload,
+      };
+    },
   },
 });
 
@@ -52,6 +64,7 @@ export const {
   removeWeeklyGoals,
   updateWeeklyGoalName,
   updateWeeklyGoalStatus,
+  reInitializeWeeklyGoals,
 } = weeklySlice.actions;
 export default weeklySlice;
 export const weeklyGoalReducer = weeklySlice.reducer;
