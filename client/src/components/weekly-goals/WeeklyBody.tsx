@@ -10,9 +10,25 @@ import {
   removeWeeklyGoals,
   updateWeeklyGoalStatus,
   updateWeeklyGoalName,
+  reInitializeWeeklyGoals,
 } from "../../redux/slices/weeklyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
 import { weeklyContent as content } from "../../constants/GenericConstants";
+import {
+  closestCorners,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 const WeeklyBody = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -90,6 +106,12 @@ const WeeklyBody = () => {
   });
 
   const isDisabled = userValue.length > 1 ? false : true;
+  const sensor = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <>
@@ -97,9 +119,43 @@ const WeeklyBody = () => {
       <CompletedContainer heading="Completed Goals">
         {renderCompletedWTasks}
       </CompletedContainer>
-      <OngoingContainer heading="Ongoing Goals">
-        {renderOngoingWGoals}
-      </OngoingContainer>
+      <DndContext
+        modifiers={[restrictToParentElement]}
+        sensors={sensor}
+        collisionDetection={closestCorners}
+        onDragEnd={(e) => {
+          const { active, over } = e;
+          if (!over) return;
+          if (active.id === over.id) return;
+          const originalIndex = ongoingWGoals.findIndex(
+            (goal) => goal.id === active.id
+          );
+          const newIndex = ongoingWGoals.findIndex(
+            (goal) => goal.id === over.id
+          );
+          const updateWeeklyGoalsWithNewIndex = arrayMove(
+            ongoingWGoals,
+            originalIndex,
+            newIndex
+          );
+
+          dispatch(
+            reInitializeWeeklyGoals([
+              ...updateWeeklyGoalsWithNewIndex,
+              ...completedWGoals,
+            ])
+          );
+        }}
+      >
+        <SortableContext
+          items={ongoingWGoals.map((goal) => goal.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <OngoingContainer heading="Ongoing Goals">
+            {renderOngoingWGoals}
+          </OngoingContainer>
+        </SortableContext>
+      </DndContext>
       {open && (
         <ShowEditModal
           isDisabled={isDisabled}
