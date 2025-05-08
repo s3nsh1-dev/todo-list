@@ -1,1 +1,45 @@
+# === NODE ===
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === ENV FILES ===
+.env
+.env.local
+.env.*.local
+
+# === BUILD OUTPUT ===
+dist/
+build/
+.next/
+out/
+coverage/
+
+# === LOG FILES ===
+logs/
+*.log
+
+# === SYSTEM FILES ===
+.DS_Store
+Thumbs.db
+
+# === EDITOR CONFIGS ===
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# === REACT SPECIFIC ===
+*.cache/
+.eslintcache
+
+# === TYPESCRIPT ===
+*.tsbuildinfo
+
+# === MONGODB DATA FILES ===
+/data/db
+/mongodb-data
