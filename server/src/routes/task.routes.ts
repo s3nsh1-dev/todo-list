@@ -1,9 +1,7 @@
 import express from "express";
-import { getTasks, postTask } from "../controller/task.controller";
-
 const taskRoutes = express.Router();
 
-taskRoutes.get("/", getTasks);
-taskRoutes.post("/add", postTask);
+taskRoutes.get("/", () => {});
+taskRoutes.post("/add", () => {});
 
 export default taskRoutes;
