@@ -1,14 +1,28 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
+import env from "../config/env.config";
+import { weeklyLogsType } from "../constants/projectTypes";
 
-dotenv.config();
-
-const model = {};
+const model: mongoose.SchemaDefinition<weeklyLogsType> = {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  weekNum: {
+    type: String,
+    required: true,
+  },
+  wResult: {
+    type: String,
+    enum: ["SUCCESS", "FAILED"],
+    required: true,
+  },
+};
 
 const weeklyHistory = new mongoose.Schema(model, { _id: false });
-const WeeklyHistory = mongoose.model(
+const WeeklyHistory = mongoose.model<weeklyLogsType>(
   "WeeklyHistory",
   weeklyHistory,
-  process.env.WEEKLY_HISTORY_COLLECTION
+  env.WEEKLY_HISTORY_COLLECTION
 );
 export default WeeklyHistory;

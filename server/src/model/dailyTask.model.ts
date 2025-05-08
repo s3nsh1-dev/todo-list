@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import { taskDetailsType } from "../constants/projectTypes";
+import env from "../config/env.config";
 
-dotenv.config();
-
-const model = {
-  taskID: {
+const model: mongoose.SchemaDefinition<taskDetailsType> = {
+  taskId: {
     type: String,
     required: true,
     unique: true,
@@ -22,9 +21,9 @@ const model = {
 };
 
 const dailyTask = new mongoose.Schema(model, { _id: false });
-const DailyTask = mongoose.model(
+const DailyTask = mongoose.model<taskDetailsType>(
   "DailyTask",
   dailyTask,
-  process.env.DAILY_TASKS_COLLECTION
+  env.DAILY_TASKS_COLLECTION
 );
 export default DailyTask;

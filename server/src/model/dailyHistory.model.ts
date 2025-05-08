@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import { historyLogType } from "../constants/projectTypes";
+import env from "../config/env.config";
 
-dotenv.config();
-
-const model = {
+const model: mongoose.SchemaDefinition<historyLogType> = {
   histId: {
     type: String,
     required: true,
@@ -11,7 +10,7 @@ const model = {
   },
   histDate: {
     type: String,
-    required: String,
+    required: true,
   },
   histResult: {
     type: String,
@@ -20,9 +19,9 @@ const model = {
 };
 
 const dailyHistory = new mongoose.Schema(model, { _id: false });
-const DailyHistory = mongoose.model(
+const DailyHistory = mongoose.model<historyLogType>(
   "DailyHistory",
   dailyHistory,
-  process.env.DAILY_HISTORY_COLLECTION
+  env.DAILY_HISTORY_COLLECTION
 );
 export default DailyHistory;

@@ -1,14 +1,28 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
+import env from "../config/env.config";
+import { monthlyHistoryType } from "../constants/projectTypes";
 
-dotenv.config();
-
-const model = {};
+const model: mongoose.SchemaDefinition<monthlyHistoryType> = {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  MonthlyName: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["SUCCESS", "FAILED"],
+    required: true,
+  },
+};
 
 const monthlyHistory = new mongoose.Schema(model, { _id: false });
-const MonthlyHistory = mongoose.model(
+const MonthlyHistory = mongoose.model<monthlyHistoryType>(
   "MonthlyHistory",
   monthlyHistory,
-  process.env.MONTHLY_HISTORY_COLLECTION
+  env.MONTHLY_HISTORY_COLLECTION
 );
 export default MonthlyHistory;

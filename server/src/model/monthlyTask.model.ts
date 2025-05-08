@@ -1,14 +1,28 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
+import env from "../config/env.config";
+import { monthlyGoalsListType } from "../constants/projectTypes";
 
-dotenv.config();
-
-const model = {};
+const model: mongoose.SchemaDefinition<monthlyGoalsListType> = {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  GoalName: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: ["ONGOING", "DONE"],
+  },
+};
 
 const monthlyTask = new mongoose.Schema(model, { _id: false });
-const MonthlyTask = mongoose.model(
+const MonthlyTask = mongoose.model<monthlyGoalsListType>(
   "MonthlyTask",
   monthlyTask,
-  process.env.MONTHLY_TASKS_COLLECTION
+  env.MONTHLY_TASKS_COLLECTION
 );
 export default MonthlyTask;
