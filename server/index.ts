@@ -1,21 +1,26 @@
 import express from "express";
 import cors from "cors";
-import taskRoutes from "./src/routes/task.routes";
-import dotenv from "dotenv";
+import env from "./src/config/env.config";
+import taskRoutes from "./src/routes/daily.routes";
+import weeklyRouter from "./src/routes/weekly.routes";
+import monthlyRouter from "./src/routes/monthly.routes";
+import yearlyRouter from "./src/routes/yearly.routes";
 
-dotenv.config();
 const app = express();
-const listeningPort = process.env.PORT || 3000;
+const listeningPort = env.PORT || 3000;
 
 console.log(process.env.PORT);
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/task", taskRoutes);
+app.use("/api/daily", taskRoutes);
+app.use("/api/weekly", weeklyRouter);
+app.use("/api/monthly", monthlyRouter);
+app.use("/api/yearly", yearlyRouter);
 
 app.get("/", (req, res) => {
-  res.send("change");
+  res.send("HOME");
 });
 
 app.listen(listeningPort, () => {
