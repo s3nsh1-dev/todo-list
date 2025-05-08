@@ -1,6 +1,6 @@
 import express, { Request, RequestHandler, Response } from "express";
-import { taskDetails, previousTasksLogs } from "../constants/projectData.js";
-import { taskDetailsType } from "../constants/projectTypes.js";
+import { taskDetails, previousTasksLogs } from "../constants/projectData";
+import { taskDetailsType } from "../constants/projectTypes";
 
 export const getTasks: RequestHandler = (
   req: express.Request,
