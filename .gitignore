@@ -43,3 +43,37 @@ Thumbs.db
 # === MONGODB DATA FILES ===
 /data/db
 /mongodb-data
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+
+# Debugging files
+*.pid
+*.seed
+
+# Coverage reports
+coverage/
+
+# Temporary files
+tmp/
+temp/

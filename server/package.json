@@ -2,27 +2,26 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
-    "watch": "tsc --watch",
-    "serve": "nodemon dist/index.js",
-    "dev": "concurrently \"npm run watch\" \"npm run serve\""
+    "build": "tsc",
+    "default": "node dist/index.js",
+    "server": "nodemon --watch src --watch index.ts --ext ts --exec ts-node index.ts"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "mongoose": "^8.13.0"
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.1",
-    "concurrently": "^9.1.2",
+    "@types/node": "^22.14.1",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
