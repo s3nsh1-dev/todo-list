@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import taskRoutes from "./src/routes/task.routes.js";
+import taskRoutes from "./src/routes/task.routes";
 
 const app = express();
 const listeningPort = process.env.PORT || 3000;
