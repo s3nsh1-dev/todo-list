@@ -3,11 +3,6 @@ import { taskDetailsType } from "../constants/projectTypes";
 import env from "../config/env.config";
 
 const model: mongoose.SchemaDefinition<taskDetailsType> = {
-  taskId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   taskName: {
     type: String,
     required: true,

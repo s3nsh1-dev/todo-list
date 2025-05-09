@@ -1,5 +1,4 @@
 export type taskDetailsType = {
-  taskId: string;
   taskName: string;
   status: "DONE" | "ONGOING";
 };
