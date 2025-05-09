@@ -20,7 +20,7 @@ const model: mongoose.SchemaDefinition<taskDetailsType> = {
   },
 };
 
-const dailyTask = new mongoose.Schema(model, { _id: false });
+const dailyTask = new mongoose.Schema(model, { _id: true });
 const DailyTask = mongoose.model<taskDetailsType>(
   "DailyTask",
   dailyTask,

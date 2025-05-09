@@ -38,7 +38,9 @@ const updateDailyTaskStatus: RequestHandler = async (
       res.status(400).json({ message: "Corrupted Data: something went wrong" });
       return;
     }
-    res.status(201).json({ message: "", body: updatedTaskStatus });
+    res
+      .status(201)
+      .json({ message: "SUCCESS: Status Updated", body: updatedTaskStatus });
   } catch (error) {
     res.status(500).json({ message: `Server Error: ${error}` });
   }
