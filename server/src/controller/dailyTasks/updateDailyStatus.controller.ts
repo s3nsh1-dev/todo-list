@@ -7,14 +7,14 @@ const updateDailyTaskStatus: RequestHandler = async (
   res: Response
 ) => {
   try {
-    const { taskId } = { ...req.body };
-    if (!taskId) {
+    const { _id } = { ...req.body };
+    if (!_id) {
       res.status(422).json({ message: "Id not found" });
       return;
     }
     /*
     const updated = await DailyTask.findOneAndUpdate(
-      { taskId },
+      { _id },
       [
         {
           $set: {
@@ -27,7 +27,7 @@ const updateDailyTaskStatus: RequestHandler = async (
       { new: true }
     );
     */
-    const newTask = await DailyTask.findOne({ taskId });
+    const newTask = await DailyTask.findOne({ _id });
     if (!newTask) {
       res.status(404).json({ message: `Task not found` });
       return;

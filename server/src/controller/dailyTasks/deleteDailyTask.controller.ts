@@ -3,13 +3,13 @@ import DailyTask from "../../model/dailyTask.model";
 
 const deleteTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const { taskId }: { taskId: string } = { ...req.body };
-    if (!taskId) {
-      console.log(taskId);
+    const { _id }: { _id: string } = { ...req.body };
+    if (!_id) {
+      console.log(_id);
       res.status(400).json({ message: "ID not found" });
       return;
     }
-    const result = await DailyTask.deleteOne({ taskId });
+    const result = await DailyTask.deleteOne({ _id });
     if (result.deletedCount === 0) {
       res.status(404).json({ message: "Task not found" });
       return;

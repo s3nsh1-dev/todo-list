@@ -10,7 +10,6 @@ const model: mongoose.SchemaDefinition<taskDetailsType> = {
   status: {
     type: String,
     enum: ["DONE", "ONGOING"],
-    required: true,
     default: "ONGOING",
   },
 };
