@@ -34,7 +34,7 @@ export const weeklyGoalsList: weeklyGoalsListType[] = [
   { id: "7", wGoalsName: "Limit social media usage", wGoalsStatus: "ONGOING" },
 ];
 
-export const taskDetails: taskDetailsType[] = [
+export const taskDetails = [
   { taskId: "0", taskName: "Complete project report", status: "ONGOING" },
   { taskId: "1", taskName: "Review pull requests", status: "ONGOING" },
   { taskId: "2", taskName: "Fix UI bugs in dashboard", status: "DONE" },
