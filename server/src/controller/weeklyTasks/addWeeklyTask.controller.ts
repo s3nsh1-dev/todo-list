@@ -5,7 +5,7 @@ import WeeklyTask from "../../model/weeklyTask.model";
 const addWeeklyTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const result: weeklyGoalsListType = { ...req.body };
-    if (result.wGoalsName !== "" || !result || result.id === "") {
+    if (result.wGoalsName !== "" || !result) {
       res.status(422).json({ message: `Properties Missing from input` });
       return;
     }

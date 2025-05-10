@@ -3,11 +3,6 @@ import env from "../config/env.config";
 import { weeklyGoalsListType } from "../constants/projectTypes";
 
 const model: mongoose.SchemaDefinition<weeklyGoalsListType> = {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   wGoalsName: {
     type: String,
     required: true,
@@ -15,11 +10,11 @@ const model: mongoose.SchemaDefinition<weeklyGoalsListType> = {
   wGoalsStatus: {
     type: String,
     enum: ["ONGOING", "DONE"],
-    required: true,
+    default: "ONGOING",
   },
 };
 
-const weeklyTask = new mongoose.Schema(model, { _id: false });
+const weeklyTask = new mongoose.Schema(model, { _id: true });
 const WeeklyTask = mongoose.model<weeklyGoalsListType>(
   "WeeklyTask",
   weeklyTask,

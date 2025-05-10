@@ -5,7 +5,7 @@ import YearlyTask from "../../model/yearlyTask.model";
 const addYearlyTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const result: YearlyGoalType = { ...req.body };
-    if (result.yearlyGoalName === "" || result.id === "" || !result) {
+    if (result.yearlyGoalName === "" || !result) {
       res.status(422).json({ message: "Data have missing properties" });
       return;
     }

@@ -3,11 +3,6 @@ import env from "../config/env.config";
 import { weeklyLogsType } from "../constants/projectTypes";
 
 const model: mongoose.SchemaDefinition<weeklyLogsType> = {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   weekNum: {
     type: String,
     required: true,
@@ -19,7 +14,7 @@ const model: mongoose.SchemaDefinition<weeklyLogsType> = {
   },
 };
 
-const weeklyHistory = new mongoose.Schema(model, { _id: false });
+const weeklyHistory = new mongoose.Schema(model, { _id: true });
 const WeeklyHistory = mongoose.model<weeklyLogsType>(
   "WeeklyHistory",
   weeklyHistory,

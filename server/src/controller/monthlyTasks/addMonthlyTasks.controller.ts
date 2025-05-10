@@ -10,10 +10,6 @@ const addMonthlyTask: RequestHandler = async (req: Request, res: Response) => {
       return;
     }
     const monthly: monthlyGoalsListType = await MonthlyTask.create(result);
-    if (!monthly) {
-      res.status(400).json({ message: "Corrupted Data" });
-      return;
-    }
     res.status(201).json({ message: "ADDED: MONTHLY TASKS", body: monthly });
   } catch (error) {
     res.status(500).json({ message: `Server Error: ${error}` });
