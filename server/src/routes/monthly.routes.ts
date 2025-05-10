@@ -9,8 +9,8 @@ const monthlyRouter = express.Router();
 
 monthlyRouter.get("/", fetchMonthlyTasks);
 monthlyRouter.post("/add", addMonthlyTask);
-monthlyRouter.patch("/update/status", updateMonthlyTaskStatus);
-monthlyRouter.post("/update/name", updateMonthlyTaskName);
 monthlyRouter.delete("/delete", deleteMonthlyTask);
+monthlyRouter.patch("/update/status", updateMonthlyTaskStatus);
+monthlyRouter.patch("/update/name", updateMonthlyTaskName);
 
 export default monthlyRouter;

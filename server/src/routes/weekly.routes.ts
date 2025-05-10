@@ -9,8 +9,8 @@ const weeklyRouter = express.Router();
 
 weeklyRouter.get("/", fetchWeeklyTasks);
 weeklyRouter.post("/add", addWeeklyTask);
-weeklyRouter.patch("/update/status", updateWeeklyTaskStatus);
-weeklyRouter.post("/update/name", updateWeeklyTaskName);
 weeklyRouter.delete("/delete", deleteWeeklyTask);
+weeklyRouter.patch("/update/status", updateWeeklyTaskStatus);
+weeklyRouter.patch("/update/name", updateWeeklyTaskName);
 
 export default weeklyRouter;

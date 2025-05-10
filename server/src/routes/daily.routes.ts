@@ -10,7 +10,7 @@ const taskRoutes = express.Router();
 taskRoutes.get("/", fetchDailyTasks);
 taskRoutes.post("/add", addDailyTask);
 taskRoutes.delete("/delete", deleteTask);
-taskRoutes.post("/update/name", updateDailyTaskName);
+taskRoutes.patch("/update/name", updateDailyTaskName);
 taskRoutes.patch("/update/status", updateDailyTaskStatus);
 
 export default taskRoutes;
