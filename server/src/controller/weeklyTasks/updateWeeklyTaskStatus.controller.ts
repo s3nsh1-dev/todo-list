@@ -15,27 +15,25 @@ const updateWeeklyTaskStatus: RequestHandler = async (
   try {
     const { _id } = { ...req.body };
     if (!_id) {
-      res.status(422).json({ message: "ID NOT FOUND" });
+      res.status(422).json({ error: "ID NOT FOUND" });
       return;
     }
     const result = await WeeklyTask.findOne({ _id });
     if (!result) {
-      res.status(404).json({ message: "TASK NOT FOUND" });
+      res.status(404).json({ error: "TASK NOT FOUND" });
       return;
     }
     result.wGoalsStatus = result.wGoalsStatus === "DONE" ? "ONGOING" : "DONE";
     const updated: weeklyGoalsListType = await result.save();
     if (!updated) {
-      res
-        .status(400)
-        .json({ message: "FAILED: UPDATE NOT SAVED", error: updated });
+      res.status(400).json({ error: "UPDATE NOT SAVED", body: updated });
       return;
     }
     res
       .status(200)
-      .json({ message: "SUCCESS: TASK STATUS UPDATED", body: result });
+      .json({ success: "SUCCESS: TASK STATUS UPDATED", body: result });
   } catch (error) {
-    res.status(500).json({ message: `SERVER ERROR: ${error}` });
+    res.status(500).json({ error: `SERVER ERROR: ${error}` });
   }
 };
 export default updateWeeklyTaskStatus;

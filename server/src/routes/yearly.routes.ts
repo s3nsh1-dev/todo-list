@@ -11,6 +11,6 @@ yearlyRouter.get("/", fetchYearlyTasks);
 yearlyRouter.post("/add", addYearlyTask);
 yearlyRouter.delete("/delete", deleteYearlyTask);
 yearlyRouter.patch("/update/status", updateYearlyTaskStatus);
-yearlyRouter.patch("update/name", updateYearlyTaskName);
+yearlyRouter.patch("/update/name", updateYearlyTaskName);
 
 export default yearlyRouter;

@@ -9,12 +9,12 @@ const fetchWeeklyTasks: RequestHandler = async (
   try {
     const weekly: weeklyGoalsListType[] = await WeeklyTask.find({});
     if (!weekly) {
-      res.status(400).json({ message: "Corrupted Data, something went wrong" });
+      res.status(400).json({ error: "Corrupted Data, something went wrong" });
       return;
     }
-    res.status(200).json({ message: "FETCHED: WEEKLY TASKS", body: weekly });
+    res.status(200).json({ success: "FETCHED: WEEKLY TASKS", body: weekly });
   } catch (error) {
-    res.status(500).json({ message: `Server Error: ${error}` });
+    res.status(500).json({ error: `Server Error: ${error}` });
   }
 };
 export default fetchWeeklyTasks;

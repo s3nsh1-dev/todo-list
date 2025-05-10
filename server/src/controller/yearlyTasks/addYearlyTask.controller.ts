@@ -1,22 +1,30 @@
 import { RequestHandler, Response, Request } from "express";
-import { YearlyGoalType } from "../../constants/projectTypes";
 import YearlyTask from "../../model/yearlyTask.model";
 
-const addYearlyTask: RequestHandler = async (req: Request, res: Response) => {
+interface UpdatedRequestBody extends Request {
+  body: {
+    yearlyGoalName: string;
+  };
+}
+
+const addYearlyTask: RequestHandler = async (
+  req: UpdatedRequestBody,
+  res: Response
+) => {
   try {
-    const result: YearlyGoalType = { ...req.body };
-    if (result.yearlyGoalName === "" || !result) {
-      res.status(422).json({ message: "Data have missing properties" });
+    const { yearlyGoalName } = { ...req.body };
+    if (yearlyGoalName === "" || !yearlyGoalName) {
+      res.status(422).json({ error: "TASK NAME MISSING" });
       return;
     }
-    const yearly: YearlyGoalType = await YearlyTask.create(result);
+    const yearly = await YearlyTask.create({ yearlyGoalName });
     if (!yearly) {
-      res.status(400).json({ message: "Corrupt Data: something went wrong" });
+      res.status(400).json({ error: "CAN NOT ADD TASK" });
       return;
     }
-    res.status(201).json({ message: "ADDED: YEARLY TASK", body: yearly });
+    res.status(201).json({ success: "YEARLY TASK ADDED", body: yearly });
   } catch (error) {
-    res.status(500).json({ message: `Server Error: ${error}` });
+    res.status(500).json({ error: `Server Error: ${error}` });
   }
 };
 export default addYearlyTask;

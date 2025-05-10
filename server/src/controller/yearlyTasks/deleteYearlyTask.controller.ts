@@ -7,21 +7,24 @@ interface UpdatedRequestBodyType extends Request {
   };
 }
 
-const deleteYearlyTask = async (req: UpdatedRequestBodyType, res: Response) => {
+const deleteYearlyTask: RequestHandler = async (
+  req: UpdatedRequestBodyType,
+  res: Response
+) => {
   try {
     const { _id } = { ...req.body };
     if (!_id) {
-      res.status(422).json({ message: "ID NOT FOUND" });
+      res.status(422).json({ error: "ID NOT FOUND" });
       return;
     }
     const result = await YearlyTask.deleteOne({ _id });
     if (result.deletedCount === 0) {
-      res.status(404).json({ message: "TASK NOT FOUND" });
+      res.status(404).json({ error: "TASK NOT FOUND" });
       return;
     }
-    res.status(200).json({ message: "SUCCESS: TASK DELETED", body: result });
+    res.status(200).json({ success: "TASK DELETED", body: result });
   } catch (error) {
-    res.status(500).json({ message: `SERVER ERROR: ${error}` });
+    res.status(500).json({ error: `SERVER ERROR: ${error}` });
   }
 };
 export default deleteYearlyTask;

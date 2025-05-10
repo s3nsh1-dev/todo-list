@@ -1,4 +1,3 @@
-import { YearlyGoalType } from "../../constants/projectTypes";
 import { RequestHandler, Request, Response } from "express";
 import YearlyTask from "../../model/yearlyTask.model";
 
@@ -7,14 +6,14 @@ const fetchYearlyTasks: RequestHandler = async (
   res: Response
 ) => {
   try {
-    const yearly: YearlyGoalType[] = await YearlyTask.find({});
+    const yearly = await YearlyTask.find({});
     if (!yearly) {
-      res.status(400).json({ message: "Corrupted Data: something went wrong" });
+      res.status(400).json({ error: "YEARLY COLLECTION NOT FOUND" });
       return;
     }
-    res.status(200).json({ message: "FETCHED: WEEKLY TASKS", body: yearly });
+    res.status(200).json({ success: "WEEKLY TASKS FETCHED", body: yearly });
   } catch (error) {
-    res.status(500).json({ message: `Server Error: ${error}` });
+    res.status(500).json({ error: `SERVER ERROR: ${error}` });
   }
 };
 export default fetchYearlyTasks;
