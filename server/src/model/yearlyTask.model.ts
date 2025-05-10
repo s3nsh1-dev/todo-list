@@ -3,11 +3,6 @@ import { YearlyGoalType } from "../constants/projectTypes";
 import env from "../config/env.config";
 
 const model: mongoose.SchemaDefinition<YearlyGoalType> = {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   yearlyGoalName: {
     type: String,
     required: true,
@@ -15,11 +10,11 @@ const model: mongoose.SchemaDefinition<YearlyGoalType> = {
   status: {
     type: String,
     enum: ["ONGOING", "DONE"],
-    required: true,
+    default: "ONGOING",
   },
 };
 
-const yearlyTask = new mongoose.Schema(model, { _id: false });
+const yearlyTask = new mongoose.Schema(model, { _id: true });
 const YearlyTask = mongoose.model<YearlyGoalType>(
   "YearlyTask",
   yearlyTask,

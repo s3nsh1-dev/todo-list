@@ -1,9 +1,8 @@
 Why i am making this app:
 * Redux practice
 * Tailwind practice
-* mongoDB (optional)
-* after moving far in this project i came to see this project as a wonderful opportunity to introduce
-new features into a already structured code and the refactoring to make everything work again(practicing refactoring)
+* mongoDB practice
+* after moving far in this project i came to see this project as a wonderful opportunity to introduce new features into a already structured code and the refactoring to make everything work again(practicing refactoring)
 
 ===============< NEXT WORK >===============
 
@@ -14,7 +13,6 @@ feature for user to decide what button feature to active and disable
 
 unMounting will cause the state to reset. its good for component needed for quick task/window
 < cloc . > will count the lines of code we have
-Mui does not let me user margin and padding classes in tailwind
 
 /*
   when the UI is not increasing for large and have same width as small screen. use max + min + vw

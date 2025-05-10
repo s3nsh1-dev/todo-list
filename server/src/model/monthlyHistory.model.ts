@@ -3,11 +3,6 @@ import env from "../config/env.config";
 import { monthlyHistoryType } from "../constants/projectTypes";
 
 const model: mongoose.SchemaDefinition<monthlyHistoryType> = {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   MonthlyName: {
     type: String,
     required: true,
@@ -19,7 +14,7 @@ const model: mongoose.SchemaDefinition<monthlyHistoryType> = {
   },
 };
 
-const monthlyHistory = new mongoose.Schema(model, { _id: false });
+const monthlyHistory = new mongoose.Schema(model, { _id: true });
 const MonthlyHistory = mongoose.model<monthlyHistoryType>(
   "MonthlyHistory",
   monthlyHistory,

@@ -3,11 +3,6 @@ import { YearlyHistoryLogType } from "../constants/projectTypes";
 import env from "../config/env.config";
 
 const model: mongoose.SchemaDefinition<YearlyHistoryLogType> = {
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   yearNum: {
     type: String,
     required: true,
@@ -19,7 +14,7 @@ const model: mongoose.SchemaDefinition<YearlyHistoryLogType> = {
   },
 };
 
-const yearlyHistory = new mongoose.Schema(model, { _id: false });
+const yearlyHistory = new mongoose.Schema(model, { _id: true });
 const YearlyHistory = mongoose.model<YearlyHistoryLogType>(
   "YearlyHistory",
   yearlyHistory,

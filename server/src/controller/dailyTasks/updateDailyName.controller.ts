@@ -13,7 +13,7 @@ const updateDailyTaskName: RequestHandler = async (
     if (!_id || !newName) {
       res.status(422).json({ message: "Id or Name not found" });
     }
-    const result: taskDetailsType | null = await DailyTask.findOneAndUpdate(
+    const result = await DailyTask.findOneAndUpdate(
       { _id },
       { $set: { taskName: newName } },
       { new: true, runValidators: true }

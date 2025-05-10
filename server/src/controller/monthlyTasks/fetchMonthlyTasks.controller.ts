@@ -9,7 +9,7 @@ const fetchMonthlyTasks: RequestHandler = async (
   try {
     const monthly: monthlyGoalsListType[] = await MonthlyTask.find({});
     if (!monthly) {
-      res.status(404).json({ message: "Corrupted Data" });
+      res.status(404).json({ message: "COLLECTION not found" });
       return;
     }
     res.status(200).json({ message: "FETCHED: MONTHLY TASKS", body: monthly });

@@ -4,21 +4,19 @@ import WeeklyTask from "../../model/weeklyTask.model";
 
 const addWeeklyTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const result: weeklyGoalsListType = { ...req.body };
-    if (result.wGoalsName !== "" || !result || result.id === "") {
-      res.status(422).json({ message: `Properties Missing from input` });
+    const { wGoalsName }: { wGoalsName: string } = { ...req.body };
+    if (wGoalsName === "" || !wGoalsName) {
+      res.status(422).json({ error: `PROPERTIES MISSING: WEEKLY TASK NAME` });
       return;
     }
-    const weekly: weeklyGoalsListType = await WeeklyTask.create(result);
+    const weekly: weeklyGoalsListType = await WeeklyTask.create({ wGoalsName });
     if (!weekly) {
-      res
-        .status(400)
-        .json({ message: "Corrupt Data: something when wrong creating data" });
+      res.status(400).json({ error: "CAN NOT ADD TASK" });
       return;
     }
-    res.status(201).json({ message: "ADDED: WEEKLY TASK", body: weekly });
+    res.status(201).json({ success: "WEEKLY TASK ADDED", body: weekly });
   } catch (error) {
-    res.status(500).json({ message: `Server Error: ${error}` });
+    res.status(500).json({ error: `SERVER ERROR: ${error}` });
   }
 };
 export default addWeeklyTask;

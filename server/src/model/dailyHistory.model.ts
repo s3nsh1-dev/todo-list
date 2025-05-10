@@ -3,11 +3,6 @@ import { historyLogType } from "../constants/projectTypes";
 import env from "../config/env.config";
 
 const model: mongoose.SchemaDefinition<historyLogType> = {
-  histId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   histDate: {
     type: String,
     required: true,
@@ -18,7 +13,7 @@ const model: mongoose.SchemaDefinition<historyLogType> = {
   },
 };
 
-const dailyHistory = new mongoose.Schema(model, { _id: false });
+const dailyHistory = new mongoose.Schema(model, { _id: true });
 const DailyHistory = mongoose.model<historyLogType>(
   "DailyHistory",
   dailyHistory,
