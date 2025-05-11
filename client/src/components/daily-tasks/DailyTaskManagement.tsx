@@ -14,7 +14,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import {
-  arrayMove,
+  // arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
@@ -90,21 +90,27 @@ const DailyTaskManagement = () => {
             const { active, over } = e;
             if (!over) return;
             if (active.id === over.id) return;
+
             const originalIndex = ongoingTasks.findIndex(
               (task) => task._id === active.id
             );
             const newIndex = ongoingTasks.findIndex(
               (task) => task._id === over.id
             );
-            const updatedOrder = arrayMove(
-              ongoingTasks,
-              originalIndex,
-              newIndex
-            );
-            const orderedTasks = updatedOrder.map((task, index) => ({
+
+            if (originalIndex === -1 || newIndex === -1) return;
+
+            // Create optimistic update
+            const reorderedTasks = [...ongoingTasks];
+            const [movedTask] = reorderedTasks.splice(originalIndex, 1);
+            reorderedTasks.splice(newIndex, 0, movedTask);
+
+            const orderedTasks = reorderedTasks.map((task, index) => ({
               _id: task._id,
               order: index,
             }));
+
+            // Trigger the mutation with optimistic update
             reorderDailyTasks({ orderedTasks });
           }}
         >

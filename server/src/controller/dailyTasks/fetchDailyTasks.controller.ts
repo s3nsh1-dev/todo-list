@@ -4,7 +4,9 @@ import { taskDetailsType } from "../../constants/projectTypes";
 
 const fetchDailyTasks: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const result: taskDetailsType[] = await DailyTask.find({});
+    const result: taskDetailsType[] = await DailyTask.find({}).sort({
+      order: 1,
+    });
     if (!result) {
       res.status(400).json({ message: "Corrupted Data" });
       return;

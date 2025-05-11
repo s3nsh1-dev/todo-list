@@ -20,16 +20,23 @@ const reorderDailyTasks: RequestHandler = async (
       return;
     }
 
-    const bulkOperations = orderedTasks.map((task) => ({
+    // Update all tasks in a single operation
+    const bulkOperations = orderedTasks.map(({ _id, order }) => ({
       updateOne: {
-        filter: { _id: task._id },
-        update: { $set: { order: task.order } },
+        filter: { _id },
+        update: { $set: { order } },
       },
     }));
 
-    const result = await DailyTask.bulkWrite(bulkOperations);
+    await DailyTask.bulkWrite(bulkOperations);
 
-    res.status(200).json({ message: "SUCCESS: TASKS REORDERED", body: result });
+    // Fetch updated tasks to return the new order
+    const updatedTasks = await DailyTask.find({}).sort({ order: 1 });
+
+    res.status(200).json({
+      message: "SUCCESS: TASKS REORDERED",
+      body: updatedTasks,
+    });
   } catch (error: any) {
     if (error instanceof mongoose.Error.CastError) {
       res.status(400).json({ message: "Invalid taskId format" });

@@ -59,7 +59,7 @@ const dailyTaskApi = createApi({
       invalidatesTags: ["DailyTask"],
     }),
     reorderDailyTasks: builder.mutation<
-      void,
+      newType,
       { orderedTasks: { _id: string; order: number }[] }
     >({
       query: (payload) => ({
@@ -67,7 +67,33 @@ const dailyTaskApi = createApi({
         method: "PATCH",
         body: payload,
       }),
-      invalidatesTags: ["DailyTask"],
+      async onQueryStarted({ orderedTasks }, { dispatch, queryFulfilled }) {
+        // Optimistic update
+        const patchResult = dispatch(
+          dailyTaskApi.util.updateQueryData(
+            "fetchDailyTasks",
+            undefined,
+            (draft) => {
+              if (!draft?.body) return;
+              const orderMap = new Map(
+                orderedTasks.map((task) => [task._id, task.order])
+              );
+              draft.body.forEach((task) => {
+                if (orderMap.has(task._id)) {
+                  task.order = orderMap.get(task._id)!;
+                }
+              });
+              draft.body.sort((a, b) => a.order - b.order);
+            }
+          )
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });

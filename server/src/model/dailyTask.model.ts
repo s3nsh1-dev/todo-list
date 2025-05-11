@@ -14,8 +14,8 @@ const model: mongoose.SchemaDefinition<taskDetailsType> = {
   },
   order: {
     type: Number,
-    unique: true,
-    default: Math.floor(Math.random() * 100),
+    required: true,
+    default: 0,
   },
 };
 

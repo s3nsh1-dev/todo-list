@@ -2,6 +2,7 @@ export type taskDetailsType = {
   _id: string;
   taskName: string;
   status: "DONE" | "ONGOING";
+  order: number;
 };
 export type historyLogType = {
   _id: string;
