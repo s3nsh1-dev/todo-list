@@ -1,6 +1,7 @@
 export type taskDetailsType = {
   taskName: string;
   status: "DONE" | "ONGOING";
+  order: number;
 };
 export type historyLogType = {
   histDate: string;

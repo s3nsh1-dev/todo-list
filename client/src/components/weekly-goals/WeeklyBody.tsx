@@ -11,7 +11,7 @@ import {
   updateWeeklyGoalStatus,
   updateWeeklyGoalName,
   reInitializeWeeklyGoals,
-} from "../../redux/slices/weeklyGoalsSlice";
+} from "../../redux/slices/model/weeklyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
 import { weeklyContent as content } from "../../constants/GenericConstants";
 import {
@@ -81,8 +81,8 @@ const WeeklyBody = () => {
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
     return (
       <CompletedDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         index={index}
         arrLength={completedWGoals.length}
         name={goal.wGoalsName}
@@ -94,8 +94,8 @@ const WeeklyBody = () => {
   const renderOngoingWGoals = ongoingWGoals.map((goal, index) => {
     return (
       <OngoingDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         name={goal.wGoalsName}
         index={index}
         arrLength={ongoingWGoals.length}
@@ -128,10 +128,10 @@ const WeeklyBody = () => {
           if (!over) return;
           if (active.id === over.id) return;
           const originalIndex = ongoingWGoals.findIndex(
-            (goal) => goal.id === active.id
+            (goal) => goal._id === active.id
           );
           const newIndex = ongoingWGoals.findIndex(
-            (goal) => goal.id === over.id
+            (goal) => goal._id === over.id
           );
           const updateWeeklyGoalsWithNewIndex = arrayMove(
             ongoingWGoals,
@@ -148,7 +148,7 @@ const WeeklyBody = () => {
         }}
       >
         <SortableContext
-          items={ongoingWGoals.map((goal) => goal.id)}
+          items={ongoingWGoals.map((goal) => goal._id)}
           strategy={verticalListSortingStrategy}
         >
           <OngoingContainer heading="Ongoing Goals">

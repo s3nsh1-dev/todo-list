@@ -11,7 +11,7 @@ import {
   updateMonthlyGoalStatus,
   editMonthlyGoal,
   reInitializeMonthlyGoals,
-} from "../../redux/slices/monthlyGoalsSlice";
+} from "../../redux/slices/model/monthlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
 import { monthlyContent as content } from "../../constants/GenericConstants";
 import {
@@ -81,8 +81,8 @@ const MonthlyBody = () => {
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
     return (
       <CompletedDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         index={index}
         arrLength={completedWGoals.length}
         name={goal.GoalName}
@@ -94,8 +94,8 @@ const MonthlyBody = () => {
   const renderOngoingWGoals = ongoingWGoals.map((goal, index) => {
     return (
       <OngoingDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         name={goal.GoalName}
         index={index}
         arrLength={ongoingWGoals.length}
@@ -130,10 +130,10 @@ const MonthlyBody = () => {
             return;
           }
           const originalIndex = ongoingWGoals.findIndex(
-            (goal) => goal.id === active.id
+            (goal) => goal._id === active.id
           );
           const newIndex = ongoingWGoals.findIndex(
-            (goal) => goal.id === over.id
+            (goal) => goal._id === over.id
           );
           const updatedGoals = arrayMove(
             ongoingWGoals,
@@ -146,7 +146,7 @@ const MonthlyBody = () => {
         }}
       >
         <SortableContext
-          items={ongoingWGoals.map((goal) => goal.id)}
+          items={ongoingWGoals.map((goal) => goal._id)}
           strategy={verticalListSortingStrategy}
         >
           <OngoingContainer heading="Ongoing Goals">

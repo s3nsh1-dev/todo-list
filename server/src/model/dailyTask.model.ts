@@ -12,6 +12,11 @@ const model: mongoose.SchemaDefinition<taskDetailsType> = {
     enum: ["DONE", "ONGOING"],
     default: "ONGOING",
   },
+  order: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 };
 
 const dailyTask = new mongoose.Schema(model, { _id: true });

@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   yearlyHistoryLogs,
   yearlyGoalList,
-} from "../../constants/sliceDataset";
+} from "../../../constants/sliceDataset";
 import {
   YearlyHistoryLogType,
   YearlyGoalType,
-} from "../../constants/commonInterfaces";
+} from "../../../constants/commonInterfaces";
 
 interface InitialStateType {
   yearlyGoalList: YearlyGoalType[];
@@ -24,7 +24,7 @@ const yearlySlice = createSlice({
   reducers: {
     addYearlyGoal: (state, action: PayloadAction<string>) => {
       state.yearlyGoalList.push({
-        id: crypto.randomUUID(),
+        _id: crypto.randomUUID(),
         yearlyGoalName: action.payload,
         status: "ONGOING",
       });
@@ -34,7 +34,7 @@ const yearlySlice = createSlice({
       return {
         ...state,
         yearlyGoalList: state.yearlyGoalList.filter((goal) => {
-          return goal.id !== action.payload;
+          return goal._id !== action.payload;
         }),
       };
     },
@@ -44,7 +44,7 @@ const yearlySlice = createSlice({
       action: PayloadAction<{ id: string; name: string }>
     ) => {
       const { id, name } = action.payload;
-      const goal = state.yearlyGoalList.find((goal) => goal.id === id);
+      const goal = state.yearlyGoalList.find((goal) => goal._id === id);
       if (goal) {
         goal.yearlyGoalName = name;
       }
@@ -52,7 +52,7 @@ const yearlySlice = createSlice({
 
     updateYearlyGoalStatus: (state, action: PayloadAction<string>) => {
       const goal = state.yearlyGoalList.find(
-        (goal) => goal.id === action.payload
+        (goal) => goal._id === action.payload
       );
       if (goal) {
         goal.status = goal.status === "DONE" ? "ONGOING" : "DONE";

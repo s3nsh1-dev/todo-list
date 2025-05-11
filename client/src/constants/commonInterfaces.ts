@@ -1,10 +1,11 @@
 export type taskDetailsType = {
-  taskId: string;
+  _id: string;
   taskName: string;
   status: "DONE" | "ONGOING";
+  order: number;
 };
 export type historyLogType = {
-  histId: string;
+  _id: string;
   histDate: string;
   histResult: string;
 };
@@ -23,37 +24,37 @@ export type weeklyGoalObjectType = {
 };
 
 export type weeklyLogsType = {
-  id: string;
+  _id: string;
   weekNum: string;
   wResult: "SUCCESS" | "FAILED";
 };
 
 export type weeklyGoalsListType = {
-  id: string;
+  _id: string;
   wGoalsName: string;
   wGoalsStatus: "ONGOING" | "DONE";
 };
 
 export interface monthlyGoalsListType {
-  id: string;
+  _id: string;
   GoalName: string;
   status: "ONGOING" | "DONE";
 }
 
 export interface monthlyHistoryType {
-  id: string;
+  _id: string;
   MonthlyName: string;
   status: "SUCCESS" | "FAILED";
 }
 
 export type YearlyGoalType = {
-  id: string;
+  _id: string;
   yearlyGoalName: string;
   status: "ONGOING" | "DONE";
 };
 
 export type YearlyHistoryLogType = {
-  id: string;
+  _id: string;
   yearNum: string;
   status: "SUCCESS" | "FAILED";
 };
@@ -64,3 +65,8 @@ export interface notesTypes {
   content: string;
   date: string;
 }
+
+export type UpdateNameType = {
+  _id: string;
+  newName: string;
+};

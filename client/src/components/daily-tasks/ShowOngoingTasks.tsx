@@ -3,8 +3,12 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
-import { useDispatch } from "react-redux";
-import { updateTask } from "../../redux/slices/dailyTasksSlice";
+// import { useDispatch } from "react-redux";
+// import { updateTask } from "../../redux/slices/model/dailyTasksSlice";
+import {
+  useUpdateDailyTaskNameMutation,
+  useUpdateDailyTaskStatusMutation,
+} from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 import IconButton from "@mui/material/IconButton";
 import ShowEditModal from "../common/ShowEditModal";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
@@ -18,15 +22,29 @@ interface propTypes {
 }
 
 const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
-  const { listeners, transform, transition, attributes, setNodeRef } =
-    useSortable({
-      id: tasks.taskId,
-    });
+  const [updateDailyTaskName] = useUpdateDailyTaskNameMutation();
+  const [updateDailyTaskStatus] = useUpdateDailyTaskStatusMutation();
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: tasks._id,
+  });
 
-  const style = {
+  const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
+    zIndex: isDragging ? 999 : "auto",
+    position: isDragging ? ("relative" as const) : ("static" as const),
+    opacity: isDragging ? 0.5 : 1,
     touchAction: "none",
+    cursor: "move",
+    // backgroundColor: isDragging ? "rgb(249 250 251)" : "transparent",
+    boxShadow: isDragging ? "0 4px 6px -1px rgb(0 0 0 / 0.1)" : "none",
   };
 
   const [open, setOpen] = useState(false);
@@ -38,27 +56,33 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
   const onOpen = () => {
     setOpen(true);
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleUpdateTaskStatus = () => {
-    dispatch(updateTask({ ...tasks, status: "DONE" }));
+    updateDailyTaskStatus(tasks._id);
+    // dispatch(updateTask({ ...tasks, status: "DONE" }));
   };
   const submitEditedTask = () => {
-    dispatch(updateTask({ ...tasks, taskName: userValue }));
+    updateDailyTaskName({ _id: tasks._id, newName: userValue });
+    // dispatch(updateTask({ ...tasks, taskName: userValue }));
     onClose();
   };
 
   return (
     <>
       <div
-        className="flex items-center justify-between"
+        className="flex items-center justify-between rounded-lg transition-all duration-200"
         style={style}
         ref={setNodeRef}
       >
-        <div className="flex items-center min-w-60 w-[50vw]">
-          <IconButton {...listeners} {...attributes}>
+        <div className="flex items-center min-w-60 w-[50vw] gap-2">
+          <IconButton
+            {...listeners}
+            {...attributes}
+            className="cursor-grab active:cursor-grabbing"
+          >
             <DragIndicatorIcon sx={{ color: "gray" }} />
           </IconButton>
-          <p className="flex item-center flex-row ">{tasks.taskName}</p>
+          <p className="flex items-center flex-row">{tasks.taskName}</p>
         </div>
         <div>
           <IconButton onClick={onOpen}>

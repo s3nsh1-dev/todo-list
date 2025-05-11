@@ -10,7 +10,7 @@ import {
   removeYearlyGoal,
   updateYearlyGoalStatus,
   updateYearlyGoalName,
-} from "../../redux/slices/yearlyGoalsSlice";
+} from "../../redux/slices/model/yearlyGoalsSlice";
 import ShowEditModal from "../common/ShowEditModal";
 import { yearlyContent as content } from "../../constants/GenericConstants";
 import DndKitDefault from "../others/DndKitDefault";
@@ -66,8 +66,8 @@ const YearlyBody = () => {
   const renderCompletedWTasks = completedYGoals.map((goal, index) => {
     return (
       <CompletedDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         index={index}
         arrLength={completedYGoals.length}
         name={goal.yearlyGoalName}
@@ -79,8 +79,8 @@ const YearlyBody = () => {
   const renderOngoingWGoals = ongoingYGoals.map((goal, index) => {
     return (
       <OngoingDivision
-        key={goal.id}
-        id={goal.id}
+        key={goal._id}
+        id={goal._id}
         name={goal.yearlyGoalName}
         index={index}
         arrLength={ongoingYGoals.length}

@@ -15,7 +15,7 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import type { YearlyGoalType } from "../../constants/commonInterfaces";
-import { reInitializeYearlyGoals } from "../../redux/slices/yearlyGoalsSlice";
+import { reInitializeYearlyGoals } from "../../redux/slices/model/yearlyGoalsSlice";
 import { useDispatch } from "react-redux";
 
 interface propTypes {
@@ -46,9 +46,11 @@ const DndKitDefault: React.FC<propTypes> = ({
         if (!over) return;
         if (active.id === over.id) return;
         const originalIndex = memoizedGoals.findIndex(
-          (goal) => goal.id === active.id
+          (goal) => goal._id === active.id
         );
-        const newIndex = memoizedGoals.findIndex((goal) => goal.id === over.id);
+        const newIndex = memoizedGoals.findIndex(
+          (goal) => goal._id === over.id
+        );
         const newlyUpdatedYearlyGoalWithIndex = arrayMove(
           memoizedGoals,
           originalIndex,
@@ -63,7 +65,7 @@ const DndKitDefault: React.FC<propTypes> = ({
       }}
     >
       <SortableContext
-        items={memoizedGoals.map((goal) => goal.id)}
+        items={memoizedGoals.map((goal) => goal._id)}
         strategy={verticalListSortingStrategy}
       >
         {children}

@@ -26,7 +26,7 @@ const DailyTaskHistoryModal: FC<propTypes> = ({ closingModal }) => {
       tasks.histResult === "SUCCESS" ? "bg-green-800" : "bg-red-800";
     return (
       <ShowLatestHistory
-        key={tasks.histId}
+        key={tasks._id}
         primary={tasks.histDate}
         secondary={tasks.histResult}
         index={index}

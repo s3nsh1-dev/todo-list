@@ -3,7 +3,7 @@ import TaskCardActionButtons from "../common/TaskCardActionButtons";
 import TaskCardLabelContent from "../common/TaskCardLabelContent";
 import { addPanelStyle } from "../../constants/customCssProperties";
 import { useDispatch } from "react-redux";
-import { addYearlyGoal } from "../../redux/slices/yearlyGoalsSlice";
+import { addYearlyGoal } from "../../redux/slices/model/yearlyGoalsSlice";
 
 interface propsTypes {
   onClosingModal: () => void;

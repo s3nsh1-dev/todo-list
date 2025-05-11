@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type {
   weeklyGoalObjectType,
   weeklyGoalsListType,
-} from "../../constants/commonInterfaces";
-import { weeklyGoalsList, weeklyLogs } from "../../constants/sliceDataset";
+} from "../../../constants/commonInterfaces";
+import { weeklyGoalsList, weeklyLogs } from "../../../constants/sliceDataset";
 
 const initialState: weeklyGoalObjectType = { weeklyGoalsList, weeklyLogs };
 
@@ -13,7 +13,7 @@ const weeklySlice = createSlice({
   reducers: {
     addWeeklyGoals: (state, action: PayloadAction<string>) => {
       state.weeklyGoalsList.push({
-        id: crypto.randomUUID(),
+        _id: crypto.randomUUID(),
         wGoalsName: action.payload,
         wGoalsStatus: "ONGOING",
       });
@@ -24,7 +24,7 @@ const weeklySlice = createSlice({
       return {
         ...state,
         weeklyGoalsList: state.weeklyGoalsList.filter((task) => {
-          return task.id !== action.payload;
+          return task._id !== action.payload;
         }),
       };
     },
@@ -34,14 +34,14 @@ const weeklySlice = createSlice({
     ) => {
       const { id, name } = action.payload;
       // Using mutation style (allowed by Immer)
-      const goal = state.weeklyGoalsList.find((goal) => goal.id === id);
+      const goal = state.weeklyGoalsList.find((goal) => goal._id === id);
       if (goal) {
         goal.wGoalsName = name;
       }
     },
     updateWeeklyGoalStatus: (state, action: PayloadAction<string>) => {
       const goal = state.weeklyGoalsList.find(
-        (goal) => goal.id === action.payload
+        (goal) => goal._id === action.payload
       );
       if (goal) {
         goal.wGoalsStatus = goal.wGoalsStatus === "DONE" ? "ONGOING" : "DONE";

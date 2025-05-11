@@ -3,9 +3,9 @@ import IconButton from "@mui/material/IconButton";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
-import { useDispatch } from "react-redux";
-import { updateTask } from "../../redux/slices/dailyTasksSlice";
-
+// import { useDispatch } from "react-redux";
+// import { updateTask } from "../../redux/slices/model/dailyTasksSlice";
+import { useUpdateDailyTaskStatusMutation } from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 interface propTypes {
   tasks: taskDetailsType;
   index: number;
@@ -13,9 +13,11 @@ interface propTypes {
 }
 
 const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [updateDailyTaskName] = useUpdateDailyTaskStatusMutation();
   const handleResetTaskStatus = () => {
-    dispatch(updateTask({ ...tasks, status: "ONGOING" }));
+    // dispatch(updateTask({ ...tasks, status: "ONGOING" }));
+    updateDailyTaskName(tasks._id);
   };
   return (
     <>
