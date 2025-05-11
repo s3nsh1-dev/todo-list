@@ -78,4 +78,5 @@ export const {
   useFetchDailyTasksQuery,
   useUpdateDailyTaskNameMutation,
   useUpdateDailyTaskStatusMutation,
+  useReorderDailyTasksMutation,
 } = dailyTaskApi;
