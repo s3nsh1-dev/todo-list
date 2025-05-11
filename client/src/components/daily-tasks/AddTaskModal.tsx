@@ -1,31 +1,22 @@
 import { useState, FC } from "react";
-import type { taskDetailsType } from "../../constants/commonInterfaces";
-import { addTasks } from "../../redux/slices/dailyTasksSlice";
-import { useDispatch } from "react-redux";
 import { addPanelStyle } from "../../constants/customCssProperties";
 import TaskCardLabelContent from "../common/TaskCardLabelContent";
 import TaskCardActionButtons from "../common/TaskCardActionButtons";
+import { useAddDailyTaskMutation } from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 
 interface propsTypes {
   closingModal: () => void;
 }
 
 const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
-  const [userValue, setUserValue] = useState("");
-  const dispatch = useDispatch();
+  const [addDailyTask] = useAddDailyTaskMutation();
 
-  const newTask: taskDetailsType = {
-    // useId() is also good but not stable
-    taskId: crypto.randomUUID(),
-    taskName: "",
-    status: "ONGOING",
-  };
+  const [userValue, setUserValue] = useState("");
 
   const isDisabled = userValue.length > 0 ? false : true;
 
   const handleSubmit = () => {
-    newTask.taskName = userValue;
-    dispatch(addTasks(newTask));
+    addDailyTask(userValue);
     closingModal();
   };
 

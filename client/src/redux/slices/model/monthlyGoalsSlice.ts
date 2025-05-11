@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { monthlyHistory, monthlyGoalsList } from "../../constants/sliceDataset";
+import {
+  monthlyHistory,
+  monthlyGoalsList,
+} from "../../../constants/sliceDataset";
 import {
   monthlyGoalsListType,
   monthlyHistoryType,
-} from "../../constants/commonInterfaces";
+} from "../../../constants/commonInterfaces";
 
 interface monthlyGoalsState {
   monthlyHistory: monthlyHistoryType[];
@@ -21,7 +24,7 @@ const monthlySlice = createSlice({
   reducers: {
     addMonthlyGoals: (state, action: PayloadAction<string>) => {
       state.monthlyGoalsList.push({
-        id: crypto.randomUUID(),
+        _id: crypto.randomUUID(),
         GoalName: action.payload,
         status: "ONGOING",
       });
@@ -32,7 +35,7 @@ const monthlySlice = createSlice({
         monthlyGoalsList: state.monthlyGoalsList.map(
           (goal: monthlyGoalsListType) => {
             const newStatus = goal.status === "DONE" ? "ONGOING" : "DONE";
-            return goal.id === action.payload
+            return goal._id === action.payload
               ? { ...goal, status: newStatus }
               : goal;
           }
@@ -43,7 +46,7 @@ const monthlySlice = createSlice({
       return {
         ...state,
         monthlyGoalsList: state.monthlyGoalsList.filter(
-          (goal) => goal.id !== action.payload
+          (goal) => goal._id !== action.payload
         ),
       };
     },
@@ -52,7 +55,7 @@ const monthlySlice = createSlice({
       action: PayloadAction<{ id: string; name: string }>
     ) => {
       const goal = state.monthlyGoalsList.find(
-        (goal) => goal.id === action.payload.id
+        (goal) => goal._id === action.payload.id
       );
       if (goal) {
         goal.GoalName = action.payload.name;

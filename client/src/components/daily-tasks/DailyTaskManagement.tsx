@@ -1,9 +1,10 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../redux/store";
+// import React from "react";
 import ShowOngoingTasks from "./ShowOngoingTasks";
 import ShowCompletedTasks from "./ShowCompletedTasks";
-import { replaceTasksWithNewValue } from "../../redux/slices/dailyTasksSlice";
+import {
+  useFetchDailyTasksQuery,
+  useReorderDailyTasksMutation,
+} from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 import {
   closestCorners,
   DndContext,
@@ -21,42 +22,8 @@ import {
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 const DailyTaskManagement = () => {
-  const dispatch = useDispatch();
-  const dailyTasksList = useSelector(
-    (state: RootState) => state.dailyTasks.taskDetails
-  );
-
-  const taskName = React.useMemo(
-    () => ({
-      completedTasks: dailyTasksList.filter((tasks) => tasks.status === "DONE"),
-      ongoingTasks: dailyTasksList.filter(
-        (tasks) => tasks.status === "ONGOING"
-      ),
-    }),
-    [dailyTasksList]
-  );
-
-  const renderOngoingTasks = taskName.ongoingTasks.map((tasks, index) => {
-    return (
-      <ShowOngoingTasks
-        key={tasks.taskId}
-        tasks={tasks}
-        index={index}
-        arrLength={taskName.ongoingTasks.length}
-      />
-    );
-  });
-
-  const renderCompletedTasks = taskName.completedTasks.map((tasks, index) => {
-    return (
-      <ShowCompletedTasks
-        key={tasks.taskId}
-        tasks={tasks}
-        index={index}
-        arrLength={taskName.completedTasks.length}
-      />
-    );
-  });
+  const { data, error, isLoading } = useFetchDailyTasksQuery();
+  const [reorderDailyTasks] = useReorderDailyTasksMutation();
 
   const sensor = useSensors(
     useSensor(PointerSensor),
@@ -64,6 +31,48 @@ const DailyTaskManagement = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  if (!data) {
+    return <div>Do not have any task</div>;
+  }
+
+  console.log("typeof data:", typeof data);
+  console.log("Array.isArray(data):", Array.isArray(data));
+  console.log("data:", data.message);
+
+  const dailyTasksList = data?.body || [];
+
+  const ongoingTasks = dailyTasksList.filter(
+    (task) => task.status === "ONGOING"
+  );
+  const completedTasks = dailyTasksList.filter(
+    (task) => task.status === "DONE"
+  );
+
+  if (error) return <div>We have error</div>;
+  if (isLoading) return <div>....Loading</div>;
+
+  const renderOngoingTasks = ongoingTasks.map((tasks, index) => {
+    return (
+      <ShowOngoingTasks
+        key={tasks._id}
+        tasks={tasks}
+        index={index}
+        arrLength={ongoingTasks.length}
+      />
+    );
+  });
+
+  const renderCompletedTasks = completedTasks.map((tasks, index) => {
+    return (
+      <ShowCompletedTasks
+        key={tasks._id}
+        tasks={tasks}
+        index={index}
+        arrLength={completedTasks.length}
+      />
+    );
+  });
 
   return (
     <article className="flex flex-col gap-5">
@@ -80,30 +89,27 @@ const DailyTaskManagement = () => {
           onDragEnd={(e) => {
             const { active, over } = e;
             if (!over) return;
-            if (active.id === over.id) {
-              return;
-            }
-            const originalIndex = taskName.ongoingTasks.findIndex(
-              (task) => task.taskId === active.id
+            if (active.id === over.id) return;
+            const originalIndex = ongoingTasks.findIndex(
+              (task) => task._id === active.id
             );
-            const newIndex = taskName.ongoingTasks.findIndex(
-              (task) => task.taskId === over.id
+            const newIndex = ongoingTasks.findIndex(
+              (task) => task._id === over.id
             );
-            const updatedTasks = arrayMove(
-              taskName.ongoingTasks,
+            const updatedOrder = arrayMove(
+              ongoingTasks,
               originalIndex,
               newIndex
             );
-            dispatch(
-              replaceTasksWithNewValue([
-                ...updatedTasks,
-                ...taskName.completedTasks,
-              ])
-            );
+            const orderedTasks = updatedOrder.map((task, index) => ({
+              _id: task._id,
+              order: index,
+            }));
+            reorderDailyTasks({ orderedTasks });
           }}
         >
           <SortableContext
-            items={taskName["ongoingTasks"].map((task) => task.taskId)}
+            items={ongoingTasks.map((task) => task._id)}
             strategy={verticalListSortingStrategy}
           >
             {renderOngoingTasks}

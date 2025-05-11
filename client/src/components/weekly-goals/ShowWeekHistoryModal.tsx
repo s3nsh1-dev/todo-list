@@ -23,7 +23,7 @@ const ShowWeekHistoryModal: React.FC<propsTypes> = ({ onClosingModal }) => {
       goal.wResult === "SUCCESS" ? "bg-green-800" : "bg-red-800";
     return (
       <ShowLatestHistory
-        key={goal.id}
+        key={goal._id}
         primary={`Week ${goal.weekNum}`}
         secondary={goal.wResult}
         color={color}

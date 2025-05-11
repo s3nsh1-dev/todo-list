@@ -23,7 +23,7 @@ const ShowMonthHistoryModal: React.FC<propsTypes> = ({ onClosingModal }) => {
       goal.status === "SUCCESS" ? "bg-green-800" : "bg-red-800";
     return (
       <ShowLatestHistory
-        key={goal.id}
+        key={goal._id}
         primary={`${goal.MonthlyName}`}
         secondary={goal.status}
         color={color}

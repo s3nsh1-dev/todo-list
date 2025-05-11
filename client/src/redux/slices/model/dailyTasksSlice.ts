@@ -2,8 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   taskDetailsType,
   dailyTasksType,
-} from "../../constants/commonInterfaces";
-import { taskDetails, previousTasksLogs } from "../../constants/sliceDataset";
+} from "../../../constants/commonInterfaces";
+import {
+  taskDetails,
+  previousTasksLogs,
+} from "../../../constants/sliceDataset";
 
 const initialState: dailyTasksType = {
   taskDetails,
@@ -23,7 +26,7 @@ const dailyTasksSlice = createSlice({
       return {
         ...state,
         taskDetails: state["taskDetails"].filter(
-          (task) => task.taskId !== action.payload
+          (task) => task._id !== action.payload
         ),
       };
     },
@@ -32,7 +35,7 @@ const dailyTasksSlice = createSlice({
       return {
         ...state,
         taskDetails: state["taskDetails"].map((tasks) =>
-          tasks.taskId === action.payload.taskId ? action.payload : tasks
+          tasks._id === action.payload._id ? action.payload : tasks
         ),
       };
     },

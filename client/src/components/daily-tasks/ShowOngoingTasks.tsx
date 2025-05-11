@@ -3,8 +3,12 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
-import { useDispatch } from "react-redux";
-import { updateTask } from "../../redux/slices/dailyTasksSlice";
+// import { useDispatch } from "react-redux";
+// import { updateTask } from "../../redux/slices/model/dailyTasksSlice";
+import {
+  useUpdateDailyTaskNameMutation,
+  useUpdateDailyTaskStatusMutation,
+} from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 import IconButton from "@mui/material/IconButton";
 import ShowEditModal from "../common/ShowEditModal";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
@@ -18,9 +22,11 @@ interface propTypes {
 }
 
 const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
+  const [updateDailyTaskName] = useUpdateDailyTaskNameMutation();
+  const [updateDailyTaskStatus] = useUpdateDailyTaskStatusMutation();
   const { listeners, transform, transition, attributes, setNodeRef } =
     useSortable({
-      id: tasks.taskId,
+      id: tasks._id,
     });
 
   const style = {
@@ -38,12 +44,14 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
   const onOpen = () => {
     setOpen(true);
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleUpdateTaskStatus = () => {
-    dispatch(updateTask({ ...tasks, status: "DONE" }));
+    updateDailyTaskStatus(tasks._id);
+    // dispatch(updateTask({ ...tasks, status: "DONE" }));
   };
   const submitEditedTask = () => {
-    dispatch(updateTask({ ...tasks, taskName: userValue }));
+    updateDailyTaskName({ _id: tasks._id, newName: userValue });
+    // dispatch(updateTask({ ...tasks, taskName: userValue }));
     onClose();
   };
 
