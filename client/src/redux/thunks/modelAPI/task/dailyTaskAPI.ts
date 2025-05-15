@@ -97,6 +97,7 @@ const dailyTaskApi = createApi({
     }),
   }),
 });
+console.log("I am being called");
 export default dailyTaskApi;
 export const {
   useAddDailyTaskMutation,

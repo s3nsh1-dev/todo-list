@@ -4,12 +4,17 @@ import {
   YearlyGoalType,
 } from "../../../../constants/commonInterfaces";
 
+interface newType {
+  message: string;
+  body: YearlyGoalType[];
+}
+
 const yearlyTaskApi = createApi({
   reducerPath: "YearlyTaskApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/yearly" }),
   tagTypes: ["YearlyTask"],
   endpoints: (builder) => ({
-    fetchYearlyTask: builder.query<YearlyGoalType[], void>({
+    fetchYearlyTask: builder.query<newType, void>({
       query: () => ({
         url: "/",
         method: "GET",
@@ -57,6 +62,43 @@ const yearlyTaskApi = createApi({
       }),
       invalidatesTags: ["YearlyTask"],
     }),
+    reorderYearlyTasks: builder.mutation<
+      newType,
+      { orderedTasks: { _id: string; order: number }[] }
+    >({
+      query: (payload) => ({
+        url: "/reorder",
+        method: "PATCH",
+        body: payload,
+      }),
+      async onQueryStarted({ orderedTasks }, { dispatch, queryFulfilled }) {
+        // Optimistic update
+        const patchResult = dispatch(
+          yearlyTaskApi.util.updateQueryData(
+            "fetchYearlyTask",
+            undefined,
+            (draft) => {
+              if (!draft?.body) return;
+              const orderMap = new Map(
+                orderedTasks.map((task) => [task._id, task.order])
+              );
+              draft.body.forEach((task) => {
+                if (orderMap.has(task._id)) {
+                  task.order = orderMap.get(task._id)!;
+                }
+              });
+              draft.body.sort((a, b) => a.order - b.order);
+            }
+          )
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+    }),
   }),
 });
 
@@ -67,4 +109,5 @@ export const {
   useDeleteYearlyTaskMutation,
   useUpdateYearlyTaskNameMutation,
   useUpdateYearlyTaskStatusMutation,
+  useReorderYearlyTasksMutation,
 } = yearlyTaskApi;
