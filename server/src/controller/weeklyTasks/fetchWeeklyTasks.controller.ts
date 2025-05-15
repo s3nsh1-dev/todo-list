@@ -7,7 +7,9 @@ const fetchWeeklyTasks: RequestHandler = async (
   res: Response
 ) => {
   try {
-    const weekly: weeklyGoalsListType[] = await WeeklyTask.find({});
+    const weekly: weeklyGoalsListType[] = await WeeklyTask.find({}).sort({
+      order: 1,
+    });
     if (!weekly) {
       res.status(400).json({ error: "Corrupted Data, something went wrong" });
       return;

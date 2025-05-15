@@ -6,7 +6,7 @@ const fetchYearlyTasks: RequestHandler = async (
   res: Response
 ) => {
   try {
-    const yearly = await YearlyTask.find({});
+    const yearly = await YearlyTask.find({}).sort({ order: 1 });
     if (!yearly) {
       res.status(400).json({ error: "YEARLY COLLECTION NOT FOUND" });
       return;

@@ -7,7 +7,9 @@ const fetchMonthlyTasks: RequestHandler = async (
   res: Response
 ) => {
   try {
-    const monthly: monthlyGoalsListType[] = await MonthlyTask.find({});
+    const monthly: monthlyGoalsListType[] = await MonthlyTask.find({}).sort({
+      order: 1,
+    });
     if (!monthly) {
       res.status(404).json({ message: "COLLECTION not found" });
       return;
