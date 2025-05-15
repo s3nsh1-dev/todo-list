@@ -17,12 +17,18 @@ const addYearlyTask: RequestHandler = async (
       res.status(422).json({ error: "TASK NAME MISSING" });
       return;
     }
-    const yearly = await YearlyTask.create({ yearlyGoalName });
-    if (!yearly) {
+
+    //find the highest order
+    const lastTask = await YearlyTask.findOne({}).sort({ order: -1 }).limit(1);
+
+    const newOrder = lastTask ? lastTask.order + 1 : 0;
+
+    const task = await YearlyTask.create({ yearlyGoalName, order: newOrder });
+    if (!task) {
       res.status(400).json({ error: "CAN NOT ADD TASK" });
       return;
     }
-    res.status(201).json({ success: "YEARLY TASK ADDED", body: yearly });
+    res.status(201).json({ success: "YEARLY TASK ADDED", body: task });
   } catch (error) {
     res.status(500).json({ error: `Server Error: ${error}` });
   }

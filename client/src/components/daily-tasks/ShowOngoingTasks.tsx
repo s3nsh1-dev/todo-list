@@ -3,8 +3,6 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
-// import { useDispatch } from "react-redux";
-// import { updateTask } from "../../redux/slices/model/dailyTasksSlice";
 import {
   useUpdateDailyTaskNameMutation,
   useUpdateDailyTaskStatusMutation,
@@ -43,7 +41,6 @@ const ShowOngoingTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
     opacity: isDragging ? 0.5 : 1,
     touchAction: "none",
     cursor: "move",
-    // backgroundColor: isDragging ? "rgb(249 250 251)" : "transparent",
     boxShadow: isDragging ? "0 4px 6px -1px rgb(0 0 0 / 0.1)" : "none",
   };
 

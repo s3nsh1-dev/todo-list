@@ -9,12 +9,18 @@ const addWeeklyTask: RequestHandler = async (req: Request, res: Response) => {
       res.status(422).json({ error: `PROPERTIES MISSING: WEEKLY TASK NAME` });
       return;
     }
-    const weekly: weeklyGoalsListType = await WeeklyTask.create({ wGoalsName });
-    if (!weekly) {
+
+    //find the highest order number
+    const lastTask = await WeeklyTask.findOne({}).sort({ order: -1 }).limit(1);
+
+    const newOrder = lastTask ? lastTask.order + 1 : 0;
+
+    const task = await WeeklyTask.create({ wGoalsName, order: newOrder });
+    if (!task) {
       res.status(400).json({ error: "CAN NOT ADD TASK" });
       return;
     }
-    res.status(201).json({ success: "WEEKLY TASK ADDED", body: weekly });
+    res.status(201).json({ success: "WEEKLY TASK ADDED", body: task });
   } catch (error) {
     res.status(500).json({ error: `SERVER ERROR: ${error}` });
   }

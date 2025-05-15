@@ -12,6 +12,11 @@ const model: mongoose.SchemaDefinition<monthlyGoalsListType> = {
     enum: ["ONGOING", "DONE"],
     default: "ONGOING",
   },
+  order: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 };
 
 const monthlyTask = new mongoose.Schema(model, { _id: true });
