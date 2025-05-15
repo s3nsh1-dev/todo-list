@@ -4,6 +4,7 @@ import addMonthlyTask from "../controller/monthlyTasks/addMonthlyTasks.controlle
 import updateMonthlyTaskName from "../controller/monthlyTasks/updateMonthlyTaskName.controller";
 import updateMonthlyTaskStatus from "../controller/monthlyTasks/updateMonthlyTaskStatus.controller";
 import deleteMonthlyTask from "../controller/monthlyTasks/deleteMonthlyTask.controller";
+import reorderMonthlyTasks from "../controller/monthlyTasks/reorderMonthlyTasks.controller";
 
 const monthlyRouter = express.Router();
 
@@ -12,5 +13,6 @@ monthlyRouter.post("/add", addMonthlyTask);
 monthlyRouter.delete("/delete", deleteMonthlyTask);
 monthlyRouter.patch("/update/status", updateMonthlyTaskStatus);
 monthlyRouter.patch("/update/name", updateMonthlyTaskName);
+monthlyRouter.patch("/reorder", reorderMonthlyTasks);
 
 export default monthlyRouter;

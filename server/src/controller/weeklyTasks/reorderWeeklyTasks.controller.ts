@@ -8,7 +8,7 @@ interface ReorderRequestBody extends Request {
   };
 }
 
-const reorderMonthlyTasks: RequestHandler = async (
+const reorderWeeklyTasks: RequestHandler = async (
   req: ReorderRequestBody,
   res: Response
 ): Promise<void> => {
@@ -49,4 +49,4 @@ const reorderMonthlyTasks: RequestHandler = async (
   }
 };
 
-export default reorderMonthlyTasks;
+export default reorderWeeklyTasks;
