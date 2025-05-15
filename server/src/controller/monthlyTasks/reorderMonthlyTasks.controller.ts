@@ -1,5 +1,5 @@
 import { RequestHandler, Request, Response } from "express";
-import DailyTask from "../../model/dailyTask.model";
+import MonthlyTask from "../../model/monthlyTask.model";
 import mongoose from "mongoose";
 
 interface ReorderRequestBody extends Request {
@@ -8,13 +8,13 @@ interface ReorderRequestBody extends Request {
   };
 }
 
-const reorderDailyTasks: RequestHandler = async (
+const reorderMonthlyTasks: RequestHandler = async (
   req: ReorderRequestBody,
   res: Response
 ): Promise<void> => {
   try {
     const { orderedTasks } = req.body;
-    console.log("dailyReorder:", orderedTasks);
+    console.log("monthlyReorder:", orderedTasks);
 
     if (!orderedTasks || !Array.isArray(orderedTasks)) {
       res.status(422).json({ message: "Invalid or missing orderedTasks" });
@@ -29,10 +29,10 @@ const reorderDailyTasks: RequestHandler = async (
       },
     }));
 
-    await DailyTask.bulkWrite(bulkOperations);
+    await MonthlyTask.bulkWrite(bulkOperations);
 
     // Fetch updated tasks to return the new order
-    const updatedTasks = await DailyTask.find({}).sort({ order: 1 });
+    const updatedTasks = await MonthlyTask.find({}).sort({ order: 1 });
 
     res.status(200).json({
       message: "SUCCESS: TASKS REORDERED",
@@ -49,4 +49,4 @@ const reorderDailyTasks: RequestHandler = async (
   }
 };
 
-export default reorderDailyTasks;
+export default reorderMonthlyTasks;
