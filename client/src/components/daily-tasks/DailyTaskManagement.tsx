@@ -1,4 +1,3 @@
-// import React from "react";
 import ShowOngoingTasks from "./ShowOngoingTasks";
 import ShowCompletedTasks from "./ShowCompletedTasks";
 import {
@@ -109,7 +108,7 @@ const DailyTaskManagement = () => {
               _id: task._id,
               order: index,
             }));
-
+            console.log("OrderedTasks", orderedTasks);
             // Trigger the mutation with optimistic update
             reorderDailyTasks({ orderedTasks });
           }}

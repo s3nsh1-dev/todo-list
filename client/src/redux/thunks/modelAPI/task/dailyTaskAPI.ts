@@ -69,6 +69,9 @@ const dailyTaskApi = createApi({
       }),
       async onQueryStarted({ orderedTasks }, { dispatch, queryFulfilled }) {
         // Optimistic update
+        // { dispatch, queryFulfilled } is ......
+        // is this retriggering fetchDailyTasks ?
+        // show me a sample of draft and its timeline
         const patchResult = dispatch(
           dailyTaskApi.util.updateQueryData(
             "fetchDailyTasks",
@@ -87,7 +90,6 @@ const dailyTaskApi = createApi({
             }
           )
         );
-
         try {
           await queryFulfilled;
         } catch {
@@ -97,7 +99,6 @@ const dailyTaskApi = createApi({
     }),
   }),
 });
-console.log("I am being called");
 export default dailyTaskApi;
 export const {
   useAddDailyTaskMutation,
