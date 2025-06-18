@@ -12,7 +12,6 @@ interface propTypes {
   index: number;
   arrLength: number;
   handleStatus: (value: string) => void;
-  handleEditGoal: ({ id, name }: { id: string; name: string }) => void;
 }
 
 const OngoingDivision: React.FC<propTypes> = ({
@@ -20,9 +19,9 @@ const OngoingDivision: React.FC<propTypes> = ({
   name,
   index,
   arrLength,
-  handleEditGoal,
   handleStatus,
 }) => {
+  const handleEditGoal = () => {};
   const { listeners, transform, transition, attributes, setNodeRef } =
     useSortable({ id });
 

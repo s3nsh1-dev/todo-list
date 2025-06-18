@@ -1,18 +1,13 @@
-import { useMemo, useState, useRef } from "react";
-import { RootState } from "../../redux/store";
-import IntroToManagement from "../common/IntroToManagement";
 import CompletedContainer from "../common/CompletedContainer";
 import OngoingContainer from "../common/OngoingContainer";
 import CompletedDivision from "../common/CompletedDivision";
 import OngoingDivision from "../common/OngoingDivision";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  removeWeeklyGoals,
-  updateWeeklyGoalStatus,
-  updateWeeklyGoalName,
-  reInitializeWeeklyGoals,
-} from "../../redux/slices/model/weeklyGoalsSlice";
-import ShowEditModal from "../common/ShowEditModal";
+  useFetchWeeklyTasksQuery,
+  useDeleteWeeklyTaskMutation,
+  useUpdateWeeklyTaskStatusMutation,
+  useReorderWeeklyTasksMutation,
+} from "../../redux/thunks/modelAPI/task/weeklyTaskAPI";
 import { weeklyContent as content } from "../../constants/GenericConstants";
 import {
   closestCorners,
@@ -23,59 +18,46 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
+import IntroToManagement from "../common/IntroToManagement";
 
 const WeeklyBody = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [userValue, setUserValue] = useState<string>("");
-  const editData = useRef<{ id: string; oldName: string }>({
-    id: "",
-    oldName: "",
-  });
-
-  const GG = useSelector(
-    (state: RootState) => state.weeklyGoals.weeklyGoalsList
+  const [deleteWeeklyTask] = useDeleteWeeklyTaskMutation();
+  const [reorderWeeklyTasks] = useReorderWeeklyTasksMutation();
+  const [updateWeeklyTaskStatus] = useUpdateWeeklyTaskStatusMutation();
+  const { data, error, isLoading } = useFetchWeeklyTasksQuery();
+  const sensor = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
   );
 
-  //these will reduce the possibility or re-render when there is not change in global status but in local states
-  const ongoingWGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.wGoalsStatus === "ONGOING");
-  }, [GG]);
+  if (!data) {
+    return <div>....Corrupted Request</div>;
+  }
+  if (error) return <div>We have error</div>;
+  if (isLoading) return <div>....Loading</div>;
 
-  const completedWGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.wGoalsStatus === "DONE");
-  }, [GG]);
+  const weeklyTaskArray = data.body || [];
 
-  const dispatch = useDispatch();
+  const ongoingWGoals = [...weeklyTaskArray].filter(
+    (goal) => goal.wGoalsStatus === "ONGOING"
+  );
+  const completedWGoals = [...weeklyTaskArray].filter(
+    (goal) => goal.wGoalsStatus === "DONE"
+  );
 
-  const handleStatusUpdate = (value: string) => {
-    dispatch(updateWeeklyGoalStatus(value));
+  const handleStatusUpdate = (taskName: string) => {
+    updateWeeklyTaskStatus(taskName);
   };
 
-  const handleDeleteGoal = (value: string) => {
-    dispatch(removeWeeklyGoals(value));
-  };
-
-  const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
-    editData.current.id = id;
-    editData.current.oldName = name;
-    toggleModal();
-  };
-
-  const toggleModal = () => {
-    setOpen((open) => !open);
-  };
-
-  const handleSubmit = () => {
-    dispatch(
-      updateWeeklyGoalName({ id: editData.current.id, name: userValue })
-    );
-    toggleModal();
+  const handleDeleteGoal = (_id: string) => {
+    deleteWeeklyTask(_id);
   };
 
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
@@ -100,18 +82,9 @@ const WeeklyBody = () => {
         index={index}
         arrLength={ongoingWGoals.length}
         handleStatus={handleStatusUpdate}
-        handleEditGoal={handleEditWGoal}
       />
     );
   });
-
-  const isDisabled = userValue.length > 1 ? false : true;
-  const sensor = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
 
   return (
     <>
@@ -120,31 +93,34 @@ const WeeklyBody = () => {
         {renderCompletedWTasks}
       </CompletedContainer>
       <DndContext
-        modifiers={[restrictToParentElement]}
         sensors={sensor}
+        modifiers={[restrictToParentElement]}
         collisionDetection={closestCorners}
         onDragEnd={(e) => {
           const { active, over } = e;
           if (!over) return;
           if (active.id === over.id) return;
+
           const originalIndex = ongoingWGoals.findIndex(
             (goal) => goal._id === active.id
           );
           const newIndex = ongoingWGoals.findIndex(
             (goal) => goal._id === over.id
           );
-          const updateWeeklyGoalsWithNewIndex = arrayMove(
-            ongoingWGoals,
-            originalIndex,
-            newIndex
-          );
+          if (originalIndex === -1 || newIndex === -1) return;
 
-          dispatch(
-            reInitializeWeeklyGoals([
-              ...updateWeeklyGoalsWithNewIndex,
-              ...completedWGoals,
-            ])
-          );
+          // Create optimistic update
+          const reorderedTasks = [...ongoingWGoals];
+          const [movedTask] = reorderedTasks.splice(originalIndex, 1);
+          reorderedTasks.splice(newIndex, 0, movedTask);
+
+          const orderedTasks = reorderedTasks.map((task, index) => ({
+            _id: task._id,
+            order: index,
+          }));
+          console.log("OrderedTasks", orderedTasks);
+          // Trigger the mutation with optimistic update
+          reorderWeeklyTasks({ orderedTasks });
         }}
       >
         <SortableContext
@@ -156,17 +132,6 @@ const WeeklyBody = () => {
           </OngoingContainer>
         </SortableContext>
       </DndContext>
-      {open && (
-        <ShowEditModal
-          isDisabled={isDisabled}
-          submitEditedTask={handleSubmit}
-          userValue={userValue}
-          setUserValue={setUserValue}
-          open={open}
-          onClose={toggleModal}
-          placeholder={editData.current.oldName}
-        />
-      )}
     </>
   );
 };
