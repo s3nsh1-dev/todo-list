@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DividerGray } from "../others/CommonComponents";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -5,7 +6,8 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-
+import { useUpdateWeeklyTaskNameMutation } from "../../redux/thunks/modelAPI/task/weeklyTaskAPI";
+import ShowEditModal from "./ShowEditModal";
 interface propTypes {
   id: string;
   name: string;
@@ -21,7 +23,16 @@ const OngoingDivision: React.FC<propTypes> = ({
   arrLength,
   handleStatus,
 }) => {
-  const handleEditGoal = () => {};
+  const [updateWeeklyTaskName] = useUpdateWeeklyTaskNameMutation();
+  const [open, setOpen] = useState<boolean>(false);
+  const [userValue, setUserValue] = useState<string>("");
+  const isDisabled = userValue.length > 0 ? false : true;
+  const onClose = () => {
+    setOpen(false);
+  };
+  const onOpen = () => {
+    setOpen(true);
+  };
   const { listeners, transform, transition, attributes, setNodeRef } =
     useSortable({ id });
 
@@ -29,6 +40,11 @@ const OngoingDivision: React.FC<propTypes> = ({
     transition,
     transform: CSS.Transform.toString(transform),
     touchAction: "none",
+  };
+  const submitEditedTask = () => {
+    updateWeeklyTaskName({ _id: id, newName: userValue });
+    // dispatch(updateTask({ ...tasks, taskName: userValue }));
+    onClose();
   };
   return (
     <>
@@ -40,11 +56,7 @@ const OngoingDivision: React.FC<propTypes> = ({
           <p className="flex items-center ">{name}</p>
         </div>
         <div>
-          <IconButton
-            onClick={() => {
-              handleEditGoal({ id, name });
-            }}
-          >
+          <IconButton onClick={onOpen}>
             <EditIcon className="hover:text-blue-500 text-gray-500" />
           </IconButton>
           <IconButton
@@ -57,6 +69,17 @@ const OngoingDivision: React.FC<propTypes> = ({
         </div>
       </div>
       {index < arrLength - 1 && <DividerGray />}
+      {open && (
+        <ShowEditModal
+          isDisabled={isDisabled}
+          submitEditedTask={submitEditedTask}
+          userValue={userValue}
+          setUserValue={setUserValue}
+          open={open}
+          onClose={onClose}
+          placeholder={name}
+        />
+      )}
     </>
   );
 };

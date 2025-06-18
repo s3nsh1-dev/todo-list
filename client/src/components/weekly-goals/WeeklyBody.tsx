@@ -43,7 +43,7 @@ const WeeklyBody = () => {
   if (error) return <div>We have error</div>;
   if (isLoading) return <div>....Loading</div>;
 
-  const weeklyTaskArray = data.body || [];
+  const weeklyTaskArray = data.body;
 
   const ongoingWGoals = [...weeklyTaskArray].filter(
     (goal) => goal.wGoalsStatus === "ONGOING"
@@ -59,6 +59,8 @@ const WeeklyBody = () => {
   const handleDeleteGoal = (_id: string) => {
     deleteWeeklyTask(_id);
   };
+
+  console.log("this is weekly data", data.body);
 
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
     return (
