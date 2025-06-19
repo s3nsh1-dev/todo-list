@@ -18,13 +18,18 @@ import type { YearlyGoalType } from "../../constants/commonInterfaces";
 
 interface propTypes {
   children: React.ReactNode;
-  memoizedGoals: YearlyGoalType[];
-  onReorder: (orderedGoals: YearlyGoalType[]) => void;
+  ongoingTasks: YearlyGoalType[];
+  onReorder: ({ orderedTasks }: { orderedTasks: GG[] }) => void;
 }
+
+type GG = {
+  _id: string;
+  order: number;
+};
 
 const DndKitDefault: React.FC<propTypes> = ({
   children,
-  memoizedGoals,
+  ongoingTasks,
   onReorder, // <-- receive the prop
 }) => {
   const sensor = useSensors(
@@ -42,22 +47,27 @@ const DndKitDefault: React.FC<propTypes> = ({
         const { active, over } = e;
         if (!over) return;
         if (active.id === over.id) return;
-        const originalIndex = memoizedGoals.findIndex(
+        const draggedIndex = ongoingTasks.findIndex(
           (goal) => goal._id === active.id
         );
-        const newIndex = memoizedGoals.findIndex(
+        const droppedIndex = ongoingTasks.findIndex(
           (goal) => goal._id === over.id
         );
-        const newlyUpdatedGoals = arrayMove(
-          memoizedGoals,
-          originalIndex,
-          newIndex
+        const reorderedTasks = arrayMove(
+          ongoingTasks,
+          draggedIndex,
+          droppedIndex
         );
-        onReorder(newlyUpdatedGoals);
+        const orderedTasks = reorderedTasks.map((task, index) => ({
+          _id: task._id,
+          order: index,
+        }));
+        console.log("Year reordering", orderedTasks);
+        onReorder({ orderedTasks });
       }}
     >
       <SortableContext
-        items={memoizedGoals.map((goal) => goal._id)}
+        items={ongoingTasks.map((goal) => goal._id)}
         strategy={verticalListSortingStrategy}
       >
         {children}

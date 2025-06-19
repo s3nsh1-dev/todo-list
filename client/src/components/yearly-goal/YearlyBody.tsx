@@ -83,14 +83,8 @@ const YearlyBody = () => {
         {renderCompletedWTasks}
       </CompletedContainer>
       <DndKitDefault
-        memoizedGoals={ongoingYGoals}
-        onReorder={(orderedGoals) => {
-          const orderedTasks = orderedGoals.map((task, index) => ({
-            _id: task._id,
-            order: index,
-          }));
-          reorderYearlyTasks({ orderedTasks });
-        }}
+        ongoingTasks={ongoingYGoals}
+        onReorder={reorderYearlyTasks}
       >
         <OngoingContainer heading="Ongoing">
           {renderOngoingWGoals}

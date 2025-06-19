@@ -123,7 +123,7 @@ const WeeklyBody = () => {
             (goal) => goal._id === over.id
           );
 
-          // Create optimistic update
+          // Create optimistic update also alternate of arrayMove method provided by DNDkit
           if (originalIndex === -1 || newIndex === -1) return;
           const reorderedTasks = [...ongoingWGoals];
           const [movedTask] = reorderedTasks.splice(originalIndex, 1);
