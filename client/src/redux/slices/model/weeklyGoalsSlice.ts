@@ -16,6 +16,7 @@ const weeklySlice = createSlice({
         _id: crypto.randomUUID(),
         wGoalsName: action.payload,
         wGoalsStatus: "ONGOING",
+        order: state.weeklyGoalsList.length, // or use another logic for order
       });
     },
     // immer will automatically replace this newly returned object to the old one behind the scenes
