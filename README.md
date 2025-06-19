@@ -1,6 +1,3 @@
-![image](https://github.com/user-attachments/assets/7fd011af-87db-4882-993e-cf6a562048ae)![image](https://github.com/user-attachments/assets/09d854d4-262d-4862-bfad-754ed1c6ba47)#### This is image of welcome card shows quick info about app
-![image](https://github.com/user-attachments/assets/39160d51-28ae-48f3-98a5-62e30a75858e)
-
 #### This image is Homepage of the app
 ![image](https://github.com/user-attachments/assets/d57ebd71-9c81-4601-aff9-5b3dfd2cb2cd)
 
