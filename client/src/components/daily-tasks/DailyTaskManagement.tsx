@@ -19,6 +19,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
+import { taskDetails } from "../../constants/sliceDataset";
 
 const DailyTaskManagement = () => {
   const { data, error, isLoading } = useFetchDailyTasksQuery();
@@ -35,11 +36,11 @@ const DailyTaskManagement = () => {
     return <div>Do not have any task</div>;
   }
 
-  console.log("typeof data:", typeof data);
+  console.log("data:", data);
   console.log("Array.isArray(data):", Array.isArray(data));
   console.log("data:", data.message);
 
-  const dailyTasksList = data?.body || [];
+  const dailyTasksList = data?.body || taskDetails;
 
   const ongoingTasks = dailyTasksList.filter(
     (task) => task.status === "ONGOING"
