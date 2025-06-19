@@ -103,7 +103,11 @@ const WeeklyBody = () => {
 
   return (
     <>
-      <IntroToManagement heading="Introduction" content={content} />
+      <IntroToManagement
+        heading="Weekly Tasks"
+        content={content}
+        color="text-amber-200"
+      />
       <CompletedContainer heading="Completed Goals">
         {renderCompletedWTasks}
       </CompletedContainer>

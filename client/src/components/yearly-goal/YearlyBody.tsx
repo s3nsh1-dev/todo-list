@@ -78,7 +78,11 @@ const YearlyBody = () => {
 
   return (
     <>
-      <IntroToManagement heading="Introduction" content={content} />
+      <IntroToManagement
+        heading="Yearly Goals"
+        content={content}
+        color="text-green-400"
+      />
       <CompletedContainer heading="Completed">
         {renderCompletedWTasks}
       </CompletedContainer>

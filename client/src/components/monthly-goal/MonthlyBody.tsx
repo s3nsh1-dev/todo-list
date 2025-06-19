@@ -101,7 +101,11 @@ const MonthlyBody = () => {
 
   return (
     <>
-      <IntroToManagement heading="Introduction" content={content} />
+      <IntroToManagement
+        heading="Monthly Tasks"
+        content={content}
+        color="text-red-400"
+      />
       <CompletedContainer heading="Completed Goals">
         {renderCompletedWTasks}
       </CompletedContainer>
