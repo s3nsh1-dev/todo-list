@@ -1,3 +1,6 @@
+#### This is Welcome Card showing quick app info
+![image](https://github.com/user-attachments/assets/290c970a-2cd8-475e-8962-61b2623d3962)
+
 #### This image is Homepage of the app
 ![image](https://github.com/user-attachments/assets/d57ebd71-9c81-4601-aff9-5b3dfd2cb2cd)
 
@@ -8,10 +11,10 @@
 ![image](https://github.com/user-attachments/assets/d3837efb-67c2-40ab-9685-f03c0a583bf7)
 
 #### This image shows the list of Monthly tasks divided into Completed and Ongoing with lil intro template
-![image](https://github.com/user-attachments/assets/5b5c1383-1383-4c63-a47d-129af9682915)
+![image](https://github.com/user-attachments/assets/66248e07-61e7-46d4-9e26-efc12acabd9d)
 
 #### This image shows the list of Monthly tasks divided into Completed and Ongoing with lil intro template
-![image](https://github.com/user-attachments/assets/66248e07-61e7-46d4-9e26-efc12acabd9d)
+
 ![image](https://github.com/user-attachments/assets/9cbf98c6-509d-4787-8390-885150bcd2f8)
 
 #### This image shows the Notes taking section where user can enter this notes
