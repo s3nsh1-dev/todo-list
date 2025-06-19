@@ -1,66 +1,52 @@
-import { useMemo, useState, useRef } from "react";
-import { RootState } from "../../redux/store";
 import IntroToManagement from "../common/IntroToManagement";
 import CompletedContainer from "../common/CompletedContainer";
 import OngoingContainer from "../common/OngoingContainer";
 import CompletedDivision from "../common/CompletedDivision";
 import OngoingDivision from "../common/OngoingDivision";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  removeYearlyGoal,
-  updateYearlyGoalStatus,
-  updateYearlyGoalName,
-} from "../../redux/slices/model/yearlyGoalsSlice";
-import ShowEditModal from "../common/ShowEditModal";
+  useFetchYearlyTaskQuery,
+  useDeleteYearlyTaskMutation,
+  useUpdateYearlyTaskStatusMutation,
+  useUpdateYearlyTaskNameMutation,
+  useReorderYearlyTasksMutation,
+} from "../../redux/thunks/modelAPI/task/yearlyTaskAPI";
 import { yearlyContent as content } from "../../constants/GenericConstants";
 import DndKitDefault from "../others/DndKitDefault";
 
 const YearlyBody = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [userValue, setUserValue] = useState<string>("");
-  const editData = useRef<{ id: string; oldName: string }>({
-    id: "",
-    oldName: "",
-  });
+  const { data, error, isLoading } = useFetchYearlyTaskQuery();
+  const [deleteYearlyTask] = useDeleteYearlyTaskMutation();
+  const [updateYearlyTaskName] = useUpdateYearlyTaskNameMutation();
+  const [updateYearlyTaskStatus] = useUpdateYearlyTaskStatusMutation();
+  const [reorderYearlyTasks] = useReorderYearlyTasksMutation();
 
-  const GG = useSelector(
-    (state: RootState) => state.yearlyResolution.yearlyGoalList
-  );
+  if (!data) return <div>....Corrupted Data</div>;
+  if (error) return <div>Server Error</div>;
+  if (isLoading) return <div>....Loading</div>;
+
+  const GG = data.body || [];
 
   //these will reduce the possibility or re-render when there is not change in global status but in local states
-  const ongoingYGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.status === "ONGOING");
-  }, [GG]);
+  const ongoingYGoals = [...GG].filter((goal) => goal.status === "ONGOING");
 
-  const completedYGoals = useMemo(() => {
-    return [...GG].filter((goal) => goal.status === "DONE");
-  }, [GG]);
+  const completedYGoals = [...GG].filter((goal) => goal.status === "DONE");
 
-  const dispatch = useDispatch();
-
-  const handleStatusUpdate = (value: string) => {
-    dispatch(updateYearlyGoalStatus(value));
+  const handleStatusUpdate = (_id: string) => {
+    updateYearlyTaskStatus(_id);
   };
 
-  const handleDeleteGoal = (value: string) => {
-    dispatch(removeYearlyGoal(value));
+  const handleDeleteGoal = (_id: string) => {
+    deleteYearlyTask(_id);
   };
 
-  const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
-    editData.current.id = id;
-    editData.current.oldName = name;
-    toggleModal();
-  };
-
-  const toggleModal = () => {
-    setOpen((open) => !open);
-  };
-
-  const handleSubmit = () => {
-    dispatch(
-      updateYearlyGoalName({ id: editData.current.id, name: userValue })
-    );
-    toggleModal();
+  const handleEdittedYearlyGoalsName = ({
+    _id,
+    newName,
+  }: {
+    _id: string;
+    newName: string;
+  }) => {
+    updateYearlyTaskName({ _id, newName });
   };
 
   const renderCompletedWTasks = completedYGoals.map((goal, index) => {
@@ -85,12 +71,10 @@ const YearlyBody = () => {
         index={index}
         arrLength={ongoingYGoals.length}
         handleStatus={handleStatusUpdate}
-        handleEditGoal={handleEditWGoal}
+        handleEditGoal={handleEdittedYearlyGoalsName}
       />
     );
   });
-
-  const isDisabled = userValue.length > 1 ? false : true;
 
   return (
     <>
@@ -100,23 +84,18 @@ const YearlyBody = () => {
       </CompletedContainer>
       <DndKitDefault
         memoizedGoals={ongoingYGoals}
-        completedGoals={completedYGoals}
+        onReorder={(orderedGoals) => {
+          const orderedTasks = orderedGoals.map((task, index) => ({
+            _id: task._id,
+            order: index,
+          }));
+          reorderYearlyTasks({ orderedTasks });
+        }}
       >
         <OngoingContainer heading="Ongoing">
           {renderOngoingWGoals}
         </OngoingContainer>
       </DndKitDefault>
-      {open && (
-        <ShowEditModal
-          isDisabled={isDisabled}
-          submitEditedTask={handleSubmit}
-          userValue={userValue}
-          setUserValue={setUserValue}
-          open={open}
-          onClose={toggleModal}
-          placeholder={editData.current.oldName}
-        />
-      )}
     </>
   );
 };

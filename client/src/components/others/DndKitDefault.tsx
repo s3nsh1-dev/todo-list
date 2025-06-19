@@ -15,21 +15,18 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import type { YearlyGoalType } from "../../constants/commonInterfaces";
-import { reInitializeYearlyGoals } from "../../redux/slices/model/yearlyGoalsSlice";
-import { useDispatch } from "react-redux";
 
 interface propTypes {
   children: React.ReactNode;
   memoizedGoals: YearlyGoalType[];
-  completedGoals: YearlyGoalType[];
+  onReorder: (orderedGoals: YearlyGoalType[]) => void;
 }
 
 const DndKitDefault: React.FC<propTypes> = ({
   children,
   memoizedGoals,
-  completedGoals,
+  onReorder, // <-- receive the prop
 }) => {
-  const dispatch = useDispatch();
   const sensor = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -51,17 +48,12 @@ const DndKitDefault: React.FC<propTypes> = ({
         const newIndex = memoizedGoals.findIndex(
           (goal) => goal._id === over.id
         );
-        const newlyUpdatedYearlyGoalWithIndex = arrayMove(
+        const newlyUpdatedGoals = arrayMove(
           memoizedGoals,
           originalIndex,
           newIndex
         );
-        dispatch(
-          reInitializeYearlyGoals([
-            ...newlyUpdatedYearlyGoalWithIndex,
-            ...completedGoals,
-          ])
-        );
+        onReorder(newlyUpdatedGoals);
       }}
     >
       <SortableContext

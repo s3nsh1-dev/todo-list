@@ -1,6 +1,6 @@
-understand how the dailyTask is working with ordering and the backend API
-replicate the functionality for week, month, year
-leave the history with Redux
-reach a point where u can say the project is done
+understand how yearly reordering is working and how daily/weekly/monthly is optimized and different and how the reodering is taking place
+what arraymove do ?
+is returing whole array is good or array with id and order number is good for optimization
+why when logic is same : returing whole array is not throwing error
 add daily time reset
 the add reset for week, month, year
