@@ -27,6 +27,7 @@ const monthlySlice = createSlice({
         _id: crypto.randomUUID(),
         GoalName: action.payload,
         status: "ONGOING",
+        order: state.monthlyGoalsList.length, // or use another logic for order
       });
     },
     updateMonthlyGoalStatus: (state, action: PayloadAction<string>) => {

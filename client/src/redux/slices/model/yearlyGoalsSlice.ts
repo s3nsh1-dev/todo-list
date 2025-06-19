@@ -27,6 +27,7 @@ const yearlySlice = createSlice({
         _id: crypto.randomUUID(),
         yearlyGoalName: action.payload,
         status: "ONGOING",
+        order: state.yearlyGoalList.length,
       });
     },
 

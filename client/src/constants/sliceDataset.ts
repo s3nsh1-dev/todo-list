@@ -21,50 +21,115 @@ export const weeklyLogs: weeklyLogsType[] = [
 ];
 
 export const weeklyGoalsList: weeklyGoalsListType[] = [
-  { _id: "1", wGoalsName: "Exercise 5 times a week", wGoalsStatus: "DONE" },
-  { _id: "2", wGoalsName: "Read 2 books", wGoalsStatus: "ONGOING" },
-  { _id: "3", wGoalsName: "Improve coding skills", wGoalsStatus: "DONE" },
-  { _id: "4", wGoalsName: "Meditate daily", wGoalsStatus: "ONGOING" },
-  { _id: "5", wGoalsName: "Eat healthy meals", wGoalsStatus: "DONE" },
+  {
+    _id: "1",
+    wGoalsName: "Exercise 5 times a week",
+    wGoalsStatus: "DONE",
+    order: 1,
+  },
+  { _id: "2", wGoalsName: "Read 2 books", wGoalsStatus: "ONGOING", order: 2 },
+  {
+    _id: "3",
+    wGoalsName: "Improve coding skills",
+    wGoalsStatus: "DONE",
+    order: 3,
+  },
+  { _id: "4", wGoalsName: "Meditate daily", wGoalsStatus: "ONGOING", order: 4 },
+  { _id: "5", wGoalsName: "Eat healthy meals", wGoalsStatus: "DONE", order: 5 },
   {
     _id: "6",
     wGoalsName: "Complete a side project",
     wGoalsStatus: "ONGOING",
+    order: 6,
   },
-  { _id: "7", wGoalsName: "Limit social media usage", wGoalsStatus: "ONGOING" },
+  {
+    _id: "7",
+    wGoalsName: "Limit social media usage",
+    wGoalsStatus: "ONGOING",
+    order: 7,
+  },
 ];
 
 export const taskDetails: taskDetailsType[] = [
-  { _id: "0", taskName: "Complete project report", status: "ONGOING" },
-  { _id: "1", taskName: "Review pull requests", status: "ONGOING" },
-  { _id: "2", taskName: "Fix UI bugs in dashboard", status: "DONE" },
-  { _id: "3", taskName: "Plan team meeting agenda", status: "ONGOING" },
-  { _id: "4", taskName: "Write documentation for API", status: "DONE" },
-  { _id: "5", taskName: "Respond to client emails", status: "ONGOING" },
+  {
+    _id: "0",
+    taskName: "Complete project report",
+    status: "ONGOING",
+    order: 1,
+  },
+  { _id: "1", taskName: "Review pull requests", status: "ONGOING", order: 2 },
+  { _id: "2", taskName: "Fix UI bugs in dashboard", status: "DONE", order: 3 },
+  {
+    _id: "3",
+    taskName: "Plan team meeting agenda",
+    status: "ONGOING",
+    order: 4,
+  },
+  {
+    _id: "4",
+    taskName: "Write documentation for API",
+    status: "DONE",
+    order: 5,
+  },
+  {
+    _id: "5",
+    taskName: "Respond to client emails",
+    status: "ONGOING",
+    order: 6,
+  },
   {
     _id: "6",
     taskName: "Refactor authentication module",
     status: "ONGOING",
+    order: 7,
   },
-  { _id: "7", taskName: "Test new feature deployment", status: "DONE" },
+  {
+    _id: "7",
+    taskName: "Test new feature deployment",
+    status: "DONE",
+    order: 8,
+  },
   {
     _id: "8",
     taskName: "Update dependencies in package.json",
     status: "ONGOING",
+    order: 9,
   },
-  { _id: "9", taskName: "Optimize database queries", status: "DONE" },
+  {
+    _id: "9",
+    taskName: "Optimize database queries",
+    status: "DONE",
+    order: 10,
+  },
   {
     _id: "10",
     taskName: "Prepare slides for presentation",
     status: "ONGOING",
+    order: 11,
   },
-  { _id: "11", taskName: "Fix login validation issue", status: "ONGOING" },
-  { _id: "12", taskName: "Conduct code review for intern", status: "DONE" },
-  { _id: "13", taskName: "Schedule one-on-one meetings", status: "ONGOING" },
+  {
+    _id: "11",
+    taskName: "Fix login validation issue",
+    status: "ONGOING",
+    order: 12,
+  },
+  {
+    _id: "12",
+    taskName: "Conduct code review for intern",
+    status: "DONE",
+    order: 13,
+  },
+  {
+    _id: "13",
+    taskName: "Schedule one-on-one meetings",
+    status: "ONGOING",
+    order: 14,
+  },
   {
     _id: "14",
     taskName: "Draft blog post on React performance",
     status: "DONE",
+    order: 15,
   },
 ];
 export const previousTasksLogs: historyLogType[] = [
@@ -100,22 +165,59 @@ export const monthlyHistory: monthlyHistoryType[] = [
 ];
 
 export const monthlyGoalsList: monthlyGoalsListType[] = [
-  { _id: "1", GoalName: "Increase monthly sales by 10%", status: "ONGOING" },
-  { _id: "2", GoalName: "Launch new marketing campaign", status: "DONE" },
+  {
+    _id: "1",
+    GoalName: "Increase monthly sales by 10%",
+    status: "ONGOING",
+    order: 1,
+  },
+  {
+    _id: "2",
+    GoalName: "Launch new marketing campaign",
+    status: "DONE",
+    order: 2,
+  },
   {
     _id: "3",
     GoalName: "Improve customer support response time",
     status: "ONGOING",
+    order: 3,
   },
-  { _id: "4", GoalName: "Reduce operational costs", status: "ONGOING" },
-  { _id: "5", GoalName: "Expand into two new regions", status: "DONE" },
-  { _id: "6", GoalName: "Implement a new CRM system", status: "ONGOING" },
-  { _id: "7", GoalName: "Upgrade website performance", status: "ONGOING" },
-  { _id: "8", GoalName: "Enhance social media engagement", status: "DONE" },
+  {
+    _id: "4",
+    GoalName: "Reduce operational costs",
+    status: "ONGOING",
+    order: 4,
+  },
+  {
+    _id: "5",
+    GoalName: "Expand into two new regions",
+    status: "DONE",
+    order: 5,
+  },
+  {
+    _id: "6",
+    GoalName: "Implement a new CRM system",
+    status: "ONGOING",
+    order: 6,
+  },
+  {
+    _id: "7",
+    GoalName: "Upgrade website performance",
+    status: "ONGOING",
+    order: 7,
+  },
+  {
+    _id: "8",
+    GoalName: "Enhance social media engagement",
+    status: "DONE",
+    order: 8,
+  },
   {
     _id: "9",
     GoalName: "Train team on new sales strategies",
     status: "ONGOING",
+    order: 9,
   },
 ];
 
@@ -125,52 +227,67 @@ export const yearlyGoalList: YearlyGoalType[] = [
     _id: "1",
     yearlyGoalName: "Increase company revenue by 20%",
     status: "ONGOING",
+    order: 1,
   },
   {
     _id: "2",
     yearlyGoalName: "Expand to international markets",
     status: "DONE",
+    order: 2,
   },
-  { _id: "3", yearlyGoalName: "Hire 50 new employees", status: "ONGOING" },
+  {
+    _id: "3",
+    yearlyGoalName: "Hire 50 new employees",
+    status: "ONGOING",
+    order: 3,
+  },
   {
     _id: "4",
     yearlyGoalName: "Develop a new flagship product",
     status: "ONGOING",
+    order: 4,
   },
   {
     _id: "5",
     yearlyGoalName: "Improve customer retention rate",
     status: "ONGOING",
+    order: 5,
   },
   {
     _id: "6",
     yearlyGoalName: "Achieve 1M social media followers",
     status: "DONE",
+    order: 6,
   },
   {
     _id: "7",
     yearlyGoalName: "Enhance employee training programs",
     status: "ONGOING",
+    order: 7,
   },
   {
     _id: "8",
     yearlyGoalName: "Increase brand partnerships",
     status: "DONE",
+    order: 8,
   },
   {
     _id: "9",
     yearlyGoalName: "Reduce company expenses by 15%",
     status: "ONGOING",
+    order: 9,
   },
   {
     _id: "10",
     yearlyGoalName: "Improve ESG (Environmental, Social, Governance) practices",
     status: "DONE",
+    order: 10,
   },
   {
     _id: "11",
     yearlyGoalName: "Launch new AI-driven analytics tool",
     status: "ONGOING",
+    order: 11,
   },
 ];
 
