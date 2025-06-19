@@ -14,6 +14,7 @@ interface EnvVariables {
   YEARLY_HISTORY_COLLECTION: string;
   MONGODB_DATABASE: string;
   MONGODB_CONNECTION_STRING: string;
+  MONGODB_ATLAS_STRING: string;
 }
 
 const env: EnvVariables = {
@@ -28,6 +29,7 @@ const env: EnvVariables = {
   YEARLY_HISTORY_COLLECTION: process.env.YEARLY_HISTORY_COLLECTION || "",
   MONGODB_DATABASE: process.env.MONGODB_DATABASE || "",
   MONGODB_CONNECTION_STRING: process.env.MONGODB_CONNECTION_STRING || "",
+  MONGODB_ATLAS_STRING: process.env.MONGODB_ATLAS_STRING || "",
 };
 
 export default env;
