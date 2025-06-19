@@ -3,9 +3,13 @@ import IconButton from "@mui/material/IconButton";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { DividerGray } from "../others/CommonComponents";
 import type { taskDetailsType } from "../../constants/commonInterfaces";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import { useDispatch } from "react-redux";
 // import { updateTask } from "../../redux/slices/model/dailyTasksSlice";
-import { useUpdateDailyTaskStatusMutation } from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
+import {
+  useUpdateDailyTaskStatusMutation,
+  useDeleteDailyTaskMutation,
+} from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
 interface propTypes {
   tasks: taskDetailsType;
   index: number;
@@ -15,9 +19,13 @@ interface propTypes {
 const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
   // const dispatch = useDispatch();
   const [updateDailyTaskName] = useUpdateDailyTaskStatusMutation();
+  const [deleteDailyTask] = useDeleteDailyTaskMutation();
   const handleResetTaskStatus = () => {
     // dispatch(updateTask({ ...tasks, status: "ONGOING" }));
     updateDailyTaskName(tasks._id);
+  };
+  const removeCompletedTask = () => {
+    deleteDailyTask(tasks._id);
   };
   return (
     <>
@@ -26,6 +34,9 @@ const ShowCompletedTasks: FC<propTypes> = ({ tasks, index, arrLength }) => {
           {tasks.taskName}
         </p>
         <div>
+          <IconButton onClick={removeCompletedTask}>
+            <DeleteOutlineIcon className="text-gray-500 hover:text-red-700" />
+          </IconButton>
           <IconButton onClick={handleResetTaskStatus}>
             <HighlightOffIcon className="text-gray-500 hover:text-red-700" />
           </IconButton>

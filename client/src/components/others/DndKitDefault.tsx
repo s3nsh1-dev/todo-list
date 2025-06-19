@@ -15,21 +15,23 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import type { YearlyGoalType } from "../../constants/commonInterfaces";
-import { reInitializeYearlyGoals } from "../../redux/slices/model/yearlyGoalsSlice";
-import { useDispatch } from "react-redux";
 
 interface propTypes {
   children: React.ReactNode;
-  memoizedGoals: YearlyGoalType[];
-  completedGoals: YearlyGoalType[];
+  ongoingTasks: YearlyGoalType[];
+  onReorder: ({ orderedTasks }: { orderedTasks: GG[] }) => void;
 }
+
+type GG = {
+  _id: string;
+  order: number;
+};
 
 const DndKitDefault: React.FC<propTypes> = ({
   children,
-  memoizedGoals,
-  completedGoals,
+  ongoingTasks,
+  onReorder, // <-- receive the prop
 }) => {
-  const dispatch = useDispatch();
   const sensor = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -45,27 +47,27 @@ const DndKitDefault: React.FC<propTypes> = ({
         const { active, over } = e;
         if (!over) return;
         if (active.id === over.id) return;
-        const originalIndex = memoizedGoals.findIndex(
+        const draggedIndex = ongoingTasks.findIndex(
           (goal) => goal._id === active.id
         );
-        const newIndex = memoizedGoals.findIndex(
+        const droppedIndex = ongoingTasks.findIndex(
           (goal) => goal._id === over.id
         );
-        const newlyUpdatedYearlyGoalWithIndex = arrayMove(
-          memoizedGoals,
-          originalIndex,
-          newIndex
+        const reorderedTasks = arrayMove(
+          ongoingTasks,
+          draggedIndex,
+          droppedIndex
         );
-        dispatch(
-          reInitializeYearlyGoals([
-            ...newlyUpdatedYearlyGoalWithIndex,
-            ...completedGoals,
-          ])
-        );
+        const orderedTasks = reorderedTasks.map((task, index) => ({
+          _id: task._id,
+          order: index,
+        }));
+        console.log("Year reordering", orderedTasks);
+        onReorder({ orderedTasks });
       }}
     >
       <SortableContext
-        items={memoizedGoals.map((goal) => goal._id)}
+        items={ongoingTasks.map((goal) => goal._id)}
         strategy={verticalListSortingStrategy}
       >
         {children}

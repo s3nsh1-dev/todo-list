@@ -1,18 +1,15 @@
-import { useMemo, useState, useRef } from "react";
-import { RootState } from "../../redux/store";
 import IntroToManagement from "../common/IntroToManagement";
 import CompletedContainer from "../common/CompletedContainer";
 import OngoingContainer from "../common/OngoingContainer";
 import CompletedDivision from "../common/CompletedDivision";
 import OngoingDivision from "../common/OngoingDivision";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  removeMonthlyGoal,
-  updateMonthlyGoalStatus,
-  editMonthlyGoal,
-  reInitializeMonthlyGoals,
-} from "../../redux/slices/model/monthlyGoalsSlice";
-import ShowEditModal from "../common/ShowEditModal";
+  useFetchMonthlyTasksQuery,
+  useDeleteMonthlyTaskMutation,
+  useReorderMonthlyTasksMutation,
+  useUpdateMonthlyTaskStatusMutation,
+  useUpdateMonthlyTaskNameMutation,
+} from "../../redux/thunks/modelAPI/task/monthlyTaskAPI";
 import { monthlyContent as content } from "../../constants/GenericConstants";
 import {
   closestCorners,
@@ -23,7 +20,6 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
@@ -31,51 +27,49 @@ import {
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 
 const MonthlyBody = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [userValue, setUserValue] = useState<string>("");
-  const editData = useRef<{ id: string; oldName: string }>({
-    id: "",
-    oldName: "",
-  });
-
-  const weeklyGoalState = useSelector(
-    (state: RootState) => state.monthlyGoals.monthlyGoalsList
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
   );
+  const [deleteMonthlyTask] = useDeleteMonthlyTaskMutation();
+  const [reorderMonthlyTasks] = useReorderMonthlyTasksMutation();
+  const [updateMonthlyTaskStatus] = useUpdateMonthlyTaskStatusMutation();
+  const [updateMonthlyTaskName] = useUpdateMonthlyTaskNameMutation();
+  const { data, error, isLoading } = useFetchMonthlyTasksQuery();
+  if (!data) return <div>....Corrupted Data</div>;
+  if (error) return <div>Server Error</div>;
+  if (isLoading) return <div>....Loading</div>;
+
+  const weeklyGoalState = data.body || [];
 
   //these will reduce the possibility or re-render when there is not change in global status but in local states
-  const ongoingWGoals = useMemo(() => {
-    return [...weeklyGoalState].filter((goal) => goal.status === "ONGOING");
-  }, [weeklyGoalState]);
-
+  const ongoingWGoals = [...weeklyGoalState].filter(
+    (goal) => goal.status === "ONGOING"
+  );
   // The cached array does not need manual updates because updating the global state will automatically recreate it
   // hence manual update will be meaning less
-  const completedWGoals = useMemo(() => {
-    return [...weeklyGoalState].filter((goal) => goal.status === "DONE");
-  }, [weeklyGoalState]);
+  const completedWGoals = [...weeklyGoalState].filter(
+    (goal) => goal.status === "DONE"
+  );
 
-  const dispatch = useDispatch();
-
-  const handleStatusUpdate = (value: string) => {
-    dispatch(updateMonthlyGoalStatus(value));
+  const handleStatusUpdate = (_id: string) => {
+    updateMonthlyTaskStatus(_id);
   };
 
-  const handleDeleteGoal = (value: string) => {
-    dispatch(removeMonthlyGoal(value));
+  const handleDeleteGoal = (_id: string) => {
+    deleteMonthlyTask(_id);
   };
 
-  const handleEditWGoal = ({ id, name }: { id: string; name: string }) => {
-    editData.current.id = id;
-    editData.current.oldName = name;
-    toggleModal();
-  };
-
-  const toggleModal = () => {
-    setOpen((open) => !open);
-  };
-
-  const handleSubmit = () => {
-    dispatch(editMonthlyGoal({ id: editData.current.id, name: userValue }));
-    toggleModal();
+  const handleEdittedMontlyGoalName = ({
+    _id,
+    newName,
+  }: {
+    _id: string;
+    newName: string;
+  }) => {
+    updateMonthlyTaskName({ _id, newName });
   };
 
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
@@ -100,22 +94,18 @@ const MonthlyBody = () => {
         index={index}
         arrLength={ongoingWGoals.length}
         handleStatus={handleStatusUpdate}
-        handleEditGoal={handleEditWGoal}
+        handleEditGoal={handleEdittedMontlyGoalName}
       />
     );
   });
 
-  const isDisabled = userValue.length > 1 ? false : true;
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
   return (
     <>
-      <IntroToManagement heading="Introduction" content={content} />
+      <IntroToManagement
+        heading="Monthly Tasks"
+        content={content}
+        color="text-red-400"
+      />
       <CompletedContainer heading="Completed Goals">
         {renderCompletedWTasks}
       </CompletedContainer>
@@ -135,14 +125,18 @@ const MonthlyBody = () => {
           const newIndex = ongoingWGoals.findIndex(
             (goal) => goal._id === over.id
           );
-          const updatedGoals = arrayMove(
-            ongoingWGoals,
-            originalIndex,
-            newIndex
-          );
-          dispatch(
-            reInitializeMonthlyGoals([...updatedGoals, ...completedWGoals])
-          );
+
+          // Create optimistic update
+          if (originalIndex === -1 || newIndex === -1) return;
+          const reorderedTasks = [...ongoingWGoals];
+          const [movedTask] = reorderedTasks.splice(originalIndex, 1);
+          reorderedTasks.splice(newIndex, 0, movedTask);
+
+          const orderedTasks = reorderedTasks.map((task, index) => ({
+            _id: task._id,
+            order: index,
+          }));
+          reorderMonthlyTasks({ orderedTasks });
         }}
       >
         <SortableContext
@@ -154,17 +148,6 @@ const MonthlyBody = () => {
           </OngoingContainer>
         </SortableContext>
       </DndContext>
-      {open && (
-        <ShowEditModal
-          isDisabled={isDisabled}
-          submitEditedTask={handleSubmit}
-          userValue={userValue}
-          setUserValue={setUserValue}
-          open={open}
-          onClose={toggleModal}
-          placeholder={editData.current.oldName}
-        />
-      )}
     </>
   );
 };
