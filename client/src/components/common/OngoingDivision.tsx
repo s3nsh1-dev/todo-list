@@ -6,7 +6,6 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useUpdateWeeklyTaskNameMutation } from "../../redux/thunks/modelAPI/task/weeklyTaskAPI";
 import ShowEditModal from "./ShowEditModal";
 interface propTypes {
   id: string;
@@ -14,16 +13,17 @@ interface propTypes {
   index: number;
   arrLength: number;
   handleStatus: (value: string) => void;
+  handleEditGoal: ({ _id, newName }: { _id: string; newName: string }) => void;
 }
-
 const OngoingDivision: React.FC<propTypes> = ({
   id,
   name,
   index,
   arrLength,
   handleStatus,
+  handleEditGoal,
 }) => {
-  const [updateWeeklyTaskName] = useUpdateWeeklyTaskNameMutation();
+  // const [updateWeeklyTaskName] = useUpdateWeeklyTaskNameMutation();
   const [open, setOpen] = useState<boolean>(false);
   const [userValue, setUserValue] = useState<string>("");
   const isDisabled = userValue.length > 0 ? false : true;
@@ -42,7 +42,8 @@ const OngoingDivision: React.FC<propTypes> = ({
     touchAction: "none",
   };
   const submitEditedTask = () => {
-    updateWeeklyTaskName({ _id: id, newName: userValue });
+    handleEditGoal({ _id: id, newName: userValue });
+    // updateWeeklyTaskName();
     // dispatch(updateTask({ ...tasks, taskName: userValue }));
     onClose();
   };

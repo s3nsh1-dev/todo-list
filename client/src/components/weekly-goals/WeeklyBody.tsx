@@ -7,6 +7,7 @@ import {
   useDeleteWeeklyTaskMutation,
   useUpdateWeeklyTaskStatusMutation,
   useReorderWeeklyTasksMutation,
+  useUpdateWeeklyTaskNameMutation,
 } from "../../redux/thunks/modelAPI/task/weeklyTaskAPI";
 import { weeklyContent as content } from "../../constants/GenericConstants";
 import {
@@ -29,6 +30,8 @@ const WeeklyBody = () => {
   const [deleteWeeklyTask] = useDeleteWeeklyTaskMutation();
   const [reorderWeeklyTasks] = useReorderWeeklyTasksMutation();
   const [updateWeeklyTaskStatus] = useUpdateWeeklyTaskStatusMutation();
+  const [updateWeeklyTaskName] = useUpdateWeeklyTaskNameMutation();
+
   const { data, error, isLoading } = useFetchWeeklyTasksQuery();
   const sensor = useSensors(
     useSensor(PointerSensor),
@@ -60,6 +63,15 @@ const WeeklyBody = () => {
     deleteWeeklyTask(_id);
   };
 
+  const handleEdittedWeeklyGoalName = ({
+    _id,
+    newName,
+  }: {
+    _id: string;
+    newName: string;
+  }) => {
+    updateWeeklyTaskName({ _id, newName });
+  };
   console.log("this is weekly data", data.body);
 
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
@@ -84,6 +96,7 @@ const WeeklyBody = () => {
         index={index}
         arrLength={ongoingWGoals.length}
         handleStatus={handleStatusUpdate}
+        handleEditGoal={handleEdittedWeeklyGoalName}
       />
     );
   });
@@ -109,9 +122,9 @@ const WeeklyBody = () => {
           const newIndex = ongoingWGoals.findIndex(
             (goal) => goal._id === over.id
           );
-          if (originalIndex === -1 || newIndex === -1) return;
 
           // Create optimistic update
+          if (originalIndex === -1 || newIndex === -1) return;
           const reorderedTasks = [...ongoingWGoals];
           const [movedTask] = reorderedTasks.splice(originalIndex, 1);
           reorderedTasks.splice(newIndex, 0, movedTask);
@@ -120,7 +133,6 @@ const WeeklyBody = () => {
             _id: task._id,
             order: index,
           }));
-          console.log("OrderedTasks", orderedTasks);
           // Trigger the mutation with optimistic update
           reorderWeeklyTasks({ orderedTasks });
         }}
