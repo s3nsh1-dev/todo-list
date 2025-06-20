@@ -4,7 +4,8 @@
 
 ---
 
-`link: https://todolist-and-notes.netlify.app/weekly-goals`
+`link`: [https://todolist-and-notes.netlify.app/](https://todolist-and-notes.netlify.app/)
+
 
 ---
 
