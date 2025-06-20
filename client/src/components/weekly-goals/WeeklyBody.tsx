@@ -41,7 +41,7 @@ const WeeklyBody = () => {
   );
 
   if (!data) {
-    return <div>....Corrupted Request</div>;
+    return <div>....fetching data</div>;
   }
   if (error) return <div>We have error</div>;
   if (isLoading) return <div>....Loading</div>;

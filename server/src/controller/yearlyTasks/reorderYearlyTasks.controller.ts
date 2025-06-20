@@ -14,7 +14,6 @@ const reorderYearlyTasks: RequestHandler = async (
 ): Promise<void> => {
   try {
     const { orderedTasks } = req.body;
-    console.log("yearlyReorder:", orderedTasks);
 
     if (!orderedTasks || !Array.isArray(orderedTasks)) {
       res.status(422).json({ message: "Invalid or missing orderedTasks" });

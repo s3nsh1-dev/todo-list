@@ -5,7 +5,6 @@ const deleteTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const { _id }: { _id: string } = { ...req.body };
     if (!_id) {
-      console.log(_id);
       res.status(400).json({ message: "ID not found" });
       return;
     }

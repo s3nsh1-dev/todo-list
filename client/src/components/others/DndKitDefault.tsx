@@ -62,7 +62,6 @@ const DndKitDefault: React.FC<propTypes> = ({
           _id: task._id,
           order: index,
         }));
-        console.log("Year reordering", orderedTasks);
         onReorder({ orderedTasks });
       }}
     >

@@ -36,10 +36,6 @@ const DailyTaskManagement = () => {
     return <div>Do not have any task</div>;
   }
 
-  console.log("data:", data);
-  console.log("Array.isArray(data):", Array.isArray(data));
-  console.log("data:", data.message);
-
   const dailyTasksList = data?.body || taskDetails;
 
   const ongoingTasks = dailyTasksList.filter(
@@ -109,7 +105,7 @@ const DailyTaskManagement = () => {
               _id: task._id,
               order: index,
             }));
-            console.log("OrderedTasks", orderedTasks);
+
             // Trigger the mutation with optimistic update
             reorderDailyTasks({ orderedTasks });
           }}

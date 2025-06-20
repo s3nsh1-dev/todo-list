@@ -8,7 +8,6 @@ import IntroCard from "../components/homepage/IntroCard";
 
 const Homepage = () => {
   const { intoFlag, setIntoFlag } = useGlobalContext();
-  console.log("intoFlag", intoFlag);
   const renderRouteButtons: React.ReactNode[] = RouteButtonProperties.map(
     (buttons) => {
       return (

@@ -20,7 +20,7 @@ const YearlyBody = () => {
   const [updateYearlyTaskStatus] = useUpdateYearlyTaskStatusMutation();
   const [reorderYearlyTasks] = useReorderYearlyTasksMutation();
 
-  if (!data) return <div>....Corrupted Data</div>;
+  if (!data) return <div>....fetching Data</div>;
   if (error) return <div>Server Error</div>;
   if (isLoading) return <div>....Loading</div>;
 
