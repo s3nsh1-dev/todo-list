@@ -102,8 +102,9 @@ const MonthlyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Monthly Tasks"
+        heading="📅 Monthly Missions — Zoom Out, Level Up"
         content={content}
+        subContent="Think big. Plan better."
         color="text-red-400"
       />
       <CompletedContainer heading="Completed Goals">

@@ -16,10 +16,10 @@ export const day = new Date().toDateString().slice(0, 3);
 export const todayDate = `${day}, ${date}`;
 
 export const weeklyContent =
-  "Plan your week with clear objectives and ignite your progress. You can easily add, update, remove, and change the status of your weekly goals. Embrace each week as a fresh start to achieve more and shine brightly.";
+  "📅 Weekly Planner — Organize, Prioritize, and Conquer! \nEvery week is a fresh chapter. Add 📝, update ✏️, delete ❌, and drag & drop 🔀 your weekly goals to stay on track. Monitor your progress through clear success ✅ and failure ❌ indicators. Powered by Express ⚡ and MongoDB 🍃 — plan smart, shine brighter.";
 
 export const monthlyContent =
-  "Chart your monthly targets and take confident steps toward success. With options to add, update, remove, and adjust your goals, every month offers a new opportunity for growth. May your journey bring you closer to your dreams!";
+  "🗓️ Monthly Goals — Reflect, Plan, and Achieve! \nSet meaningful monthly goals that matter. Whether you're adding 📝 new objectives, updating ✏️ them, removing ❌ what no longer serves, or reordering 🔁 priorities — this feature has your back. With status tracking ✅❌ and a robust backend, success is only a plan away.";
 
 export const yearlyContent =
-  "Set your yearly resolution and let your ambitions soar. Here, you can add, update, remove, and toggle the status of your goals. No matter the challenge, we wish you a prosperous year that unlocks your full potential. Best of luck!";
+  "📆 Yearly Vision — Dream Big, Stay Focused! \nMap out your resolutions and long-term goals for the year. Add 📝 new milestones, update ✏️ your aims, remove ❌ finished ones, and reorder 🔁 when priorities shift. With real-time progress tracking ✅❌ and full stack power ⚡🍃 behind the scenes, make this year count!";

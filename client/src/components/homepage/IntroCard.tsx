@@ -21,7 +21,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
     {
       title: `Welcome to `,
       content:
-        "Your simple, efficient task manager that helps you stay organized and productive.",
+        "Stay Organized, Be Productive. One Stop Solution for high performance",
       icon: (
         <CheckCircleOutlineIcon
           fontSize="large"
@@ -31,8 +31,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
     },
     {
       title: "Manage Your Tasks",
-      content:
-        "Create, organize, and complete tasks with ease. Set priorities and deadlines to stay on track.",
+      content: "Plan it. Drag it. Complete it. Repeat. Go Tiger",
       icon: (
         <FormatListBulletedIcon
           fontSize="large"
@@ -43,7 +42,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
     {
       title: "Take Notes",
       content:
-        "Capture your thoughts and ideas quickly with our integrated notes feature.",
+        "Capture your thoughts and ideas quickly and keep it close to you.  ",
       icon: (
         <StickyNote2Icon fontSize="large" sx={{ color: "#ff9800", mb: 2 }} />
       ),
