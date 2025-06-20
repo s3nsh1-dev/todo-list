@@ -72,7 +72,6 @@ const WeeklyBody = () => {
   }) => {
     updateWeeklyTaskName({ _id, newName });
   };
-  console.log("this is weekly data", data.body);
 
   const renderCompletedWTasks = completedWGoals.map((goal, index) => {
     return (
