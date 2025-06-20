@@ -3,7 +3,9 @@
 **ToDo...?** is a clean, intuitive task management app built to help you stay focused and organized. Whether it’s your daily to-dos or long-term goals, this app helps you break tasks into **Daily**, **Weekly**, **Monthly**, and **Yearly** segments — giving structure to your personal productivity system. 
 
 ---
-link:https://todolist-and-notes.netlify.app/weekly-goals
+
+`link: https://todolist-and-notes.netlify.app/weekly-goals`
+
 ---
 
 ## 📸 Preview
