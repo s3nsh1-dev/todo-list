@@ -9,9 +9,11 @@ interface newType {
   body: weeklyGoalsListType[];
 }
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const weeklyTaskApi = createApi({
   reducerPath: "WeeklyTaskApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/weekly" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/weekly` }),
   tagTypes: ["WeeklyTask"],
   endpoints: (builder) => ({
     fetchWeeklyTasks: builder.query<newType, void>({

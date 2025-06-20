@@ -9,9 +9,11 @@ interface newType {
   body: taskDetailsType[];
 }
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const dailyTaskApi = createApi({
   reducerPath: "dailyTaskApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/daily" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/daily` }),
   tagTypes: ["DailyTask"],
   endpoints: (builder) => ({
     fetchDailyTasks: builder.query<newType, void>({

@@ -9,9 +9,11 @@ interface newType {
   body: YearlyGoalType[];
 }
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const yearlyTaskApi = createApi({
   reducerPath: "YearlyTaskApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/yearly" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/yearly` }),
   tagTypes: ["YearlyTask"],
   endpoints: (builder) => ({
     fetchYearlyTask: builder.query<newType, void>({

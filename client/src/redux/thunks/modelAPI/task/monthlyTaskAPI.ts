@@ -9,9 +9,13 @@ interface newType {
   body: monthlyGoalsListType[];
 }
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const monthlyTaskApi = createApi({
   reducerPath: "monthlyTaskApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/monthly" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${BASE_URL}/api/monthly`,
+  }),
   tagTypes: ["MonthlyTask"],
   endpoints: (builder) => ({
     fetchMonthlyTasks: builder.query<newType, void>({
