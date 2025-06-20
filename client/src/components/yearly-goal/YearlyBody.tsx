@@ -79,8 +79,9 @@ const YearlyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Yearly Goals"
+        heading="🌟 Yearly Vision — One Year, Unlimited Growth"
         content={content}
+        subContent="Dream far. Track smart."
         color="text-green-400"
       />
       <CompletedContainer heading="Completed">

@@ -103,7 +103,8 @@ const WeeklyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Weekly Tasks"
+        heading="✅ Weekly Tasks — Organize Your Week, One Goal at a Time"
+        subContent="Set your weekly game plan and stay agile."
         content={content}
         color="text-amber-200"
       />

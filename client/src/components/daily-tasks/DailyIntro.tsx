@@ -1,12 +1,20 @@
 const DailyIntro = () => {
   return (
     <article id="daily-tasks-info" className="text-blue-300">
-      <h1 className="font-bold text-2xl">Daily Tasks</h1>
+      <h1 className="font-bold text-3xl">
+        🗓️ Daily Tasks — Master Your Day, Every Day
+      </h1>
       <p className="text-justify">
-        Use the Daily Tasks feature to manage your to-dos effortlessly. Add a
-        new task with a unique ID, update its name when needed, or remove it by
-        its ID. The app automatically tracks your task outcomes (SUCCESS or
-        FAILED) so you can review your daily performance.
+        <p
+          className="text-orange-300 font-bold font-mono"
+          style={{ margin: "7px 0px" }}
+        >
+          Plan it. Drag it. Complete it. Repeat.
+        </p>
+        Create 📝, update ✏️, delete ❌, and drag & drop 🔀 your tasks with
+        ease. Track your progress with auto-marked results ✅ and make every day
+        a win. Powered by Express ⚡ and MongoDB 🍃 for smooth, real-time
+        action.
       </p>
     </article>
   );
