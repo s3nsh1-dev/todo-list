@@ -23,7 +23,7 @@ export type weeklyGoalsListType = {
 export interface monthlyGoalsListType {
   GoalName: string;
   status: "ONGOING" | "DONE";
-  order: 0;
+  order: number;
 }
 export interface monthlyHistoryType {
   MonthlyName: string;
