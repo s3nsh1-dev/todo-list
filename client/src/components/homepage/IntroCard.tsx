@@ -31,7 +31,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
     },
     {
       title: "Manage Your Tasks",
-      content: "Plan it. Drag it. Complete it. Repeat. Go Tiger",
+      content: "Drag your tasks. Drop your doubts. Conquer your day. Repeat with pride. 🎯🐅",
       icon: (
         <FormatListBulletedIcon
           fontSize="large"
