@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import RedirectToHome from "../others/RedirectToHome";
+import ThemeToggle from "../common/ThemeToggle";
 
 interface propTypes {
   open: boolean;
@@ -8,12 +9,14 @@ interface propTypes {
 
 const NotesHeader: React.FC<propTypes> = ({ open, toggleNotes }) => {
   return (
-    <div
-      className="flex justify-between"
-      style={{ marginBottom: "10px", marginTop: "5px" }}
-    >
-      <h1 className="font-bold flex items-center text-2xl">Notes</h1>
-      <div className="flex gap-2">
+    <div className="module-toolbar" style={{ marginBottom: "10px", marginTop: "5px" }}>
+      <div>
+        <p className="module-toolbar-eyebrow">Knowledge Capture</p>
+        <h1 className="module-toolbar-title">Notes</h1>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
         <RedirectToHome />
         <Button
           variant={open ? "contained" : "outlined"}

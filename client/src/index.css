@@ -1,6 +1,22 @@
 @import "tailwindcss";
 
 :root {
+  --bg: #090f1d;
+  --bg-soft: #0f1729;
+  --card: #111b31;
+  --card-soft: #15213a;
+  --border: #253353;
+  --text: #e5edff;
+  --muted: #9caecc;
+  --accent: #5d8fff;
+  --accent-hover: #4a7ded;
+  --shadow-sm: 0 5px 16px rgba(3, 9, 20, 0.35);
+  --shadow-md: 0 20px 48px rgba(3, 9, 20, 0.45);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+}
+
+[data-theme="light"] {
   --bg: #f3f5f9;
   --bg-soft: #edf1f8;
   --card: #ffffff;
@@ -12,8 +28,6 @@
   --accent-hover: #1d4ed8;
   --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.07);
   --shadow-md: 0 18px 44px rgba(15, 23, 42, 0.14);
-  --radius-lg: 18px;
-  --radius-md: 12px;
 }
 
 * {
@@ -323,13 +337,29 @@ a {
 }
 
 .task-section-badge-ongoing {
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: color-mix(in oklab, var(--accent) 30%, transparent);
+  color: var(--text);
 }
 
 .task-section-badge-completed {
-  background: #e2e8f0;
-  color: #334155;
+  background: color-mix(in oklab, var(--muted) 35%, transparent);
+  color: var(--text);
+}
+
+.home-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--card-soft);
+}
+
+.theme-toggle:hover {
+  background: color-mix(in oklab, var(--accent) 16%, var(--card-soft));
 }
 
 @media (max-width: 992px) {

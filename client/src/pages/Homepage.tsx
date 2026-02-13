@@ -5,6 +5,7 @@ import ToDoHeading from "../components/others/ToDoHeading";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Modal from "@mui/material/Modal";
 import IntroCard from "../components/homepage/IntroCard";
+import ThemeToggle from "../components/common/ThemeToggle";
 
 const Homepage = () => {
   const { intoFlag, setIntoFlag } = useGlobalContext();
@@ -30,7 +31,11 @@ const Homepage = () => {
     <>
       <div className="home-layout">
         <header className="home-header">
-          <p className="home-badge">Personal Productivity Suite</p>
+          <div className="home-header-top">
+            <p className="home-badge">Personal Productivity Suite</p>
+            <ThemeToggle />
+          </div>
+
           <h1>
             <ToDoHeading />
           </h1>

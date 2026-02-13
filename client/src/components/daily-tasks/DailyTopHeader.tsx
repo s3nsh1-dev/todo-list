@@ -8,6 +8,7 @@ import AddTaskModal from "./AddTaskModal";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import DailyTaskHistoryModal from "./DailyTaskHistoryModal";
+import ThemeToggle from "../common/ThemeToggle";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -50,6 +51,7 @@ const DailyTopHeader = () => {
         </div>
 
         <div className="flex items-center gap-1">
+          <ThemeToggle />
           <Link to="/">
             <IconButton aria-label="edit-daily-tasks">
               <HomeIcon sx={{ color: "var(--accent)" }} />
