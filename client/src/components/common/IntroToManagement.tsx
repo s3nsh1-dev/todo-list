@@ -14,12 +14,10 @@ const IntroToManagement: React.FC<propTypes> = ({
   subContent,
 }) => {
   return (
-    <section className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</h1>
-      <p className={`mt-3 text-sm font-semibold ${color}`}>{subContent}</p>
-      <p className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-600 sm:text-base">
-        {content}
-      </p>
+    <section className="module-intro-card">
+      <h1>{heading}</h1>
+      <p className={`module-intro-highlight ${color}`}>{subContent}</p>
+      <p>{content}</p>
     </section>
   );
 };

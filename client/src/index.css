@@ -209,6 +209,63 @@ a {
   box-shadow: var(--shadow-md);
 }
 
+.module-toolbar {
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.module-toolbar-eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.module-toolbar-title {
+  margin: 2px 0 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.module-intro,
+.module-intro-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+
+.module-intro h1,
+.module-intro-card h1 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.015em;
+}
+
+.module-intro-highlight {
+  margin: 8px 0 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.module-intro p,
+.module-intro-card p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
 @media (max-width: 992px) {
   .home-surface {
     grid-template-columns: 1fr;

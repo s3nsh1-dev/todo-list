@@ -10,16 +10,15 @@ export const colorPalette: paletteType[] = [
   { id: "fourth", color: "text-green-600" },
 ];
 
-// Current Date and Day
-export const date = new Date().toDateString().slice(4, 15).split(" ").join(".");
-export const day = new Date().toDateString().slice(0, 3);
+const date = new Date().toDateString().slice(4, 15).split(" ").join(".");
+const day = new Date().toDateString().slice(0, 3);
 export const todayDate = `${day}, ${date}`;
 
 export const weeklyContent =
-  "📅 Weekly Planner — Organize, Prioritize, and Conquer! \nEvery week is a fresh chapter. Add 📝, update ✏️, delete ❌, and drag & drop 🔀 your weekly goals to stay on track. Monitor your progress through clear success ✅ and failure ❌ indicators. Powered by Express ⚡ and MongoDB 🍃 — plan smart, shine brighter.";
+  "Plan weekly priorities, maintain alignment, and monitor progress throughout the week. Keep active goals visible, update scope when needed, and close completed outcomes with confidence.";
 
 export const monthlyContent =
-  "🗓️ Monthly Goals — Reflect, Plan, and Achieve! \nSet meaningful monthly goals that matter. Whether you're adding 📝 new objectives, updating ✏️ them, removing ❌ what no longer serves, or reordering 🔁 priorities — this feature has your back. With status tracking ✅❌ and a robust backend, success is only a plan away.";
+  "Track monthly objectives with a broader view of execution. Use this module to sequence key initiatives, maintain momentum, and measure completion across the month.";
 
 export const yearlyContent =
-  "📆 Yearly Vision — Dream Big, Stay Focused! \nMap out your resolutions and long-term goals for the year. Add 📝 new milestones, update ✏️ your aims, remove ❌ finished ones, and reorder 🔁 when priorities shift. With real-time progress tracking ✅❌ and full stack power ⚡🍃 behind the scenes, make this year count!";
+  "Define long-term objectives and manage strategic milestones over the year. Use this section to keep priorities organized, measurable, and consistently reviewed.";
