@@ -14,20 +14,13 @@ const IntroToManagement: React.FC<propTypes> = ({
   subContent,
 }) => {
   return (
-    <div className={color} style={{ margin: "3% 0px" }}>
-      <h1 className="text-3xl font-bold" style={{ marginBottom: "10px" }}>
-        {heading}
-      </h1>
-      <p className="text-justify">
-        <p
-          className="font-bold text-orange-300 font-mono"
-          style={{ margin: "7px 0px" }}
-        >
-          {subContent}
-        </p>
+    <section className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{heading}</h1>
+      <p className={`mt-3 text-sm font-semibold ${color}`}>{subContent}</p>
+      <p className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-600 sm:text-base">
         {content}
       </p>
-    </div>
+    </section>
   );
 };
 

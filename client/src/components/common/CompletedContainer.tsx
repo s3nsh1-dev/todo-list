@@ -5,15 +5,10 @@ interface propTypes {
 
 const CompletedContainer: React.FC<propTypes> = ({ heading, children }) => {
   return (
-    <div style={{ margin: "10px 0px" }}>
-      <h1
-        className="text-2xl font-bold text-gray-400"
-        style={{ padding: "5px 0px" }}
-      >
-        {heading}
-      </h1>
-      <div>{children}</div>
-    </div>
+    <section className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+      <h2 className="mb-2 text-xl font-bold text-slate-700">{heading}</h2>
+      <div className="divide-y divide-slate-200">{children}</div>
+    </section>
   );
 };
 
