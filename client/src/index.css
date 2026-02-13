@@ -312,6 +312,27 @@ a {
   gap: 10px;
 }
 
+.module-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 0;
+}
+
+.module-toolbar-actions-goals {
+  padding-bottom: 4px;
+}
+
+.notes-toolbar-actions {
+  gap: 8px;
+}
+
+.notes-toolbar-button {
+  min-width: 98px;
+}
+
 .module-toolbar-eyebrow {
   margin: 0;
   font-size: 0.78rem;
@@ -734,6 +755,27 @@ a {
 
 .theme-toggle:hover {
   background: color-mix(in oklab, var(--accent) 16%, var(--card-soft));
+}
+
+@media (max-width: 760px) {
+  .module-toolbar {
+    align-items: flex-start;
+  }
+
+  .module-toolbar-actions {
+    width: 100%;
+    justify-content: flex-start;
+    row-gap: 8px;
+  }
+
+  .module-toolbar-actions-goals {
+    padding-bottom: 2px;
+  }
+
+  .notes-toolbar-actions .notes-toolbar-button {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+  }
 }
 
 @media (max-width: 992px) {

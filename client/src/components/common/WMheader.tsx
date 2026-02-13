@@ -23,7 +23,7 @@ const WMheader: React.FC<propTypes> = ({
         <h1 className="module-toolbar-title type-display-md">{dateInfo}</h1>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="module-toolbar-actions module-toolbar-actions-goals">
         <ThemeToggle />
         <RedirectToHome />
         <IconButton onClick={toggleHistory}>

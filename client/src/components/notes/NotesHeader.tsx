@@ -15,13 +15,14 @@ const NotesHeader: React.FC<propTypes> = ({ open, toggleNotes }) => {
         <h1 className="module-toolbar-title type-display-md">Notes</h1>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="module-toolbar-actions notes-toolbar-actions">
         <ThemeToggle />
         <RedirectToHome />
         <Button
           variant={open ? "contained" : "outlined"}
           onClick={toggleNotes}
           color="success"
+          className="notes-toolbar-button"
         >
           Create
         </Button>
@@ -29,6 +30,7 @@ const NotesHeader: React.FC<propTypes> = ({ open, toggleNotes }) => {
           variant={open ? "outlined" : "contained"}
           onClick={toggleNotes}
           color="secondary"
+          className="notes-toolbar-button"
         >
           Saved
         </Button>
