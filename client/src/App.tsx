@@ -10,18 +10,20 @@ import Test from "./Test/Test";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="*" element={<PageNotFound />} />
-        <Route path="/daily-tasks" element={<DailyTasks />} />
-        <Route path="/weekly-goals" element={<WeeklyGoals />} />
-        <Route path="/monthly-goals" element={<MonthlyGoals />} />
-        <Route path="/yearly-goals" element={<YearlyGoals />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/test" element={<Test />} />
-      </Routes>
-    </>
+    <div className="app-shell">
+      <div className="page-frame">
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="*" element={<PageNotFound />} />
+          <Route path="/daily-tasks" element={<DailyTasks />} />
+          <Route path="/weekly-goals" element={<WeeklyGoals />} />
+          <Route path="/monthly-goals" element={<MonthlyGoals />} />
+          <Route path="/yearly-goals" element={<YearlyGoals />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/test" element={<Test />} />
+        </Routes>
+      </div>
+    </div>
   );
 };
 

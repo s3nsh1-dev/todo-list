@@ -1,8 +1,5 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { hoverAnimation } from "../../constants/GenericConstants";
-
-const moreCss: string = `rounded-xl w-50 font-bold cursor-pointer`;
 
 interface tasksLinksPropsType {
   route: string;
@@ -10,15 +7,18 @@ interface tasksLinksPropsType {
   color: string;
 }
 
+const toneMap: Record<string, string> = {
+  "bg-blue-500": "home-route-daily",
+  "bg-yellow-500": "home-route-weekly",
+  "bg-red-500": "home-route-monthly",
+  "bg-green-600": "home-route-yearly",
+};
+
 const TasksLinks: React.FC<tasksLinksPropsType> = ({ route, text, color }) => {
   return (
-    <Link to={route}>
-      <div
-        className={`${color} ${moreCss} ${hoverAnimation}`}
-        style={{ padding: "0.5rem" }}
-      >
-        {text}
-      </div>
+    <Link to={route} className={`home-route-link ${toneMap[color]}`}>
+      <small>Open Module</small>
+      <p>{text}</p>
     </Link>
   );
 };

@@ -9,18 +9,20 @@ const ToDoHeading = () => {
       </span>
     );
   });
+
   const renderColorFullDots: React.ReactNode[] = colorPalette.map((color) => {
     return (
-      <span key={color.id} className={`${color.color}`}>
+      <span key={color.id} className="todo-heading-dot">
         .
       </span>
     );
   });
+
   return (
     <>
       {renderTodoLetters}
       {renderColorFullDots}
-      <span className="text-purple-500">?</span>
+      <span className="todo-heading-question">?</span>
     </>
   );
 };

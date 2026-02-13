@@ -8,6 +8,7 @@ import IntroCard from "../components/homepage/IntroCard";
 
 const Homepage = () => {
   const { intoFlag, setIntoFlag } = useGlobalContext();
+
   const renderRouteButtons: React.ReactNode[] = RouteButtonProperties.map(
     (buttons) => {
       return (
@@ -20,22 +21,30 @@ const Homepage = () => {
       );
     }
   );
+
   const handleCloseIntro = () => {
     setIntoFlag(false);
   };
+
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen gap-20">
-        <h1 className="font-bold text-5xl">
-          what <ToDoHeading />
-        </h1>
-        <div className="flex gap-3 text-center">
-          <div className="flex flex-col justify-center items-center gap-3">
-            {renderRouteButtons}
-          </div>
+      <div className="home-layout">
+        <section className="home-hero">
+          <h1>
+            Build your day with <ToDoHeading />
+          </h1>
+          <p>
+            A structured productivity workspace for daily execution and long-term
+            goals.
+          </p>
+        </section>
+
+        <section className="home-actions">
+          <div className="home-actions-grid">{renderRouteButtons}</div>
           <NotesLink />
-        </div>
+        </section>
       </div>
+
       {intoFlag && (
         <Modal open={intoFlag} onClose={handleCloseIntro}>
           <IntroCard onClose={handleCloseIntro} />
@@ -44,4 +53,5 @@ const Homepage = () => {
     </>
   );
 };
+
 export default Homepage;
