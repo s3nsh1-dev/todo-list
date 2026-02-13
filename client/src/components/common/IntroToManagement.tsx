@@ -14,7 +14,7 @@ const IntroToManagement: React.FC<propTypes> = ({
   subContent,
 }) => {
   return (
-    <section className="module-intro-card">
+    <section className="module-intro-card" style={{ marginBottom: "20px" }}>
       <h1 className="type-display-lg">{heading}</h1>
       <p className={`module-intro-highlight ${color}`}>{subContent}</p>
       <p className="type-body-md">{content}</p>
