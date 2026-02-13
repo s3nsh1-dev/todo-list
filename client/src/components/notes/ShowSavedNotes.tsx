@@ -4,25 +4,28 @@ import NotesCards from "./NotesCards";
 
 const ShowSavedNotes = () => {
   const data = useSelector((state: RootState) => state.notesArray);
+
   if (data.length === 0) {
     return (
-      <div className="flex flex-wrap justify-center gap-5">
-        <p className="font-bold text-2xl">No Notes Saved</p>
+      <div className="note-empty">
+        <p className="type-display-sm">No saved notes yet</p>
       </div>
     );
   }
-  const renderNotesCard = data.map((note) => {
-    return (
-      <NotesCards
-        key={note.id}
-        id={note.id}
-        title={note.title}
-        content={note.content}
-      />
-    );
-  });
+
   return (
-    <div className="flex flex-wrap justify-center gap-5">{renderNotesCard}</div>
+    <div className="note-grid">
+      {data.map((note) => {
+        return (
+          <NotesCards
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+          />
+        );
+      })}
+    </div>
   );
 };
 

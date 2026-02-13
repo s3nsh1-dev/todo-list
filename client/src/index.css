@@ -178,7 +178,11 @@ a {
   min-height: 132px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  background: var(--card);
+  background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--card) 92%, var(--accent)),
+      var(--card)
+    );
   box-shadow: var(--shadow-sm);
   padding: 16px;
   display: flex;
@@ -191,6 +195,17 @@ a {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: color-mix(in oklab, var(--accent) 28%, var(--border));
+}
+
+.home-route-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .home-route-link p {
@@ -227,7 +242,11 @@ a {
 .home-notes-link {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  background: var(--card-soft);
+  background: linear-gradient(
+    155deg,
+    var(--card-soft),
+    color-mix(in oklab, var(--card-soft) 80%, var(--accent))
+  );
   box-shadow: var(--shadow-sm);
   padding: 16px;
   display: flex;
@@ -444,6 +463,17 @@ a {
   padding: 20px;
 }
 
+.task-modal-shell {
+  border-radius: calc(var(--radius-lg) + 2px);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--card) 90%, var(--accent)),
+    var(--card)
+  );
+  box-shadow: var(--shadow-md);
+}
+
 .task-modal-input {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -455,6 +485,227 @@ a {
 
 .task-modal-input:focus {
   border-color: var(--accent);
+}
+
+.note-editor-card {
+  margin-top: 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--card) 92%, var(--accent)),
+    var(--card)
+  );
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.note-input-title {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-soft);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  outline: none;
+}
+
+.note-input-body {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--card-soft) 85%, var(--bg-soft));
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  outline: none;
+}
+
+.note-input-title:focus,
+.note-input-body:focus {
+  border-color: var(--accent);
+}
+
+.note-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.note-toolbar-right {
+  justify-content: flex-end;
+}
+
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.note-empty {
+  margin-top: 20px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.note-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--card) 90%, var(--accent)),
+      var(--card)
+    );
+  box-shadow: var(--shadow-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.note-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-card-content {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  color: var(--muted);
+  height: 104px;
+  overflow: hidden;
+}
+
+.note-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.note-modal-card {
+  border-radius: calc(var(--radius-lg) + 2px);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--card) 92%, var(--accent)),
+      var(--card)
+    );
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.note-modal-body {
+  min-height: 320px;
+  resize: vertical;
+}
+
+.history-card {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--card) 92%, var(--accent)),
+      var(--card)
+    );
+  box-shadow: var(--shadow-md);
+}
+
+.history-content-wrap {
+  margin-bottom: 28px;
+}
+
+.history-title {
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.history-scroll {
+  overflow-y: auto;
+  padding: 0 10px;
+  max-height: 30vh;
+}
+
+.history-row {
+  margin: 10px 0;
+}
+
+.history-row-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 5px 0;
+}
+
+.history-row-primary {
+  margin: 0;
+}
+
+.history-row-status {
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 0;
+}
+
+.task-form-content {
+  color: var(--text);
+}
+
+.task-form-title {
+  text-align: center;
+  margin: 0 0 4px;
+}
+
+.task-form-field-wrap {
+  margin-top: 16px;
+}
+
+.task-form-label {
+  margin: 0;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.task-form-input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin: 6px 0;
+  width: 100%;
+  background: var(--card-soft);
+  color: var(--text);
+}
+
+.task-form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.task-form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .home-header-top {

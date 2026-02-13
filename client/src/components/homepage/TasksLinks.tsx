@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 
 interface tasksLinksPropsType {
   route: string;
@@ -24,6 +25,10 @@ const subtitleMap: Record<string, string> = {
 const TasksLinks: React.FC<tasksLinksPropsType> = ({ route, text, color }) => {
   return (
     <Link to={route} className={`home-route-link ${toneMap[color]}`}>
+      <div className="home-route-topline">
+        <span>Open</span>
+        <ArrowOutwardRoundedIcon sx={{ fontSize: 16, color: "var(--muted)" }} />
+      </div>
       <p>{text}</p>
       <small>{subtitleMap[color]}</small>
     </Link>

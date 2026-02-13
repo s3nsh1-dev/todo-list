@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import { FC } from "react";
+
 type propsTypes = {
   isDisabled: boolean;
   handleSubmit: () => void;
@@ -16,10 +17,7 @@ const TaskCardActionButtons: FC<propsTypes> = ({
   enterLabel,
 }) => {
   return (
-    <div
-      id="add-dailyTask-actionButtons"
-      className="flex justify-center item-center gap-3"
-    >
+    <div id="add-dailyTask-actionButtons" className="task-form-actions">
       <Button color="error" variant="contained" onClick={handleClose}>
         {backLabel}
       </Button>

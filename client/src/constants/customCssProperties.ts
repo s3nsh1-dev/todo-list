@@ -37,7 +37,7 @@ export const notesPanelStyle: CSSProperties = {
   minWidth: "300px", // Minimum width on smallest screens
   borderRadius: "8px",
   padding: "20px",
-  backgroundColor: "#1f2937", // tailwind's gray-800 to match bg
+  backgroundColor: "var(--card)",
   zIndex: 1,
   display: "flex",
   flexDirection: "column",

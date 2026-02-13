@@ -14,25 +14,13 @@ const HistoryCard: React.FC<propTypes> = ({
   panelTitle,
 }) => {
   return (
-    <div className="bg-gray-800" style={historyPanelStyle}>
-      <div style={{ marginBottom: "50px" }}>
-        <div style={{ marginBottom: "30px" }}>
-          <h1
-            className="font-bold text-3xl text-center"
-            style={{ paddingBottom: "10px" }}
-          >
-            {panelTitle}
-          </h1>
-        </div>
-        <div
-          className="overflow-y-auto"
-          style={{ padding: "0px 10px", maxHeight: "30vh" }}
-        >
-          {children}
-        </div>
+    <div className="history-card" style={historyPanelStyle}>
+      <div className="history-content-wrap">
+        <h1 className="history-title type-display-lg">{panelTitle}</h1>
+        <div className="history-scroll">{children}</div>
       </div>
       <Button color="error" onClick={closingModal}>
-        CLOSE
+        Close
       </Button>
     </div>
   );

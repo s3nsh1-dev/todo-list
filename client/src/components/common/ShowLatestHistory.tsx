@@ -1,5 +1,6 @@
 import { DividerGray } from "../others/CommonComponents";
 import { FC } from "react";
+
 interface propTypes {
   primary: string;
   secondary: string;
@@ -7,6 +8,7 @@ interface propTypes {
   arrLength: number;
   color: string;
 }
+
 const ShowLatestHistory: FC<propTypes> = ({
   primary,
   secondary,
@@ -15,12 +17,10 @@ const ShowLatestHistory: FC<propTypes> = ({
   color,
 }) => {
   return (
-    <div className="" style={{ margin: "10px 0px" }}>
-      <div className="flex justify-between" style={{ margin: "5px 0px" }}>
-        <p className="font-bold">{primary}</p>
-        <div className={`${color} w-20 flex justify-center rounded`}>
-          {secondary}
-        </div>
+    <div className="history-row">
+      <div className="history-row-main">
+        <p className="type-body-md history-row-primary">{primary}</p>
+        <div className={`${color} history-row-status`}>{secondary}</div>
       </div>
       {index !== arrLength - 1 && <DividerGray />}
     </div>

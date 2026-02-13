@@ -26,7 +26,7 @@ const AddYearlyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
   };
 
   return (
-    <div className="bg-gray-800" style={addPanelStyle}>
+    <div className="task-modal-shell" style={addPanelStyle}>
       <TaskCardLabelContent
         heading="Add Yearly Goal"
         label="Goal Name"

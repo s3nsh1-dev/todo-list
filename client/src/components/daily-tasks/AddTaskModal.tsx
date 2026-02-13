@@ -21,7 +21,7 @@ const AddTaskModal: FC<propsTypes> = ({ closingModal }) => {
   };
 
   return (
-    <div className="bg-gray-800" style={addPanelStyle}>
+    <div className="task-modal-shell" style={addPanelStyle}>
       <TaskCardLabelContent
         userValue={userValue}
         setUserValue={setUserValue}
