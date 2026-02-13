@@ -29,17 +29,18 @@ const Homepage = () => {
   return (
     <>
       <div className="home-layout">
-        <section className="home-hero">
+        <header className="home-header">
+          <p className="home-badge">Personal Productivity Suite</p>
           <h1>
-            Build your day with <ToDoHeading />
+            <ToDoHeading />
           </h1>
           <p>
-            A structured productivity workspace for daily execution and long-term
-            goals.
+            Plan clearly across daily, weekly, monthly, and yearly horizons in
+            one focused workspace.
           </p>
-        </section>
+        </header>
 
-        <section className="home-actions">
+        <section className="home-surface">
           <div className="home-actions-grid">{renderRouteButtons}</div>
           <NotesLink />
         </section>

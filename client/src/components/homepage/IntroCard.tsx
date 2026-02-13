@@ -21,31 +21,31 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
     {
       title: "Welcome to ",
       content:
-        "Plan clearly, execute consistently, and review progress in one focused workspace.",
+        "Keep planning and execution in one reliable space with clean workflows.",
       icon: (
         <CheckCircleOutlineIcon
           fontSize="large"
-          sx={{ color: "#42b883", mb: 2 }}
+          sx={{ color: "#4f8ef8", mb: 2 }}
         />
       ),
     },
     {
-      title: "Manage Your Tasks",
+      title: "Task Management",
       content:
-        "Organize goals by timeline, reorder priorities, and keep momentum every day.",
+        "Organize tasks by timeline, update priorities, and track completion with clarity.",
       icon: (
         <FormatListBulletedIcon
           fontSize="large"
-          sx={{ color: "#54a6ff", mb: 2 }}
+          sx={{ color: "#2f9d74", mb: 2 }}
         />
       ),
     },
     {
-      title: "Capture Notes",
+      title: "Notes",
       content:
-        "Save quick ideas and context so decisions stay close to your tasks.",
+        "Store contextual notes and keep important details close to your work.",
       icon: (
-        <StickyNote2Icon fontSize="large" sx={{ color: "#ffc061", mb: 2 }} />
+        <StickyNote2Icon fontSize="large" sx={{ color: "#d09028", mb: 2 }} />
       ),
     },
   ];
@@ -77,7 +77,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
           position: "absolute",
           right: 10,
           top: 10,
-          color: "#91a3c5",
+          color: "var(--muted)",
         }}
       >
         <CloseIcon />
@@ -95,7 +95,7 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
           {steps[currentStep].title}
           {currentStep === 0 ? <ToDoHeading /> : ""}
         </Typography>
-        <Typography variant="body1" mb={4} sx={{ color: "#d6def1" }}>
+        <Typography variant="body1" mb={4} sx={{ color: "var(--muted)" }}>
           {steps[currentStep].content}
         </Typography>
 
@@ -108,7 +108,9 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
                 height: 8,
                 borderRadius: "50%",
                 backgroundColor:
-                  index === currentStep ? "#5f9dff" : "rgba(255,255,255,0.25)",
+                  index === currentStep
+                    ? "var(--accent)"
+                    : "color-mix(in oklab, var(--muted) 35%, transparent)",
               }}
             />
           ))}
@@ -122,8 +124,8 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
           sx={{
             textTransform: "none",
             fontWeight: 700,
-            bgcolor: "#1b6ef3",
-            "&:hover": { bgcolor: "#1258cc" },
+            bgcolor: "var(--accent)",
+            "&:hover": { bgcolor: "var(--accent-hover)" },
           }}
         >
           {currentStep < steps.length - 1 ? "Next" : "Get Started"}
