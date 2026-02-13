@@ -18,7 +18,7 @@ const WMheader: React.FC<propTypes> = ({
 }) => {
   return (
     <div className="module-toolbar">
-      <div>
+      <div className="module-toolbar-heading module-toolbar-heading-goals">
         <p className="module-toolbar-eyebrow">Goals Dashboard</p>
         <h1 className="module-toolbar-title type-display-md">{dateInfo}</h1>
       </div>

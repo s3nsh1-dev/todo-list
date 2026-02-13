@@ -312,6 +312,15 @@ a {
   gap: 10px;
 }
 
+.module-toolbar-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.module-toolbar-heading-goals {
+  padding-bottom: 8px;
+}
+
 .module-toolbar-actions {
   display: flex;
   align-items: center;
@@ -322,7 +331,7 @@ a {
 }
 
 .module-toolbar-actions-goals {
-  padding-bottom: 4px;
+  padding-bottom: 0;
 }
 
 .notes-toolbar-actions {
@@ -760,6 +769,10 @@ a {
 @media (max-width: 760px) {
   .module-toolbar {
     align-items: flex-start;
+  }
+
+  .module-toolbar-heading-goals {
+    padding-bottom: 6px;
   }
 
   .module-toolbar-actions {
