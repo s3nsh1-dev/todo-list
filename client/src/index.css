@@ -12,8 +12,8 @@
   --accent-hover: #4a7ded;
   --shadow-sm: 0 5px 16px rgba(3, 9, 20, 0.35);
   --shadow-md: 0 20px 48px rgba(3, 9, 20, 0.45);
-  --radius-lg: 18px;
-  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
 }
 
 [data-theme="light"] {
@@ -227,7 +227,7 @@ a {
 
 .home-intro-card {
   width: min(92vw, 460px);
-  border-radius: calc(var(--radius-lg) + 4px);
+  border-radius: calc(var(--radius-lg) + 2px);
   background: var(--card);
   color: var(--text);
   border: 1px solid var(--border);
@@ -397,7 +397,7 @@ a {
   left: 50%;
   width: min(92vw, 460px);
   transform: translate(-50%, -50%);
-  border-radius: calc(var(--radius-lg) + 4px);
+  border-radius: calc(var(--radius-lg) + 2px);
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: var(--shadow-md);
