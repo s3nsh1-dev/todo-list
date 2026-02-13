@@ -1,11 +1,9 @@
 const DailyIntro = () => {
   return (
     <article id="daily-tasks-info" className="module-intro">
-      <h1>Daily Operations</h1>
-      <p className="module-intro-highlight">
-        Focus on what must be completed today.
-      </p>
-      <p>
+      <h1 className="type-display-lg">Daily Operations</h1>
+      <p className="module-intro-highlight">Focus on what must be completed today.</p>
+      <p className="type-body-md">
         Add, update, reorder, and complete tasks with a clear operational view.
         Use this section to maintain execution consistency and close priorities
         on time.

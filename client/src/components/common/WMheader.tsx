@@ -20,7 +20,7 @@ const WMheader: React.FC<propTypes> = ({
     <div className="module-toolbar">
       <div>
         <p className="module-toolbar-eyebrow">Goals Dashboard</p>
-        <h1 className="module-toolbar-title">{dateInfo}</h1>
+        <h1 className="module-toolbar-title type-display-md">{dateInfo}</h1>
       </div>
 
       <div className="flex items-center gap-1">

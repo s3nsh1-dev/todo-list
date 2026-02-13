@@ -12,7 +12,7 @@ const NotesHeader: React.FC<propTypes> = ({ open, toggleNotes }) => {
     <div className="module-toolbar" style={{ marginBottom: "10px", marginTop: "5px" }}>
       <div>
         <p className="module-toolbar-eyebrow">Knowledge Capture</p>
-        <h1 className="module-toolbar-title">Notes</h1>
+        <h1 className="module-toolbar-title type-display-md">Notes</h1>
       </div>
 
       <div className="flex items-center gap-2">

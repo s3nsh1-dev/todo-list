@@ -25,8 +25,8 @@ const TaskBoardShell: React.FC<TaskBoardShellProps> = ({
   if (showLoadingState) {
     return (
       <div className="task-status-card">
-        <h3>Loading</h3>
-        <p>{loadingMessage}</p>
+        <h3 className="type-display-sm">Loading</h3>
+        <p className="type-body-md">{loadingMessage}</p>
       </div>
     );
   }
@@ -34,8 +34,8 @@ const TaskBoardShell: React.FC<TaskBoardShellProps> = ({
   if (showErrorState) {
     return (
       <div className="task-status-card task-status-error">
-        <h3>Service Unavailable</h3>
-        <p>{errorMessage}</p>
+        <h3 className="type-display-sm">Service Unavailable</h3>
+        <p className="type-body-md">{errorMessage}</p>
       </div>
     );
   }
@@ -43,8 +43,8 @@ const TaskBoardShell: React.FC<TaskBoardShellProps> = ({
   if (!hasTasks) {
     return (
       <div className="task-status-card task-status-empty">
-        <h3>No Records</h3>
-        <p>{emptyMessage}</p>
+        <h3 className="type-display-sm">No Records</h3>
+        <p className="type-body-md">{emptyMessage}</p>
       </div>
     );
   }

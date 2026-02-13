@@ -36,10 +36,10 @@ const Homepage = () => {
             <ThemeToggle />
           </div>
 
-          <h1>
+          <h1 className="type-display-hero">
             <ToDoHeading />
           </h1>
-          <p>
+          <p className="type-body-lg">
             Plan clearly across daily, weekly, monthly, and yearly horizons in
             one focused workspace.
           </p>

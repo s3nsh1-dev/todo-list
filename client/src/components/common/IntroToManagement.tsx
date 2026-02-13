@@ -15,9 +15,9 @@ const IntroToManagement: React.FC<propTypes> = ({
 }) => {
   return (
     <section className="module-intro-card">
-      <h1>{heading}</h1>
+      <h1 className="type-display-lg">{heading}</h1>
       <p className={`module-intro-highlight ${color}`}>{subContent}</p>
-      <p>{content}</p>
+      <p className="type-body-md">{content}</p>
     </section>
   );
 };

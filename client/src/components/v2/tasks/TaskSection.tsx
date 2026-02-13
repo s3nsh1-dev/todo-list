@@ -24,7 +24,7 @@ const TaskSection: React.FC<TaskSectionProps> = ({
   return (
     <section className={toneClasses[tone]}>
       <header className="mb-3 flex items-center justify-between">
-        <h2 className="text-xl font-bold">{heading}</h2>
+        <h2 className="type-display-sm">{heading}</h2>
         <span className={badgeClasses[tone]}>{count}</span>
       </header>
       <div className="divide-y divide-slate-300/40">{children}</div>
