@@ -30,17 +30,19 @@ const YearlyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Yearly Vision"
+        heading="Yearly Strategy"
         content={content}
-        subContent="Track your long-term direction with measurable milestones."
-        color="text-emerald-500"
+        subContent="Manage long-term targets through measurable yearly milestones."
+        color="text-emerald-600"
       />
 
       <TaskBoardShell
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={yearlyGoals.length > 0}
-        emptyMessage="No yearly goals yet. Start with your top objective."
+        loadingMessage="Loading yearly strategy items."
+        errorMessage="Yearly task service is currently unavailable."
+        emptyMessage="No yearly strategy items yet. Add your first target."
       >
         <TaskSection
           heading="Ongoing Goals"

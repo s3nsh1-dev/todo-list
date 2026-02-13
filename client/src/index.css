@@ -266,6 +266,72 @@ a {
   color: var(--muted);
 }
 
+.task-status-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+}
+
+.task-status-card h3 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.task-status-card p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.task-status-error {
+  border-color: #efc6c6;
+  background: #fff5f5;
+}
+
+.task-status-empty {
+  background: var(--card-soft);
+}
+
+.task-section {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+}
+
+.task-section h2 {
+  color: var(--text);
+}
+
+.task-section-ongoing {
+  border-left: 4px solid #3b82f6;
+}
+
+.task-section-completed {
+  border-left: 4px solid #94a3b8;
+  background: color-mix(in oklab, var(--card) 90%, var(--bg-soft));
+}
+
+.task-section-badge {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.task-section-badge-ongoing {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.task-section-badge-completed {
+  background: #e2e8f0;
+  color: #334155;
+}
+
 @media (max-width: 992px) {
   .home-surface {
     grid-template-columns: 1fr;

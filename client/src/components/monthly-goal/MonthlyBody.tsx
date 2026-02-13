@@ -30,17 +30,19 @@ const MonthlyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Monthly Goals"
+        heading="Monthly Objectives"
         content={content}
-        subContent="Plan broader outcomes and stay consistent through the month."
-        color="text-red-500"
+        subContent="Track progress over the month with clear objective ownership."
+        color="text-red-600"
       />
 
       <TaskBoardShell
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={monthlyGoalState.length > 0}
-        emptyMessage="No monthly goals yet. Add one to plan your month."
+        loadingMessage="Loading monthly objectives."
+        errorMessage="Monthly task service is currently unavailable."
+        emptyMessage="No monthly objectives yet. Add your first objective."
       >
         <TaskSection
           heading="Ongoing Goals"

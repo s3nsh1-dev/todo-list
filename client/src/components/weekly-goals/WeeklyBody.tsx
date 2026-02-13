@@ -30,17 +30,19 @@ const WeeklyBody = () => {
   return (
     <>
       <IntroToManagement
-        heading="Weekly Tasks"
-        subContent="Set priorities for the week and adjust quickly."
+        heading="Weekly Planning"
+        subContent="Prioritize outcomes and keep weekly execution aligned."
         content={content}
-        color="text-amber-500"
+        color="text-amber-600"
       />
 
       <TaskBoardShell
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={weeklyTaskArray.length > 0}
-        emptyMessage="No weekly goals yet. Add one to start planning."
+        loadingMessage="Loading weekly goals."
+        errorMessage="Weekly task service is currently unavailable."
+        emptyMessage="No weekly goals yet. Add a goal to begin planning."
       >
         <TaskSection
           heading="Ongoing Goals"
