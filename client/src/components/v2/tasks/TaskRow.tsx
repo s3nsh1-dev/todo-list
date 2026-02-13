@@ -7,10 +7,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type {
-  DraggableAttributes,
-  SyntheticListenerMap,
-} from "@dnd-kit/core";
 import TaskModalForm from "./TaskModalForm";
 
 interface TaskRowProps {
@@ -35,8 +31,8 @@ interface TaskRowContentProps {
     style?: CSSProperties;
   };
   dragHandleProps?: {
-    listeners?: SyntheticListenerMap;
-    attributes?: DraggableAttributes;
+    listeners?: object;
+    attributes?: object;
   };
 }
 
@@ -54,47 +50,46 @@ const TaskRowContent: React.FC<TaskRowContentProps> = ({
     <article
       ref={rowProps?.ref}
       style={rowProps?.style}
-      className="flex items-center justify-between gap-3 py-3"
+      className="task-row"
     >
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="task-row-content">
         {draggable ? (
           <IconButton
-            {...(dragHandleProps?.listeners || {})}
-            {...(dragHandleProps?.attributes || {})}
+            {...((dragHandleProps?.listeners || {}) as object)}
+            {...((dragHandleProps?.attributes || {}) as object)}
             className="cursor-grab active:cursor-grabbing"
             size="small"
           >
-            <DragIndicatorIcon sx={{ color: "#62718f" }} />
+            <DragIndicatorIcon sx={{ color: "var(--muted)" }} />
           </IconButton>
         ) : null}
+
         <p
-          className={`truncate text-sm sm:text-base ${
-            completed ? "text-slate-500 line-through" : "text-slate-800"
-          }`}
+          className={`task-row-name ${completed ? "task-row-name-completed" : ""}`}
           title={name}
         >
           {name}
         </p>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="task-row-actions">
         {!completed && onOpenEdit ? (
           <IconButton size="small" onClick={onOpenEdit}>
-            <ModeEditIcon className="text-slate-500 hover:text-blue-600" />
+            <ModeEditIcon sx={{ color: "var(--muted)" }} />
           </IconButton>
         ) : null}
 
         {completed && onDelete ? (
           <IconButton size="small" onClick={onDelete}>
-            <DeleteOutlineIcon className="text-slate-500 hover:text-red-600" />
+            <DeleteOutlineIcon sx={{ color: "#d16f6f" }} />
           </IconButton>
         ) : null}
 
         <IconButton size="small" onClick={onToggleStatus}>
           {completed ? (
-            <HighlightOffIcon className="text-slate-500 hover:text-red-600" />
+            <HighlightOffIcon sx={{ color: "#d16f6f" }} />
           ) : (
-            <TaskAltIcon className="text-slate-500 hover:text-green-600" />
+            <TaskAltIcon sx={{ color: "#34a67b" }} />
           )}
         </IconButton>
       </div>

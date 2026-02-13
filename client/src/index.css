@@ -65,6 +65,17 @@ a {
   margin: 0 auto;
 }
 
+.module-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.module-divider {
+  height: 1px;
+  width: 100%;
+  background: color-mix(in oklab, var(--border) 75%, transparent);
+}
+
 .home-layout {
   min-height: calc(100vh - clamp(28px, 6vw, 72px));
   display: flex;
@@ -344,6 +355,66 @@ a {
 .task-section-badge-completed {
   background: color-mix(in oklab, var(--muted) 35%, transparent);
   color: var(--text);
+}
+
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.task-row-content {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-row-name {
+  margin: 0;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-row-name-completed {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.task-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-modal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 460px);
+  transform: translate(-50%, -50%);
+  border-radius: calc(var(--radius-lg) + 4px);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+}
+
+.task-modal-input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  background: var(--card-soft);
+  color: var(--text);
+  outline: none;
+}
+
+.task-modal-input:focus {
+  border-color: var(--accent);
 }
 
 .home-header-top {
