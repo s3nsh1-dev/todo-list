@@ -24,11 +24,11 @@ const weeklyTaskApi = createApi({
       providesTags: ["WeeklyTask"],
     }),
     addWeeklyTask: builder.mutation<void, string>({
-      query: (_id) => ({
+      query: (wGoalsName) => ({
         url: "/add",
         method: "POST",
         body: {
-          _id,
+          wGoalsName,
         },
       }),
       invalidatesTags: ["WeeklyTask"],
@@ -75,7 +75,6 @@ const weeklyTaskApi = createApi({
         body: payload,
       }),
       async onQueryStarted({ orderedTasks }, { dispatch, queryFulfilled }) {
-        // Optimistic update
         const patchResult = dispatch(
           weeklyTaskApi.util.updateQueryData(
             "fetchWeeklyTasks",

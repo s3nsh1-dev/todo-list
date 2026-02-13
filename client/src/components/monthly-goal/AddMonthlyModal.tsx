@@ -2,8 +2,7 @@ import React from "react";
 import TaskCardActionButtons from "../common/TaskCardActionButtons";
 import TaskCardLabelContent from "../common/TaskCardLabelContent";
 import { addPanelStyle } from "../../constants/customCssProperties";
-import { useDispatch } from "react-redux";
-import { addMonthlyGoals } from "../../redux/slices/model/monthlyGoalsSlice";
+import { useAddMonthlyTaskMutation } from "../../redux/thunks/modelAPI/task/monthlyTaskAPI";
 
 interface propsTypes {
   onClosingModal: () => void;
@@ -11,11 +10,19 @@ interface propsTypes {
 
 const AddMonthlyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
   const [userValue, setUserValue] = React.useState<string>("");
-  const isDisabled = userValue.length > 1 ? false : true;
-  const dispatch = useDispatch();
-  const handleAddWeeklyGoal = () => {
-    dispatch(addMonthlyGoals(userValue));
-    onClosingModal();
+  const [addMonthlyTask, { isLoading }] = useAddMonthlyTaskMutation();
+
+  const normalizedValue = userValue.trim();
+  const isDisabled = normalizedValue.length < 2 || isLoading;
+
+  const handleAddMonthlyGoal = async () => {
+    if (isDisabled) return;
+    try {
+      await addMonthlyTask(normalizedValue).unwrap();
+      onClosingModal();
+    } catch (error) {
+      console.error("Failed to add monthly goal", error);
+    }
   };
 
   return (
@@ -25,14 +32,14 @@ const AddMonthlyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
         label="Goal Name"
         userValue={userValue}
         setUserValue={setUserValue}
-        placeholder="e.g., Need to go shopping"
+        placeholder="e.g., Ship portfolio improvements"
       />
       <TaskCardActionButtons
         isDisabled={isDisabled}
-        handleSubmit={handleAddWeeklyGoal}
+        handleSubmit={handleAddMonthlyGoal}
         handleClose={onClosingModal}
         backLabel="Close"
-        enterLabel="SUBMIT"
+        enterLabel={isLoading ? "Saving..." : "Submit"}
       />
     </div>
   );

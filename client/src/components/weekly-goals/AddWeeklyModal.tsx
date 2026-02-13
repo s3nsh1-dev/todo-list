@@ -2,8 +2,7 @@ import React from "react";
 import TaskCardActionButtons from "../common/TaskCardActionButtons";
 import TaskCardLabelContent from "../common/TaskCardLabelContent";
 import { addPanelStyle } from "../../constants/customCssProperties";
-import { useDispatch } from "react-redux";
-import { addWeeklyGoals } from "../../redux/slices/model/weeklyGoalsSlice";
+import { useAddWeeklyTaskMutation } from "../../redux/thunks/modelAPI/task/weeklyTaskAPI";
 
 interface propsTypes {
   onClosingModal: () => void;
@@ -11,11 +10,19 @@ interface propsTypes {
 
 const AddWeeklyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
   const [userValue, setUserValue] = React.useState<string>("");
-  const isDisabled = userValue.length > 1 ? false : true;
-  const dispatch = useDispatch();
-  const handleAddWeeklyGoal = () => {
-    dispatch(addWeeklyGoals(userValue));
-    onClosingModal();
+  const [addWeeklyTask, { isLoading }] = useAddWeeklyTaskMutation();
+
+  const normalizedValue = userValue.trim();
+  const isDisabled = normalizedValue.length < 2 || isLoading;
+
+  const handleAddWeeklyGoal = async () => {
+    if (isDisabled) return;
+    try {
+      await addWeeklyTask(normalizedValue).unwrap();
+      onClosingModal();
+    } catch (error) {
+      console.error("Failed to add weekly goal", error);
+    }
   };
 
   return (
@@ -25,14 +32,14 @@ const AddWeeklyModal: React.FC<propsTypes> = ({ onClosingModal }) => {
         label="Goal Name"
         userValue={userValue}
         setUserValue={setUserValue}
-        placeholder="e.g., Need to go shopping"
+        placeholder="e.g., Finish API integration"
       />
       <TaskCardActionButtons
         isDisabled={isDisabled}
         handleSubmit={handleAddWeeklyGoal}
         handleClose={onClosingModal}
         backLabel="Close"
-        enterLabel="SUBMIT"
+        enterLabel={isLoading ? "Saving..." : "Submit"}
       />
     </div>
   );

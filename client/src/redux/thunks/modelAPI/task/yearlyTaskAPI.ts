@@ -24,11 +24,11 @@ const yearlyTaskApi = createApi({
       providesTags: ["YearlyTask"],
     }),
     addYearlyTask: builder.mutation<void, string>({
-      query: (_id) => ({
+      query: (yearlyGoalName) => ({
         url: "/add",
         method: "POST",
         body: {
-          _id,
+          yearlyGoalName,
         },
       }),
       invalidatesTags: ["YearlyTask"],
@@ -74,7 +74,6 @@ const yearlyTaskApi = createApi({
         body: payload,
       }),
       async onQueryStarted({ orderedTasks }, { dispatch, queryFulfilled }) {
-        // Optimistic update
         const patchResult = dispatch(
           yearlyTaskApi.util.updateQueryData(
             "fetchYearlyTask",
