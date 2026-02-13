@@ -1,19 +1,17 @@
 import DailyIntro from "../components/daily-tasks/DailyIntro";
-import { Divider } from "@mui/material";
 import DailyTopHeader from "../components/daily-tasks/DailyTopHeader";
 import DailyTaskManagement from "../components/daily-tasks/DailyTaskManagement";
 
 const DailyTasks = () => {
   return (
-    <>
+    <section className="module-page">
       <DailyTopHeader />
-      <Divider />
-      <section className="flex flex-col gap-5" style={{ marginTop: "10px" }}>
+      <div className="module-divider" />
+      <section className="mt-3 flex flex-col gap-4">
         <DailyIntro />
-        <Divider />
         <DailyTaskManagement />
       </section>
-    </>
+    </section>
   );
 };
 

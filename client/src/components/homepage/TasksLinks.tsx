@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { hoverAnimation } from "../../constants/GenericConstants";
-
-const moreCss: string = `rounded-xl w-50 font-bold cursor-pointer`;
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 
 interface tasksLinksPropsType {
   route: string;
@@ -10,15 +8,29 @@ interface tasksLinksPropsType {
   color: string;
 }
 
+const toneMap: Record<string, string> = {
+  "bg-blue-500": "home-route-daily",
+  "bg-yellow-500": "home-route-weekly",
+  "bg-red-500": "home-route-monthly",
+  "bg-green-600": "home-route-yearly",
+};
+
+const subtitleMap: Record<string, string> = {
+  "bg-blue-500": "Execution and short-term priorities",
+  "bg-yellow-500": "Weekly planning and follow-through",
+  "bg-red-500": "Monthly outcome tracking",
+  "bg-green-600": "Long-term strategic goals",
+};
+
 const TasksLinks: React.FC<tasksLinksPropsType> = ({ route, text, color }) => {
   return (
-    <Link to={route}>
-      <div
-        className={`${color} ${moreCss} ${hoverAnimation}`}
-        style={{ padding: "0.5rem" }}
-      >
-        {text}
+    <Link to={route} className={`home-route-link ${toneMap[color]}`}>
+      <div className="home-route-topline">
+        <span>Open</span>
+        <ArrowOutwardRoundedIcon sx={{ fontSize: 16, color: "var(--muted)" }} />
       </div>
+      <p>{text}</p>
+      <small>{subtitleMap[color]}</small>
     </Link>
   );
 };

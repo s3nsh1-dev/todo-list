@@ -1,124 +1,89 @@
-import ShowOngoingTasks from "./ShowOngoingTasks";
-import ShowCompletedTasks from "./ShowCompletedTasks";
 import {
+  useDeleteDailyTaskMutation,
   useFetchDailyTasksQuery,
   useReorderDailyTasksMutation,
+  useUpdateDailyTaskNameMutation,
+  useUpdateDailyTaskStatusMutation,
 } from "../../redux/thunks/modelAPI/task/dailyTaskAPI";
-import {
-  closestCorners,
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import {
-  // arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { restrictToParentElement } from "@dnd-kit/modifiers";
-import { taskDetails } from "../../constants/sliceDataset";
+import TaskBoardShell from "../v2/tasks/TaskBoardShell";
+import TaskSection from "../v2/tasks/TaskSection";
+import TaskRow from "../v2/tasks/TaskRow";
+import TaskBoardDnd from "../v2/tasks/TaskBoardDnd";
+import { dailyTaskAdapter } from "../../constants/taskAdapters";
+import { useTaskBoard } from "../../hooks/v2/useTaskBoard";
 
 const DailyTaskManagement = () => {
   const { data, error, isLoading } = useFetchDailyTasksQuery();
   const [reorderDailyTasks] = useReorderDailyTasksMutation();
+  const [updateDailyTaskName] = useUpdateDailyTaskNameMutation();
+  const [updateDailyTaskStatus] = useUpdateDailyTaskStatusMutation();
+  const [deleteDailyTask] = useDeleteDailyTaskMutation();
 
-  const sensor = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+  const dailyTasksList = data?.body || [];
+  const { ongoingTasks, completedTasks } = useTaskBoard(
+    dailyTasksList,
+    dailyTaskAdapter
   );
-
-  if (!data) {
-    return <div>Do not have any task</div>;
-  }
-
-  const dailyTasksList = data?.body || taskDetails;
-
-  const ongoingTasks = dailyTasksList.filter(
-    (task) => task.status === "ONGOING"
-  );
-  const completedTasks = dailyTasksList.filter(
-    (task) => task.status === "DONE"
-  );
-
-  if (error) return <div>We have error</div>;
-  if (isLoading) return <div>....Loading</div>;
-
-  const renderOngoingTasks = ongoingTasks.map((tasks, index) => {
-    return (
-      <ShowOngoingTasks
-        key={tasks._id}
-        tasks={tasks}
-        index={index}
-        arrLength={ongoingTasks.length}
-      />
-    );
-  });
-
-  const renderCompletedTasks = completedTasks.map((tasks, index) => {
-    return (
-      <ShowCompletedTasks
-        key={tasks._id}
-        tasks={tasks}
-        index={index}
-        arrLength={completedTasks.length}
-      />
-    );
-  });
 
   return (
-    <article className="flex flex-col gap-5">
-      <div>
-        <h1 className="text-xl font-bold text-gray-400">Completed</h1>
-        <div className="text-gray-500">{renderCompletedTasks}</div>
-      </div>
-      <div>
-        <h1 className="text-xl font-bold">Ongoing</h1>
-        <DndContext
-          sensors={sensor}
-          modifiers={[restrictToParentElement]}
-          collisionDetection={closestCorners}
-          onDragEnd={(e) => {
-            const { active, over } = e;
-            if (!over) return;
-            if (active.id === over.id) return;
-
-            const originalIndex = ongoingTasks.findIndex(
-              (task) => task._id === active.id
-            );
-            const newIndex = ongoingTasks.findIndex(
-              (task) => task._id === over.id
-            );
-
-            if (originalIndex === -1 || newIndex === -1) return;
-
-            // Create optimistic update
-            const reorderedTasks = [...ongoingTasks];
-            const [movedTask] = reorderedTasks.splice(originalIndex, 1);
-            reorderedTasks.splice(newIndex, 0, movedTask);
-
-            const orderedTasks = reorderedTasks.map((task, index) => ({
-              _id: task._id,
-              order: index,
-            }));
-
-            // Trigger the mutation with optimistic update
-            reorderDailyTasks({ orderedTasks });
+    <TaskBoardShell
+      loading={isLoading}
+      error={Boolean(error)}
+      hasTasks={dailyTasksList.length > 0}
+      loadingMessage="Loading daily tasks from the server."
+      errorMessage="Daily tasks are unavailable right now."
+      emptyMessage="No daily tasks yet. Add your first task to get started."
+    >
+      <TaskSection
+        heading="Ongoing Tasks"
+        count={ongoingTasks.length}
+        tone="ongoing"
+      >
+        <TaskBoardDnd
+          tasks={ongoingTasks}
+          onReorder={(payload) => {
+            reorderDailyTasks(payload);
           }}
         >
-          <SortableContext
-            items={ongoingTasks.map((task) => task._id)}
-            strategy={verticalListSortingStrategy}
-          >
-            {renderOngoingTasks}
-          </SortableContext>
-        </DndContext>
-      </div>
-    </article>
+          {ongoingTasks.map((task) => (
+            <TaskRow
+              key={task._id}
+              id={task._id}
+              name={task.taskName}
+              completed={false}
+              draggable
+              onEdit={(newName) => {
+                updateDailyTaskName({ _id: task._id, newName });
+              }}
+              onToggleStatus={() => {
+                updateDailyTaskStatus(task._id);
+              }}
+            />
+          ))}
+        </TaskBoardDnd>
+      </TaskSection>
+
+      <TaskSection
+        heading="Completed Tasks"
+        count={completedTasks.length}
+        tone="completed"
+      >
+        {completedTasks.map((task) => (
+          <TaskRow
+            key={task._id}
+            id={task._id}
+            name={task.taskName}
+            completed
+            onDelete={() => {
+              deleteDailyTask(task._id);
+            }}
+            onToggleStatus={() => {
+              updateDailyTaskStatus(task._id);
+            }}
+          />
+        ))}
+      </TaskSection>
+    </TaskBoardShell>
   );
 };
 

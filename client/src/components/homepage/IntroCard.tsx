@@ -19,42 +19,43 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
 
   const steps = [
     {
-      title: `Welcome to `,
+      title: "Welcome to ",
       content:
-        "Stay Organized, Be Productive. One Stop Solution for high performance",
+        "Keep planning and execution in one reliable space with clean workflows.",
       icon: (
         <CheckCircleOutlineIcon
           fontSize="large"
-          sx={{ color: "#4caf50", mb: 2 }}
+          sx={{ color: "#4f8ef8", mb: 2 }}
         />
       ),
     },
     {
-      title: "Manage Your Tasks",
-      content: "Drag your tasks. Drop your doubts. Conquer your day. Repeat with pride. 🎯🐅",
+      title: "Task Management",
+      content:
+        "Organize tasks by timeline, update priorities, and track completion with clarity.",
       icon: (
         <FormatListBulletedIcon
           fontSize="large"
-          sx={{ color: "#2196f3", mb: 2 }}
+          sx={{ color: "#2f9d74", mb: 2 }}
         />
       ),
     },
     {
-      title: "Take Notes",
+      title: "Notes",
       content:
-        "Capture your thoughts and ideas quickly and keep it close to you.  ",
+        "Store contextual notes and keep important details close to your work.",
       icon: (
-        <StickyNote2Icon fontSize="large" sx={{ color: "#ff9800", mb: 2 }} />
+        <StickyNote2Icon fontSize="large" sx={{ color: "#d09028", mb: 2 }} />
       ),
     },
   ];
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      onClose();
+      setCurrentStep((prev) => prev + 1);
+      return;
     }
+    onClose();
   };
 
   return (
@@ -64,22 +65,19 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 400,
-        borderRadius: 2,
-        boxShadow: 24,
         p: 4,
         outline: "none",
       }}
-      className="text-white bg-gray-800"
+      className="home-intro-card"
     >
       <IconButton
         aria-label="close"
         onClick={onClose}
         sx={{
           position: "absolute",
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
+          right: 10,
+          top: 10,
+          color: "var(--muted)",
         }}
       >
         <CloseIcon />
@@ -93,15 +91,14 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
         mt={2}
       >
         {steps[currentStep].icon}
-        <Typography variant="h5" component="h2" fontWeight="bold" mb={2}>
+        <Typography variant="h5" component="h2" fontWeight="700" mb={2}>
           {steps[currentStep].title}
           {currentStep === 0 ? <ToDoHeading /> : ""}
         </Typography>
-        <Typography variant="body1" mb={4}>
+        <Typography variant="body1" mb={4} sx={{ color: "var(--muted)" }}>
           {steps[currentStep].content}
         </Typography>
 
-        {/* Step indicators */}
         <Box display="flex" gap={1} mb={3}>
           {steps.map((_, index) => (
             <Box
@@ -110,7 +107,10 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
                 width: 8,
                 height: 8,
                 borderRadius: "50%",
-                backgroundColor: index === currentStep ? "#1976d2" : "#e0e0e0",
+                backgroundColor:
+                  index === currentStep
+                    ? "var(--accent)"
+                    : "color-mix(in oklab, var(--muted) 35%, transparent)",
               }}
             />
           ))}
@@ -121,6 +121,12 @@ const IntroCard: React.FC<propTypes> = ({ onClose }) => {
           endIcon={<ArrowForwardIcon />}
           onClick={handleNext}
           fullWidth
+          sx={{
+            textTransform: "none",
+            fontWeight: 700,
+            bgcolor: "var(--accent)",
+            "&:hover": { bgcolor: "var(--accent-hover)" },
+          }}
         >
           {currentStep < steps.length - 1 ? "Next" : "Get Started"}
         </Button>

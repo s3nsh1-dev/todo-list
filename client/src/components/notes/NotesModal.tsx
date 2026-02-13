@@ -22,10 +22,7 @@ const NotesModal: React.FC<propTypes> = ({
   content,
   disabled,
 }) => {
-  const [data, setData] = React.useState<{
-    newTitle: string;
-    newContent: string;
-  }>({
+  const [data, setData] = React.useState<{ newTitle: string; newContent: string }>({
     newTitle: title,
     newContent: content,
   });
@@ -46,22 +43,18 @@ const NotesModal: React.FC<propTypes> = ({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(data.newContent);
-      alert("Content Copied!");
+      alert("Content copied");
     } catch (err) {
       console.error("Failed to copy content:", err);
     }
   };
+
   return (
     <Modal open={open} onClose={onClose}>
-      <div
-        className="bg-gray-800 rounded flex flex-col gap-8"
-        style={notesPanelStyle}
-      >
-        <div className="flex flex-col gap-6">
+      <div className="note-modal-card" style={notesPanelStyle}>
+        <div className="flex flex-col gap-5">
           <input
-            className="text-xl font-bold border-2 border-gray-500 rounded"
-            style={{ padding: "5px 10px" }}
-            // defaultValue={title}
+            className="note-input-title"
             disabled={disabled}
             value={data.newTitle}
             onChange={(e) => {
@@ -71,9 +64,7 @@ const NotesModal: React.FC<propTypes> = ({
             }}
           />
           <textarea
-            className="text-gray-300 whitespace-pre-wrap overflow-auto h-90 border-2 border-gray-500 rounded"
-            style={{ padding: "5px 10px" }}
-            // defaultValue={content}
+            className="note-input-body note-modal-body"
             disabled={disabled}
             value={data.newContent}
             onChange={(e) => {
@@ -83,7 +74,8 @@ const NotesModal: React.FC<propTypes> = ({
             }}
           />
         </div>
-        <div className="flex justify-end gap-4">
+
+        <div className="note-toolbar note-toolbar-right">
           <Button variant="outlined" color="primary" onClick={handleCopy}>
             Copy
           </Button>
@@ -91,11 +83,7 @@ const NotesModal: React.FC<propTypes> = ({
             Back
           </Button>
           {!disabled && (
-            <Button
-              variant="outlined"
-              color="success"
-              onClick={handleUpdateNote}
-            >
+            <Button variant="outlined" color="success" onClick={handleUpdateNote}>
               Save
             </Button>
           )}

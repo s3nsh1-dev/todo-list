@@ -8,21 +8,25 @@ import AddTaskModal from "./AddTaskModal";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import DailyTaskHistoryModal from "./DailyTaskHistoryModal";
+import ThemeToggle from "../common/ThemeToggle";
 
 export interface SimpleDialogProps {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
 }
+
 interface stateType {
   history: boolean;
   addTask: boolean;
 }
+
 const DailyTopHeader = () => {
   const [open, setOpen] = useState<stateType>({
     history: false,
     addTask: false,
   });
+
   const showAddTasksModal = () => {
     setOpen((prev: stateType) => {
       return { ...prev, addTask: !open.addTask };
@@ -40,26 +44,30 @@ const DailyTopHeader = () => {
 
   return (
     <>
-      <section id="daily-title-bar" className="flex justify-between">
-        <h1 className="flex items-center font-bold">{todayDate}</h1>
+      <section id="daily-title-bar" className="module-toolbar">
         <div>
+          <p className="module-toolbar-eyebrow">Daily Tasks</p>
+          <h1 className="module-toolbar-title">{todayDate}</h1>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
           <Link to="/">
             <IconButton aria-label="edit-daily-tasks">
-              <HomeIcon color="primary" />
+              <HomeIcon sx={{ color: "var(--accent)" }} />
             </IconButton>
           </Link>
 
-          <IconButton
-            aria-label="daily-tasks-history"
-            onClick={showHistoryModal}
-          >
-            <HistoryIcon color="error" />
+          <IconButton aria-label="daily-tasks-history" onClick={showHistoryModal}>
+            <HistoryIcon sx={{ color: "#c84e4e" }} />
           </IconButton>
+
           <IconButton aria-label="add-more-tasks" onClick={showAddTasksModal}>
-            <AddTaskIcon color="success" />
+            <AddTaskIcon sx={{ color: "#1f8f63" }} />
           </IconButton>
         </div>
       </section>
+
       {open.addTask && (
         <Modal
           open={open.addTask}
@@ -69,6 +77,7 @@ const DailyTopHeader = () => {
           <AddTaskModal closingModal={showAddTasksModal} />
         </Modal>
       )}
+
       {open.history && (
         <Modal
           open={open.history}
