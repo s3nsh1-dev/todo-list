@@ -30,9 +30,9 @@ const DailyTaskManagement = () => {
       loading={isLoading}
       error={Boolean(error)}
       hasTasks={dailyTasksList.length > 0}
-      loadingMessage="Fetching your daily queue."
-      errorMessage="Daily task service is currently unavailable."
-      emptyMessage="No daily tasks yet. Start by adding your first task."
+      loadingMessage="Loading daily tasks from the server."
+      errorMessage="Daily tasks are unavailable right now."
+      emptyMessage="No daily tasks yet. Add your first task to get started."
     >
       <TaskSection
         heading="Ongoing Tasks"

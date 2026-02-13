@@ -21,6 +21,7 @@ const TaskBoardShell: React.FC<TaskBoardShellProps> = ({
 }) => {
   const showLoadingState = Boolean(loading) && !hasTasks && !error;
   const showErrorState = Boolean(error) && !hasTasks;
+  const showInlineWarning = Boolean(error) && hasTasks;
 
   if (showLoadingState) {
     return (
@@ -49,7 +50,16 @@ const TaskBoardShell: React.FC<TaskBoardShellProps> = ({
     );
   }
 
-  return <div className="flex flex-col gap-4">{children}</div>;
+  return (
+    <div className="flex flex-col gap-4">
+      {showInlineWarning ? (
+        <div className="task-inline-state task-inline-state-warning type-body-md">
+          Live refresh is temporarily unavailable. Displaying latest loaded task data.
+        </div>
+      ) : null}
+      {children}
+    </div>
+  );
 };
 
 export default TaskBoardShell;

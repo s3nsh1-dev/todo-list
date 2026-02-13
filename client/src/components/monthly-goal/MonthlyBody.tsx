@@ -40,9 +40,9 @@ const MonthlyBody = () => {
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={monthlyGoalState.length > 0}
-        loadingMessage="Loading monthly objectives."
-        errorMessage="Monthly task service is currently unavailable."
-        emptyMessage="No monthly objectives yet. Add your first objective."
+        loadingMessage="Loading monthly goals from the server."
+        errorMessage="Monthly goals are unavailable right now."
+        emptyMessage="No monthly goals yet. Add your first objective."
       >
         <TaskSection
           heading="Ongoing Goals"

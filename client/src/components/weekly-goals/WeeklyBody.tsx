@@ -40,8 +40,8 @@ const WeeklyBody = () => {
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={weeklyTaskArray.length > 0}
-        loadingMessage="Loading weekly goals."
-        errorMessage="Weekly task service is currently unavailable."
+        loadingMessage="Loading weekly goals from the server."
+        errorMessage="Weekly goals are unavailable right now."
         emptyMessage="No weekly goals yet. Add a goal to begin planning."
       >
         <TaskSection

@@ -378,6 +378,18 @@ a {
   background: var(--card-soft);
 }
 
+.task-inline-state {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+}
+
+.task-inline-state-warning {
+  background: color-mix(in oklab, #f59e0b 10%, var(--card));
+  border-color: color-mix(in oklab, #f59e0b 40%, var(--border));
+  color: var(--text);
+}
+
 .task-section {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
@@ -730,6 +742,10 @@ a {
   }
 
   .home-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .note-grid {
     grid-template-columns: 1fr;
   }
 }

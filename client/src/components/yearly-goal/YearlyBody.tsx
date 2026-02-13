@@ -40,8 +40,8 @@ const YearlyBody = () => {
         loading={isLoading}
         error={Boolean(error)}
         hasTasks={yearlyGoals.length > 0}
-        loadingMessage="Loading yearly strategy items."
-        errorMessage="Yearly task service is currently unavailable."
+        loadingMessage="Loading yearly goals from the server."
+        errorMessage="Yearly goals are unavailable right now."
         emptyMessage="No yearly strategy items yet. Add your first target."
       >
         <TaskSection
